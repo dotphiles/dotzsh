@@ -1,0 +1,23 @@
+#
+# dotzsh : https://github.com/dotzsh/dotzsh
+#
+# Highlights make output.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+function make {
+  if zstyle -t ':dotzsh:module:utility:make' color; then
+    if (( $+commands[colormake] )); then
+      colormake "$@"
+    else
+      command make "$@"
+    fi
+  else
+    command make "$@"
+  fi
+}
+
+make "$@"
+

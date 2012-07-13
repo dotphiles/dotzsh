@@ -1,0 +1,14 @@
+#compdef cdls popdls pushdls
+#autoload
+
+#
+# dotzsh : https://github.com/dotzsh/dotzsh
+#
+# Completes cdls, popdls, and pushdls.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+_cd
+

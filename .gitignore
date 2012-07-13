@@ -1,0 +1,10 @@
+#
+# dotzsh : https://github.com/dotzsh/dotzsh
+#
+# Authors:
+#   Ben O'Hara <bohara@gmail.com>
+#
+
+*.zwc
+*.zwc.old
+modules/*/cache.zsh
