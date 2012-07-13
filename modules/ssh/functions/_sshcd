@@ -1,0 +1,14 @@
+#compdef sshcd=ssh
+#autoload
+
+#
+# dotzsh : https://github.com/dotzsh/dotzsh
+#
+# Completes sshcd.
+#
+# Authors:
+#   Ben O'Hara <bohara@gmail.com>
+#
+
+_ssh
+

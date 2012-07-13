@@ -1,0 +1,24 @@
+#
+# dotzsh : https:/github.com/dotzsh/dotzsh
+#
+# Lists explicitly installed Pacman packages.
+#
+# Authors:
+#   Benjamin Boudreau <dreurmail@gmail.com>
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+sudo pacman --query --explicit --info \
+  $(pacman --query --upgrades | cut -d' ' -f 1) \
+  | awk '
+      BEGIN {
+        FS=":"
+      }
+      /^Name/ {
+        print $2
+      }
+      /^Description/ {
+        print $2
+      }
+    '
+

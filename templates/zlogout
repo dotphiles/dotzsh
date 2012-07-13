@@ -1,0 +1,17 @@
+#
+# dotzsh : https://github.com/dotzsh/dotzsh
+#
+# Executes commands at logout.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Ben O'Hara <bohara@gmail.com>
+#
+
+# Print the message.
+cat <<-EOF
+
+Thank you. Come again!
+  -- Dr. Apu Nahasapeemapetilon
+EOF
+

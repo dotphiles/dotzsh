@@ -1,0 +1,49 @@
+#
+# dotzsh : https://github.com/dotzsh/dotzsh
+#
+# Output a grid of 256 colors
+#
+# Authors:
+#   Ben O'Hara <bohara@gmail.com>
+#
+
+color-grid() {
+
+  # first the system ones:
+  print
+  print "System colors:\n"
+  print -n "  "
+  for color ({0..7}); do
+    print -n "\033[48;05;${color}m  "
+  done
+  print -n "\033[0m\n  "
+  for color ({8..15}); do
+    print -n "\033[48;05;${color}m  "
+  done
+  print -n "\033[0m\n\n"
+
+  # now the color cube
+  print "Color cube, 6x6x6:\n"
+  for green ({0..5}); do
+  print -n "  "
+    for red ({0..5}); do
+      for blue ({0..5}); do
+        (( color =  16 + $red * 36 + $green * 6 + $blue ))
+        print -n "\033[48;5;${color}m  "
+      done
+      print -n "\033[0m "
+    done
+    print
+  done
+
+  # now the grayscale ramp
+  print
+  print "Grayscale ramp:\n";
+  print -n "  "
+  for color ({232..255}); do
+    print -n "\033[48;5;${color}m  "
+  done
+  print -n "\033[0m\n"
+  print
+}
+
