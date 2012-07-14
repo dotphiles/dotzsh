@@ -11,12 +11,9 @@ if (( ! $+commands[git] )); then
   return 2
 fi
 
-# Source module files.
-zstyle -b ":dotzsh:module:git" aliases '_git_aliases'
-if ( is-true ${_git_aliases} ); then
-  source "${0:h}/aliases.zsh"
+if (( $+commands[hub]  )); then
+  function git {
+    hub "$@"
+  }
 fi
 
-source "${0:h}/hub.zsh"
-
-unset _git_aliases

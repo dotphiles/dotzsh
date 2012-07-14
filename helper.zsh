@@ -89,16 +89,25 @@ function dzmodload {
     if zstyle -t ":dotzsh:module:${dzmodule}" timing && (( $+commands[gdate] )); then
       dzmodload_module_start=$(gdate +'%s%N')
     fi
-
-    if zstyle -t ":dotzsh:module:${dzmodule}" loaded; then
+ 
+    if zstyle -t ":dotzsh:module:local:${dzmodule}" loaded; then
       continue
-    elif [[ ! -d "${DOTZSH}/modules/$dzmodule" ]]; then
-      zstyle ":dotzsh:module:${dzmodule}" loaded 'no'
-    elif [[ -s "${DOTZSH}/modules/$dzmodule/init.zsh" ]]; then
-      # or source it from dotzsh 
-      source "${DOTZSH}/modules/$dzmodule/init.zsh"
+    elif zstyle -t ":dotzsh:module:${dzmodule}" loaded; then
+      continue
+    elif [[ ! -d "${DOTZSHLOCAL}/modules/$dzmodule" ]]; then
+      zstyle ":dotzsh:module:local:${dzmodule}" loaded 'no'
+      if [[ ! -d "${DOTZSH}/modules/$dzmodule" ]]; then
+        zstyle ":dotzsh:module:${dzmodule}" loaded 'no'
+      elif [[ -s "${DOTZSH}/modules/$dzmodule/init.zsh" ]]; then
+        source "${DOTZSH}/modules/$dzmodule/init.zsh"
+      fi
       if (( $? == 0 )); then
         zstyle ":dotzsh:module:${dzmodule}" loaded 'yes'
+        if zstyle -t ":dotzsh:module:${dzmodule}" aliases; then
+          if [[ -s "${DOTZSH}/modules/${dzmodules}/aliases.zsh" ]]; then
+            source "${DOTZSH}/modules/$dzmodule/aliases.zsh"
+          fi
+        fi
       else 
         zstyle ":dotzsh:module:${dzmodule}" loaded 'no'
         for dzfunction in \
@@ -111,19 +120,17 @@ function dzmodload {
         # remove the fpath entry
         fpath[(r)${DOTZSH}/modules/${dzmodule}/functions]=()
       fi
-    else
-      zstyle ":dotzsh:module:${dzmodule}" loaded 'yes'
-    fi
-    
-    if zstyle -t ":dotzsh:module:${dzmodule}:local" loaded; then
-      continue
-    elif [[ ! -d "${DOTZSHLOCAL}/modules/$dzmodule" ]]; then
-      zstyle ":dotzsh:module:local:${dzmodule}" loaded 'no'
     elif [[ -s "${DOTZSHLOCAL}/modules/$dzmodule/init.zsh" ]]; then
       # try to source a local modules
+      zstyle ":dotzsh:module:${dzmodule}" loaded 'no'
       source "${DOTZSHLOCAL}/modules/$dzmodule/init.zsh"
       if (( $? == 0 )); then
         zstyle ":dotzsh:module:local:${dzmodule}" loaded 'yes'
+        if zstyle -t ":dotzsh:module:${dzmodule}" aliases; then
+          if [[ -s "${DOTZSHLOCAL}/modules/${dzmodules}/aliases.zsh" ]]; then
+            source "${DOTZSHLOCAL}/modules/$dzmodule/aliases.zsh"
+          fi
+        fi
       else
         zstyle ":dotzsh:module:local:${dzmodule}" loaded 'no'
         for dzfunction in \
@@ -137,7 +144,8 @@ function dzmodload {
         fpath[(r)${DOTZSHLOCAL}/modules/${dzmodule}/functions]=()
       fi
     else
-      zstyle ":dotzsh:module:local:${dzmodule}" loaded 'yes'
+      zstyle ":dotzsh:module:${dzmodule}" loaded 'no'
+      zstyle ":dotzsh:module:local:${dzmodule}" loaded 'no'
     fi
 
     if zstyle -t ":dotzsh:module:${dzmodule}" timing && (( $+commands[gdate] )); then

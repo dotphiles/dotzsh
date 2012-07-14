@@ -13,4 +13,7 @@
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "modules/completion/functions"]
 	path = modules/completion/functions
-	url = https://github.com/zsh-users/zsh-completions.git
+    url = https://github.com/zsh-users/zsh-completions.git
+[submodule "modules/fasd/external"]
+	path = modules/fasd/external
+	url = https://github.com/clvv/fasd.git
