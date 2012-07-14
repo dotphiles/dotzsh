@@ -104,7 +104,7 @@ function dzmodload {
       if (( $? == 0 )); then
         zstyle ":dotzsh:module:${dzmodule}" loaded 'yes'
         if zstyle -t ":dotzsh:module:${dzmodule}" aliases; then
-          if [[ -s "${DOTZSH}/modules/${dzmodules}/aliases.zsh" ]]; then
+          if [[ -s "${DOTZSH}/modules/${dzmodule}/aliases.zsh" ]]; then
             source "${DOTZSH}/modules/$dzmodule/aliases.zsh"
           fi
         fi
