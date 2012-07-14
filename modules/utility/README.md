@@ -141,5 +141,5 @@ Authors
   - [Suraj N. Kurapati](https://github.com/sunaku)
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-[1]: https://github.com/dotzsh/dotzsh/issues
+[1]: https://github.com/dotphiles/dotzsh/issues
 

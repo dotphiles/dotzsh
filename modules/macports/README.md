@@ -22,5 +22,5 @@ Authors
   - [Matt Cable](https://github.com/curiousstranger)
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-[1]: https://github.com/dotzsh/dotzsh/issues
+[1]: https://github.com/dotphiles/dotzsh/issues
 

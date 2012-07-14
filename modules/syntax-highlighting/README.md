@@ -46,5 +46,5 @@ Authors
 
 [1]: https://github.com/zsh-users/zsh-syntax-highlighting
 [2]: https://github.com/zsh-users/zsh-syntax-highlighting/tree/master/highlighters
-[3]: https://github.com/dotzsh/dotzsh/issues
+[3]: https://github.com/dotphiles/dotzsh/issues
 

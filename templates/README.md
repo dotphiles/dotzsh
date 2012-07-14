@@ -71,5 +71,5 @@ Authors
 [1]: http://www.kornshell.com
 [2]: http://en.wikipedia.org/wiki/Fortune_(Unix)
 [3]: http://www.manpagez.com/man/1/msgs
-[4]: https://github.com/dotzsh/dotzsh/issues
+[4]: https://github.com/dotphiles/dotzsh/issues
 

@@ -1,5 +1,5 @@
 #
-# dotzsh : https://github.com/dotzsh/dotzsh
+# dotzsh : https://github.com/dotphiles/dotzsh
 #
 # Notify when long running commands finish with growl on OSX
 #

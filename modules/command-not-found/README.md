@@ -11,5 +11,5 @@ Authors
   - [Joseph Booker](https://github.com/sargas)
 
 [1]: https://code.launchpad.net/command-not-found
-[2]: https://github.com/dotzsh/dotzsh
+[2]: https://github.com/dotphiles/dotzsh
 

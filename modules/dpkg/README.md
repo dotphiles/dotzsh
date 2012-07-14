@@ -38,5 +38,5 @@ Authors
   - [Benjamin Boudreau](https://github.com/dreur)
 
 [1]: http://alioth.debian.org/projects/dpkg
-[2]: https://github.com/dotzsh/dotzsh/issues
+[2]: https://github.com/dotphiles/dotzsh/issues
 

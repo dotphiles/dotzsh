@@ -1,5 +1,5 @@
 #
-# dotzsh-prompt-dotphiles : https://github.com/dotzsh/dotzsh-prompt-dotphiles
+# dotzsh-prompt-dotphiles : https://github.com/dotphiles/dotzsh-prompt-dotphiles
 #
 # Setup colors for ls, grep etc
 #

@@ -16,7 +16,7 @@ version is 4.2.6.
 
   1. Clone the repository:
 
-        git clone --recursive https://github.com/dotzsh/dotzsh.git ~/.zsh
+        git clone --recursive https://github.com/dotphiles/dotzsh.git ~/.zsh
 
   2. Create a new Zsh configuration by copying the Zsh configuration file
      templates provided:
@@ -187,7 +187,7 @@ SOFTWARE.
 [6]: http://gitref.org
 [7]: https://github.com/zsh-users/zsh-completions
 [8]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
-[9]: https://github.com/dotzsh/dotzsh/contributors
+[9]: https://github.com/dotphiles/dotzsh/contributors
 [10]: http://gun.io/blog/how-to-github-fork-branch-and-pull-request
 [11]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [12]: https://help.github.com/articles/using-pull-requests

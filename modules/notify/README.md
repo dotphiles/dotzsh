@@ -20,5 +20,5 @@ Authors
   - [Ben O'Hara](https://github.com/benohara)
 
 [1]: http://growl.info
-[2]: https://github.com/dotzsh/dotzsh/issues
+[2]: https://github.com/dotphiles/dotzsh/issues
 

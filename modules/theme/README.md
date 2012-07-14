@@ -49,5 +49,5 @@ Authors
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Prompt-Themes
-[2]: https://github.com/dotzsh/dotzsh/issues
+[2]: https://github.com/dotphiles/dotzsh/issues
 

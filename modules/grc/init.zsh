@@ -1,5 +1,5 @@
 #
-# dotzsh : https://github.com/dotzsh/dotzsh
+# dotzsh : https://github.com/dotphiles/dotzsh
 #
 # Setup grc, colourify anything
 #

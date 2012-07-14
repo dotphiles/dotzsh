@@ -63,5 +63,5 @@ Authors
 [2]: https://rvm.io
 [3]: https://github.com/sstephenson/rbenv
 [4]: http://gembundler.com
-[5]: https://github.com/dotzsh/dotzsh/issues
+[5]: https://github.com/dotphiles/dotzsh/issues
 

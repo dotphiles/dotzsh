@@ -26,5 +26,5 @@ Authors
   - [Ben O'Hara](https://github.com/benohara)
 
 [1]: http://korpus.juls.savba.sk/~garabik/software/grc.html
-[2]: https://github.com/dotzsh/dotzsh/issues
+[2]: https://github.com/dotphiles/dotzsh/issues
 

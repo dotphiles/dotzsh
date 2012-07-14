@@ -54,5 +54,5 @@ Authors
 [2]: http://www.doughellmann.com/projects/virtualenvwrapper/
 [3]: http://pypi.python.org/pypi/virtualenv
 [4]: http://www.doughellmann.com/docs/virtualenvwrapper/#introduction
-[5]: https://github.com/dotzsh/dotzsh/issues
+[5]: https://github.com/dotphiles/dotzsh/issues
 

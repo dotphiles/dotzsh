@@ -21,5 +21,5 @@ Authors
   - [James Cox](https://github.com/imajes)
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-[1]: https://github.com/dotzsh/dotzsh/issues
+[1]: https://github.com/dotphiles/dotzsh/issues
 

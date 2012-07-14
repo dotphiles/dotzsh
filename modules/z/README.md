@@ -19,5 +19,5 @@ Authors
 
 [1]: https://github.com/rupa/z
 [2]: https://github.com/joelthelion/autojump
-[3]: https://github.com/dotzsh/dotzsh/issues
+[3]: https://github.com/dotphiles/dotzsh/issues
 

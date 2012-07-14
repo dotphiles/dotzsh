@@ -25,5 +25,5 @@ Authors
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
 [1]: http://yum.baseurl.org
-[2]: https://github.com/dotzsh/dotzsh/issues
+[2]: https://github.com/dotphiles/dotzsh/issues
 

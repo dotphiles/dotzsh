@@ -95,5 +95,5 @@ Authors
 
 [1]: http://openssh.org
 [2]: http://www.openbsd.org/cgi-bin/man.cgi?query=ssh-agent&sektion=1
-[3]: https://github.com/dotzsh/dotzsh/issues
+[3]: https://github.com/dotphiles/dotzsh/issues
 

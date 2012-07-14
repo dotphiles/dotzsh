@@ -1,5 +1,5 @@
 #
-# dotzsh : https://github.com/dotzsh/dotzsh
+# dotzsh : https://github.com/dotphiles/dotzsh
 #
 # Provides for an easier use of gpg-agent.
 #

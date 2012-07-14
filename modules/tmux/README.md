@@ -63,6 +63,6 @@ Authors
 [2]: http://git.io/jkPqHg
 [3]: ChrisJohnsen/tmux-MacOSX-pasteboard
 [4]: mxcl/homebrew
-[5]: https://github.com/dotzsh/dotzsh/issues
+[5]: https://github.com/dotphiles/dotzsh/issues
 [6]: https://github.com/aziz/tmuxinator
 

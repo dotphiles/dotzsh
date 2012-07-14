@@ -30,5 +30,5 @@ Authors
 
 [1]: http://www.gnupg.org
 [1]: http://linux.die.net/man/1/gpg-agent
-[2]: https://github.com/dotzsh/dotzsh/issues
+[2]: https://github.com/dotphiles/dotzsh/issues
 

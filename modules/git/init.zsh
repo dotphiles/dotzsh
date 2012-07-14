@@ -1,5 +1,5 @@
 #
-# dotzsh : https://github.com/dotzsh/dotzsh-module-git
+# dotzsh : https://github.com/dotphiles/dotzsh-module-git
 #
 # Provides Git aliases and functions.
 #

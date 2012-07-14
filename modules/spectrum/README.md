@@ -17,5 +17,5 @@ Authors
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
   - [Ben O'Hara](https://github.com/benohara))
 
-[1]: https://github.com/dotzsh/dotzsh/issues
+[1]: https://github.com/dotphiles/dotzsh/issues
 

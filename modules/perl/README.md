@@ -65,5 +65,5 @@ Authors
 
 [1]: http://www.perl.org
 [2]: http://perlbrew.pl
-[3]: https://github.com/dotzsh/dotzsh/issues
+[3]: https://github.com/dotphiles/dotzsh/issues
 

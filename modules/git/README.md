@@ -271,4 +271,4 @@ Authors
 [1]: http://www.git-scm.com/
 [2]: https://github.com/defunkt/hub
 [3]: http://www.github.com
-[4]: https://github.com/dotzsh/dotzsh-module-git/issues
+[4]: https://github.com/dotphiles/dotzsh-module-git/issues

@@ -1,5 +1,5 @@
 #
-# dotzsh : https://github.com/dotzsh/dotzsh
+# dotzsh : https://github.com/dotphiles/dotzsh
 #
 # Defines tmux aliases and provides for auto launching it at start-up.
 #

@@ -24,5 +24,5 @@ Authors
 
 [1]: http://rsync.samba.org
 [2]: http://www.bombich.com/rsync.html
-[3]: https://github.com/dotzsh/dotzsh/issues
+[3]: https://github.com/dotphiles/dotzsh/issues
 

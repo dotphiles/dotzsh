@@ -58,5 +58,5 @@ Authors
 [2]: https://github.com/joelthelion/autojump
 [3]: https://github.com/rupa/z
 [4]: https://github.com/rupa/v
-[5]: https://github.com/dotzsh/dotzsh/issues
+[5]: https://github.com/dotphiles/dotzsh/issues
 
