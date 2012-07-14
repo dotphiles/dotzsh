@@ -8,8 +8,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-if (( ! $+commands[rvm] )); then
-  return 2
+if (( ! $+commands[ruby] )); then
+  return 1
 fi
 
 # Load RVM into the shell session.
