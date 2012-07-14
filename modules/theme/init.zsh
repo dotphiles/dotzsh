@@ -22,8 +22,8 @@ elif (( $#_theme_argv > 0 )); then
   _theme=($_theme_argv)
 fi
 
-fpath=(${DOTZSH}/themes/*/prompt(/FN) $fpath)
-fpath=(${DOTZSHLOCAL}/themes/*/prompt(/FN) $fpath)
+fpath=(${DOTZSH}/themes/*/prompt.zsh(/FN) $fpath)
+fpath=(${DOTZSHLOCAL}/themes/*/prompt.zsh(/FN) $fpath)
 
 if [[ -e $DOTZSHLOCAL/themes/$_theme[1]/init.zsh ]]; then
   source $DOTZSHLOCAL/themes/$_theme[1]/init.zsh
