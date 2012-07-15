@@ -93,8 +93,7 @@ how to use Git, follow this [tutorial][5] and bookmark this [reference][6].
 Submit program completions to the [zsh-completions][7] project. The dotzsh
 completions directory will be synchronized against it.
 
-Resources
----------
+### Resources
 
 The [Zsh Reference Card][8] is indispensable.
 
