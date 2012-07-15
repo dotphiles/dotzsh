@@ -157,9 +157,7 @@ improve its performance, do not hesitate to fork and send pull requests.
 License
 -------
 
-(The MIT License)
-
-Copyright (c) 2009-2012 Robby Russell, Sorin Ionescu, and contributors.
+Copyright (c) 2012 Ben O'Hara <bohara@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
