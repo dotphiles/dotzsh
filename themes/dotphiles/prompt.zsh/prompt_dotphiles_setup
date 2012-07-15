@@ -85,7 +85,7 @@ function prompt_dotphiles_setup {
     add-zsh-hook chpwd prompt_dotphiles_chpwd
     __PROMPT_dotphiles_VCS_UPDATE=1
 
-    RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}%(?:: %{${prompt_red}%}[$?])${VIM:+" %B%{${prompt_green}%}V%b"}'
+    RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}%(?:: %{${prompt_red}%}[$?]$prompt_reset)${VIM:+" %B%{${prompt_green}%}V%b$prompt_reset"}'
 
     if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
       prompt_base03="%F{234}"  # brblack base03
