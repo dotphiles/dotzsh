@@ -45,7 +45,6 @@ if is-callable 'dircolors'; then
 
   if zstyle -t ':dotzsh:module:theme:ls' color; then
     zstyle -a ':dotzsh:module:theme:dircolors' theme '_dircolors'
-    zstyle -a ':dotzsh:module:theme:dircolors:'$_theme[1] theme '_theme_dircolors'
     if (( ${#_dircolors} > 0 )) && [[ -s "$HOME/$_dircolors" ]]; then
       eval "$(dircolors "$HOME/$_dircolors")"
     elif (( ${#_theme_dircolors} > 0 )) && [[ -s "$_theme_path/$_theme_dircolors" ]]; then
