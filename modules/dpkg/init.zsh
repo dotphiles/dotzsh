@@ -10,7 +10,7 @@
 #
 
 if (( ! $+commands[dpkg] )); then
-  return 2
+  return 1
 fi
 
 # Aliases

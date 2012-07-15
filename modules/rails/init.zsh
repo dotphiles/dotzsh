@@ -10,7 +10,7 @@
 #
 
 if (( ! $+commands[rails] )); then
-  return 2
+  return 1
 fi
 
 # Aliases (Compatible with Rails 2)

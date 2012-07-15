@@ -15,7 +15,7 @@
 #
 
 if (( ! $+commands[ssh] || ! $+commands[ssh-agent] )); then
-  return 2
+  return 1
 fi
 
 # Aliases

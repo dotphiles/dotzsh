@@ -10,7 +10,7 @@
 
 # This module is for Mac OS X only.
 if [[ "$OSTYPE" != darwin* ]]; then
-  return 4
+  return 1
 fi
 
 # Paths

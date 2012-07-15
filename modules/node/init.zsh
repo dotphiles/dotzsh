@@ -8,7 +8,7 @@
 #
 
 if (( ! $+commands[npm] )); then
-  return 2
+  return 1
 fi
 
 cache_file="${0:h}/cache.zsh"

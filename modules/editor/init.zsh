@@ -9,7 +9,7 @@
 
 # Dumb terminals lack support.
 if [[ "$TERM" == 'dumb' ]]; then
-  return 3
+  return 1
 fi
 
 # Beep on error in line editor.

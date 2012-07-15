@@ -8,7 +8,7 @@
 #
 
 if (( ! $+commands[grc] )); then
-  return 2
+  return 1
 fi
 
 if zstyle -t ':dotzsh:module:grc' color; then

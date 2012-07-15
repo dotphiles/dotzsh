@@ -9,7 +9,7 @@
 #
 
 if (( ! $+commands[python] )); then
-  return 2
+  return 1
 fi
 
 # Prepend PEP 370 per user site packages directory, which defaults to

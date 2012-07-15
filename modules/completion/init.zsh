@@ -10,7 +10,7 @@
 
 # Dumb terminals lack support.
 if [[ "$TERM" == 'dumb' ]]; then
-  return 3
+  return 1
 fi
 
 # Load and initialize the completion system ignoring insecure directories.

@@ -12,7 +12,7 @@ zstyle -s ':dotzsh:module:gnu-utility' prefix '_gnu_utility_p' || _gnu_utility_p
 
 # Check for the presence of GNU Core Utilities.
 if (( ! ${+commands[${_gnu_utility_p}whoami]} )); then
-  return 2
+  return 1
 fi
 
 # Set the commands to wrap

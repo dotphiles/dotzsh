@@ -8,7 +8,7 @@
 #
 
 if (( ! $+commands[git] )); then
-  return 2
+  return 1
 fi
 
 if (( $+commands[hub]  )); then

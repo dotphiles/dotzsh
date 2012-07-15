@@ -11,13 +11,13 @@
 # Check for the minimum supported version.
 local min_zsh_version='4.3.10'
 if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
-  return 9
+  return 1
 fi
 
 if [[ -s "${0:h}/external/zsh-history-substring-search.zsh" ]]; then
   source "${0:h}/external/zsh-history-substring-search.zsh"
 else
-  return 2
+  return 1
 fi
 
 if zstyle -t ':dotzsh:module:history-substring-search' case-sensitive; then

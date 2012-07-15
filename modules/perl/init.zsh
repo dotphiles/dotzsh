@@ -8,7 +8,7 @@
 #
 
 if (( ! $+commands[perl] )); then
-  return 2
+  return 1
 fi
 
 if [[ "$OSTYPE" == darwin* ]]; then

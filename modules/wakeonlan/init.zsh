@@ -6,6 +6,6 @@
 #
 
 if (( ! $+commands[wakeonlan] )); then
-  return 2
+  return 1
 fi
 

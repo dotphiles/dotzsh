@@ -8,7 +8,7 @@
 #
 
 if (( ! $+commands[growlnotify] )); then
-  return 2
+  return 1
 fi
 
 zstyle -a ':dotzsh:module:notify' elapsed '_elapsed'

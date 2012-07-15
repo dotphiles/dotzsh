@@ -135,19 +135,6 @@ improve its performance, do not hesitate to fork and send pull requests.
    - Large functions must be placed in a *functions* directory.
    - Functions that take arguments must have completion.
 
-### Return Codes
-
-   - Modules will return with the following the Codes
-
-     - `-1` old zsh, degrading
-     - `0` loaded ok
-     - `1` error, disabling
-     - `2` required command not available, disabling
-     - `3` dumb terminal, disabling
-     - `4` wrong os, disabling
-     - `8` module not found, disabling
-     - `9` zsh too old, disabling
-
 #### Themes
 
    - A screenshots section must be present in the file header.

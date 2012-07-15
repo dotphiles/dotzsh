@@ -8,7 +8,7 @@
 #
 
 if (( ! $+commands[hg] )); then
-  return 2
+  return 1
 fi
 
 alias hgc='hg commit'

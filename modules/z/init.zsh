@@ -9,7 +9,7 @@
 
 min_zsh_version='4.3.10'
 if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
-  return 9
+  return 1
 fi
 
 _z_prefixes=(

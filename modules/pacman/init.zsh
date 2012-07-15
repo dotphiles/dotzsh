@@ -9,7 +9,7 @@
 #
 
 if (( ! $+commands[pacman] )); then
-  return 2
+  return 1
 fi
 
 # Get the Pacman frontend.

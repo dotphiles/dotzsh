@@ -8,7 +8,7 @@
 #
 
 if (( ! $+commands[rsync] )); then
-  return 2
+  return 1
 fi
 
 # Aliases

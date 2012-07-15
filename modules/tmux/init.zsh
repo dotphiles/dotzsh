@@ -9,7 +9,7 @@
 #
 
 if (( ! $+commands[tmux] )); then
-  return 2
+  return 1
 fi
 
 # Auto Start
