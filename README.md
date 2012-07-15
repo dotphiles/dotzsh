@@ -1,18 +1,12 @@
 dotzsh
 ======
 
-Forked from sorin-ionescu's oh-my-zsh but adds support for zsh 4.2.6 as found on CentOS5/EL5
-as well as a few extra modules
-
 dotzsh is a configuration framework for [Zsh][1] that enriches the command line
 interface environment with sane defaults, aliases, functions, auto completion,
 and prompt themes.
 
 Installation
 ------------
-
-dotzsh will work with any recent release of Zsh, but the minimum recommended
-version is 4.2.6.
 
   1. Clone the repository:
 
