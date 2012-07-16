@@ -90,6 +90,10 @@ if zstyle -t ':dotzsh:module:environment:grep' color; then
   export GREP_OPTIONS='--color=auto'
 fi
 
+if zstyle -t ':dotzsh:module:completion' loaded; then
+  zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+fi
+
 # Load and execute the prompt theming system.
 autoload -Uz promptinit && promptinit
 

@@ -85,8 +85,6 @@ function prompt_dotphiles_setup {
     add-zsh-hook chpwd prompt_dotphiles_chpwd
     __PROMPT_dotphiles_VCS_UPDATE=1
 
-    RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}%(?:: %{${prompt_red}%}[$?]$prompt_reset)${VIM:+" %B%{${prompt_green}%}V%b$prompt_reset"}'
-
     if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
       prompt_base03="%F{234}"  # brblack base03
       prompt_base02="%F{235}"  # black base02
@@ -150,6 +148,22 @@ function prompt_dotphiles_setup {
   staged="+"
   dirty="*"
 
+  prompt_theme=${1:-'dark'}
+  _prompt_host=${2:-'green'}
+
+  eval prompt_host="$"prompt_$_prompt_host""
+  if [ "prompt_theme" = 'light' ]; then
+    prompt_reset="$prompt_base00"
+    prompt_hi="$prompt_base01"
+    prompt_dull="$prompt_base1"
+    zstyle ':dotzsh:module:editor' completing '%{$prompt_base1%}...$prompt_reset'
+  else
+    prompt_reset="$prompt_base0"
+    prompt_hi="$prompt_base1"
+    prompt_dull="$prompt_base01"
+    zstyle ':dotzsh:module:editor' completing '%{$prompt_base01%}...$prompt_reset'
+  fi
+  
   # Enable VCS systems you use.
   zstyle ':vcs_info:*' enable git hg svn cvs
 
@@ -175,26 +189,11 @@ function prompt_dotphiles_setup {
   zstyle ':vcs_info:*:prompt:*' formats       "${fmt_branch}"
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
-  prompt_theme=${1:-'dark'}
-  _prompt_host=${2:-'green'}
-
   zstyle ':dotzsh:module:editor:keymap:primary' overwrite " ${prompt_red}♺$prompt_reset"
   zstyle ':dotzsh:module:editor:keymap' alternate " ${prompt_yellow}❮$prompt_reset%B${prompt_red}❮%prompt_reset%b${prompt_red}❮$prompt_reset"
 
   SPROMPT='zsh: correct ${prompt_red}%R$prompt_reset to ${prompt_green}%r$prompt_reset [nyae]? '
-
-  eval prompt_host="$"prompt_$_prompt_host""
-  if [ "prompt_theme" = 'light' ]; then
-  zstyle ':dotzsh:module:editor' completing '%{$prompt_base1%}...$prompt_reset'
-    prompt_reset="$prompt_base00"
-    prompt_hi="$prompt_base01"
-    prompt_dull="$prompt_base1"
-  else
-    prompt_reset="$prompt_base0"
-    prompt_hi="$prompt_base1"
-    prompt_dull="$prompt_base01"
-    zstyle ':dotzsh:module:editor' completing '%{$prompt_base01%}...$prompt_reset'
-  fi
+  RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}%(?:: %{${prompt_red}%}[$?]$prompt_reset)${VIM:+" %B%{${prompt_green}%}V%b$prompt_reset"}'
   PROMPT='%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_hi%} at %{$prompt_host%}%m%{$prompt_hi%} in %{$prompt_dull%}%~ ${vcs_info_msg_0_}
 %{$prompt_hi%} ${userprompt} %{$prompt_reset%}'
 }
