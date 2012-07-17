@@ -90,15 +90,16 @@ function set-title-precmd {
     if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
       # Set the current working directory in Apple Terminal.
       printf '\e]7;%s\a' "file://$HOST${PWD// /%20}"
-    else
-      if [[ ! -z $SSH_CONNECTION ]]; then
-        SSHHOST="$HOST:"
-      fi
-      set-window-title "$SSHHOST${(%):-%~}"
-      for kind in tab screen; do
-        # Left-truncate the current working directory to 15 characters.
-        set-${kind}-title "$SSHHOST${(%):-%15<...<%~%<<}"
-      done
+    fi
+
+    if [[ ! -z $SSH_CONNECTION ]]; then
+      SSHHOST="$HOST:"
+    fi
+    set-window-title "$SSHHOST${(%):-%~}"
+    for kind in tab screen; do
+      # Left-truncate the current working directory to 15 characters.
+      set-${kind}-title "$SSHHOST${(%):-%15<...<%~%<<}"
+    done
     fi
   fi
 }
