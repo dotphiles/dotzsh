@@ -100,7 +100,6 @@ function set-title-precmd {
       # Left-truncate the current working directory to 15 characters.
       set-${kind}-title "$SSHHOST${(%):-%15<...<%~%<<}"
     done
-    fi
   fi
 }
 add-zsh-hook precmd set-title-precmd
