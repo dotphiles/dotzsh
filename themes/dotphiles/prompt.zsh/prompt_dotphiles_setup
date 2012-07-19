@@ -120,6 +120,7 @@ function prompt_dotphiles_setup {
       prompt_cyan="%b%F{cyan}" # cyan cyan
       prompt_green="%b%F{green}" # green green
     fi
+    RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}%(?:: %{${prompt_red}%}[$?]%{$prompt_reset%})${VIM:+" %B%{$prompt_green%}V%b%{$prompt_reset%}"}'
   else
     prompt_base03="$fg_bold[black]"  # brblack base03
     prompt_base02="$fg[black]"  # black base02
@@ -193,7 +194,6 @@ function prompt_dotphiles_setup {
   zstyle ':dotzsh:module:editor:keymap' alternate " %{$prompt_yellow%}❮%{$prompt_reset%}%B%{prompt_red%}❮%{$prompt_reset%}%b%{$prompt_red%}❮%{$prompt_reset%}"
 
   SPROMPT='zsh: correct %{$prompt_red%}%R%{$prompt_reset%} to %{$prompt_green%}%r%{$prompt_reset%} [nyae]? '
-  RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}%(?:: %{${prompt_red}%}[$?]%{$prompt_reset%})${VIM:+" %B%{$prompt_green%}V%b%{$prompt_reset%}"}'
   PROMPT='%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_hi%} at %{$prompt_host%}%m%{$prompt_hi%} in %{$prompt_dull%}%~ ${vcs_info_msg_0_}
 %{$prompt_hi%} ${userprompt} %{$prompt_reset%}'
 }
