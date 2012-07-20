@@ -152,3 +152,9 @@ function psu {
 encode64(){ echo -n $1 | base64 }
 decode64(){ echo -n $1 | base64 -d }
 
+function up {
+  for parent in {1..${1:-1}}; do
+    builtin cd ..
+  done
+}
+
