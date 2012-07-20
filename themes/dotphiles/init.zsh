@@ -8,3 +8,7 @@ zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.256
 zstyle ':dotzsh:module:theme:lscolors:dotphiles' theme 'gxfxbEaEBxxEhEhBaDaCaD'
 zstyle ':dotzsh:module:theme:grepcolors:dotphiles' theme '37;45'
 
+# Patterns
+ZSH_HIGHLIGHT_PATTERNS+=('rm -rf' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_PATTERNS+=('sudo' 'fg=white,bold,bg=red')
+
