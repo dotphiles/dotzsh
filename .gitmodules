@@ -17,3 +17,6 @@
 [submodule "modules/fasd/external"]
 	path = modules/fasd/external
 	url = https://github.com/clvv/fasd.git
+[submodule "modules/auto-fu/external"]
+	path = modules/auto-fu/external
+	url = https://github.com/hchbaw/auto-fu.zsh.git
