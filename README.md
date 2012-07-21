@@ -114,7 +114,7 @@ improve its performance, do not hesitate to fork and send pull requests.
    - Check that the issue has not already been fixed in the latest code.
    - Open an issue with a clear title and description in grammatically correct,
      complete sentences.
-   - Raise an issue on the issue tracker[14]
+   - Raise an issue on the [issue tracker][14]
 
 ### Pull Request
 
@@ -153,7 +153,7 @@ dotzsh has been tested and developed to work on the following
   - OpenSolaris >= 11
 
 If you use an older version or a different OS and see problems please raise an
-issue on the issue tracker[14]
+issue on the [issue tracker][14]
 
 License
 -------
