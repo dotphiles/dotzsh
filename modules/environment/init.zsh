@@ -17,19 +17,10 @@ setopt BRACE_CCL          # Allow brace character class list expansion.
 setopt RC_QUOTES          # Allow 'Henry''s Garage' instead of 'Henry'\''s Garage'.
 unsetopt MAIL_WARNING     # Don't print a warning message if a mail file has been accessed.
 
-if [[ "$OSTYPE" = solaris* ]]; then
-  export HOSTNAME=`hostname`
-  export HOST=$HOSTNAME
-else
-  export HOST=`hostname -s`
-  export HOSTNAME=`hostname -f`
-fi
+export HOSTNAME=`hostname`
+export HOST=`echo $HOSTNAME | cut-f1 -d.`
 if [[ "$HOSTNAME" = *\.*  ]]; then
-  if [[ "$OSTYPE" != darwin* ]]; then
-    export DOMAIN=`hostname -d`
-  else
-    export DOMAIN=`echo $HOSTNAME | cut -f2- -d.`
-  fi
+  export DOMAIN=`echo $HOSTNAME | cut -f2- -d.`
 fi
 
 # Jobs
