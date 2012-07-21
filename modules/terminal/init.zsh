@@ -19,6 +19,11 @@ if [[ "$TERM" == 'dumb' ]]; then
   return 1
 fi
 
+# Solaris has no 256 colors!
+if [[ "$OSTYPE" = solaris* ]]; then
+  export TERMINFO=/usr/gnu/share/terminfo
+fi
+
 # Set the GNU Screen window number.
 if [[ -n "$WINDOW" ]]; then
   export SCREEN_NO="%B${WINDOW}%b "
