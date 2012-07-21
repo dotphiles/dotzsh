@@ -25,7 +25,6 @@ infopath=(
 
 # Set the list of directories that man searches for manuals.
 manpath=(
-  /usr/gnu/share/man
   /usr/local/share/man
   /usr/share/man
   $manpath
@@ -38,7 +37,6 @@ unset path_file
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  /usr/gnu/bin
   /usr/local/{bin,sbin}
   /usr/{bin,sbin}
   /{bin,sbin}
