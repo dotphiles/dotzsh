@@ -5,6 +5,11 @@ dotzsh is a configuration framework for [Zsh][1] that enriches the command line
 interface environment with sane defaults, aliases, functions, auto completion,
 and prompt themes.
 
+dotzsh strives to be platform and version independent, some functionality may be
+lost when running under older versions of zsh, but it should degrade cleanly and
+allow you to use the same setup on multiple machines of differing OS's without
+problems.
+
 Installation
 ------------
 
@@ -109,6 +114,7 @@ improve its performance, do not hesitate to fork and send pull requests.
    - Check that the issue has not already been fixed in the latest code.
    - Open an issue with a clear title and description in grammatically correct,
      complete sentences.
+   - Raise an issue on the issue tracker[14]
 
 ### Pull Request
 
@@ -133,6 +139,21 @@ improve its performance, do not hesitate to fork and send pull requests.
      screenshots][13].
 
   ![dotphiles theme][2]
+
+Compatibility
+-------------
+
+dotzsh has been tested and developed to work on the following
+
+  - MacOSX >= 10.6
+  - Enterprise Linux >= 5
+  - Debian >= 6
+  - Ubuntu >= 11
+  - ArchLinux >= 2011.08.19
+  - OpenSolaris >= 11
+
+If you use an older version or a different OS and see problems please raise an
+issue on the issue tracker[14]
 
 License
 -------
@@ -170,4 +191,5 @@ SOFTWARE.
 [11]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [12]: https://help.github.com/articles/using-pull-requests
 [13]: http://daringfireball.net/projects/markdown/syntax#img
+[14]: https://github.com/dotphiles/dotzsh/issues
 
