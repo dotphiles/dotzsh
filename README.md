@@ -75,8 +75,6 @@ accompanying README files to learn of what is available.
   3. Load the theme you like in *~/.zshrc* then open a new Zsh terminal window
      or tab.
 
-     ![sorin theme][2]
-
 ### Troubleshooting
 
   `dzinfo` will show which module are loaded and how long they took to start.
@@ -158,7 +156,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 [1]: http://www.zsh.org
-[2]: http://i.imgur.com/aipDQ.png "sorin theme"
 [3]: http://git-scm.com
 [4]: https://github.com
 [5]: http://gitimmersion.com
