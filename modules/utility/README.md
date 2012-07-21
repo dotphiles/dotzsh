@@ -112,6 +112,7 @@ Functions
 ### General
 
   - `slit` prints columns *1, 2, 3 ... n*.
+  - `up` move up the directory tree
 
 ### Files and Directories
 
@@ -127,6 +128,8 @@ Functions
   - `diff` highlights diff output (requires `colordiff` or `Git`).
   - `make` highlights make output (requires `colormake`).
   - `wdiff` highlights wdiff output (requires `wdiff `or `Git`).
+  - `encode64` base64 encodes a string
+  - `decode64` base64 decodes a string
 
 ### Resource usage
 
