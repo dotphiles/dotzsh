@@ -132,6 +132,8 @@ improve its performance, do not hesitate to fork and send pull requests.
    - The pull request description must have must have [embedded
      screenshots][13].
 
+  ![dotphiles theme][2]
+
 License
 -------
 
@@ -156,6 +158,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 [1]: http://www.zsh.org
+[2]: https://raw.github.com/dotphiles/dotzsh/master/themes/dotphiles/screenshots/dotphiles.png "dotphiles theme"
 [3]: http://git-scm.com
 [4]: https://github.com
 [5]: http://gitimmersion.com
