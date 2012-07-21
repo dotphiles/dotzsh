@@ -10,8 +10,9 @@ Packaging
 
 Themes for dotzsh should be bundled in the the following way
 
+    theme-name/README.md    <- Required, README, explaining theme 
     theme-name/init.zsh     <- Optional, set dircolors, lscolors etc
     theme-name/prompt.zsh/  <- Will be added to fpath
     theme-name/dircolors/   <- Optional, dircolors files for themes
-    theme-name/screenshots/ <- Optional, screenshots of theme
+    theme-name/screenshots/ <- Required, screenshots of theme
 
