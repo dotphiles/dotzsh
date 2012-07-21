@@ -183,8 +183,9 @@ function dzinfo {
   print >&1
   print -n "  dotzsh $DOTZSHVER on $OSTYPE running zsh $ZSH_VERSION"  >&1
   if zstyle -t ":dotzsh:load" timing; then
-    print ", startup in $(format-elapsed ${dzmodload_elapsed})"  >&1
+    print -n ", startup in $(format-elapsed ${dzmodload_elapsed})"  >&1
   fi
+  print >&1
   print >&1
   print " module                            global local   aliases colour  startup">&1
   print " ======                            ====== =====   ======= ======  =======">&1
