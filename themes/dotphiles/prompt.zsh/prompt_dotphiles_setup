@@ -2,7 +2,7 @@
 # dotzsh : https://github.com/dotphiles/dotzsh
 #
 # A theme based on Steve Losh's prompt with VCS_INFO integration
-# Tweaked with solarized colors for 256/16 color modes
+# Tweaked with solarized and zenburn colors for 256/16 color modes
 #
 # Authors:
 #   Ben O'Hara <bohara@gmail.com>
@@ -29,8 +29,9 @@ Options
 
 Example
 
-  prompt dotphiles dark red
-  prompt dotphiles light orange
+  prompt dotphiles soldark red
+  prompt dotphiles sollight orange
+  prompt dotphiles zenburn orange
 
 Colors
 
@@ -149,11 +150,11 @@ function prompt_dotphiles_setup {
   staged="+"
   dirty="*"
 
-  prompt_theme=${1:-'dark'}
+  prompt_theme=${1:-'soldark'}
   _prompt_host=${2:-'green'}
 
   eval prompt_host="$"prompt_$_prompt_host""
-  if [ "prompt_theme" = 'light' ]; then
+  if [ "prompt_theme" = 'sollight' ]; then
     prompt_reset="$prompt_base00"
     prompt_hi="$prompt_base01"
     prompt_dull="$prompt_base1"
