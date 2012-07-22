@@ -1,7 +1,10 @@
 #
-# dotzsh-prompt-dotphiles : https://github.com/dotphiles/dotzsh-prompt-dotphiles
+# dotzsh : https://github.com/dotphiles/dotzsh
 #
 # Setup colors for ls, grep etc
+#
+# Authors:
+#   Ben O'Hara <bohara@gmail.com>
 #
 
 zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.256dark'
