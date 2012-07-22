@@ -19,8 +19,8 @@ setopt CORRECT
 
 # Reload dotzsh
 alias dzs='source ~/.zshrc && echo "Reloaded $HOME/.zshrc!"'
-alias dzD='setopt XTRACE && echo "DEBUG ENABLED" && zs'
-alias dzd='unsetopt XTRACE && zs'
+alias dzD='setopt XTRACE && echo "DEBUG ENABLED" && dzs'
+alias dzd='unsetopt XTRACE && dzs'
 
 # Disable correction.
 alias ack='nocorrect ack'
