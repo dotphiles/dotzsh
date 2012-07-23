@@ -45,9 +45,9 @@ function prompt_dotphiles_precmd {
     # Check for untracked files or updated submodules since vcs_info doesn't.
     if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
       __PROMPT_dotphiles_VCS_UPDATE=1
-      fmt_branch="%{$prompt_reset%}$branchopen%s:%{$prompt_orange%}%b%{$prompt_reset%}%u%c%{$prompt_yellow%}$dirty%{$prompt_reset%}$branchclose"
+      fmt_branch="%{$prompt_reset%}$branchopen%s:%{$prompt_orange%}%b%{$prompt_reset%}%{$prompt_yellow%}$dirty%{$prompt_reset%}${branchclose} %u%c%m"
     else
-      fmt_branch="%{$prompt_reset%}$branchopen%s:%{$prompt_orange%}%b%{$prompt_reset%}%u%c%{$prompt_reset%}${branchclose}"
+      fmt_branch="%{$prompt_reset%}$branchopen%s:%{$prompt_orange%}%b%{$prompt_reset%}%{$prompt_reset%}${branchclose} %u%c%m"
     fi
     zstyle ':vcs_info:*:prompt:*' formats "${fmt_branch}"
 
@@ -69,6 +69,48 @@ function prompt_dotphiles_preexec {
 
 function prompt_dotphiles_chpwd {
   __PROMPT_dotphiles_VCS_UPDATE=1
+}
+
+# Show remote ref name and number of commits ahead-of or behind
+function +vi-git-st() {
+  local ahead behind remote
+  local -a gitstatus
+
+  # Are we on a remote-tracking branch?
+  remote="${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
+    --symbolic-full-name 2>/dev/null)/refs\/remotes\/}"
+
+  if [[ -n ${remote} ]] ; then
+    # for git prior to 1.7
+    # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
+    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+    (( $ahead )) && gitstatus+=( "%{$prompt_green%}${promptahead}${ahead}%{$prompt_reset%}" )
+
+    # for git prior to 1.7
+    # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)
+    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+    (( $behind )) && gitstatus+=( "%{$prompt_red%}${promptbehind}${behind}%{$prompt_reset%}" )
+
+    if [[ ! -z $remote ]]; then
+        remsplit=":"
+    fi
+
+    if [[ ! -z $gitstatus ]]; then
+        absplit=":"
+    fi
+
+    hook_com[branch]="${hook_com[branch]}%{$prompt_reset%}${remsplit}${remote}${absplit}${(j:/:)gitstatus}"
+  fi
+}
+
+# Show count of stashed changes
+function +vi-git-stash() {
+  local -a stashes
+
+  if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
+    stashes=$(git stash list 2>/dev/null | wc -l)
+    hook_com[misc]+=" (%{$prompt_dull%}${stashes} stashed%{$prompt_reset%})"
+  fi
 }
 
 function prompt_dotphiles_setup {
@@ -149,6 +191,8 @@ function prompt_dotphiles_setup {
   unstaged="x"
   staged="+"
   dirty="*"
+  promptahead="+"
+  promptbehind="-"
 
   prompt_theme=${1:-'soldark'}
   _prompt_host=${2:-'green'}
@@ -172,6 +216,9 @@ function prompt_dotphiles_setup {
   # check-for-changes can be really slow.
   # You should disable it if you work with large repositories.
   zstyle ':vcs_info:*:prompt:*' check-for-changes true
+  zstyle ':vcs_info:git*:*' get-revision true
+
+  zstyle ':vcs_info:git*+set-message:*' hooks git-st git-stash
 
   # Formats:
   # %b - branchname
@@ -180,7 +227,7 @@ function prompt_dotphiles_setup {
   # %a - action (e.g. rebase-i)
   # %R - repository path
   # %S - path in the repository
-  local fmt_branch="%{$prompt_reset%}${branchopen}%s:%{$prompt_orange%}%b%{$prompt_reset%}%u%c%{$prompt_reset%}${branchclose}"
+  local fmt_branch="%{$prompt_reset%}${branchopen}%s:%{$prompt_orange%}%b%{$prompt_reset%}${branchclose} %u%c%m"
   local fmt_action="%{$prompt_reset%}(%{$prompt_yellow%}%a%{$prompt_reset%})"
   local fmt_unstaged="%{$prompt_cyan%}${unstaged}%{$prompt_reset%}"
   local fmt_staged="%{$prompt_green%}${staged}%{$prompt_reset%}"
