@@ -73,7 +73,7 @@ function prompt_dotphiles_chpwd {
 
 # Show remote ref name and number of commits ahead-of or behind
 function +vi-git-st() {
-  local ahead behind remote
+  local ahead behind remote remsplit absplit
   local -a gitstatus
 
   # Are we on a remote-tracking branch?
@@ -101,6 +101,9 @@ function +vi-git-st() {
 
     hook_com[branch]="${hook_com[branch]}%{$prompt_reset%}${remsplit}${remote}${absplit}${(j:/:)gitstatus}"
   fi
+
+  unset remsplit absplit
+
 }
 
 # Show count of stashed changes
