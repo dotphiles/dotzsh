@@ -45,9 +45,9 @@ function prompt_dotphiles_precmd {
     # Check for untracked files or updated submodules since vcs_info doesn't.
     if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
       __PROMPT_dotphiles_VCS_UPDATE=1
-      fmt_branch="%{$prompt_reset%}$branchopen%s:%{$prompt_orange%}%b%{$prompt_reset%}${branchclose} %{$prompt_red%}$dirty%{$prompt_reset%}%u%c%m"
+      fmt_branch="%{$prompt_reset%}$bropen%s:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %{$prompt_red%}$dirty%{$prompt_reset%}%u%c%m"
     else
-      fmt_branch="%{$prompt_reset%}$branchopen%s:%{$prompt_orange%}%b%{$prompt_reset%}${branchclose} %u%c%m"
+      fmt_branch="%{$prompt_reset%}$bropen%s:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %u%c%m"
     fi
     zstyle ':vcs_info:*:prompt:*' formats "${fmt_branch}"
 
@@ -92,14 +92,14 @@ function +vi-git-st() {
     (( $behind )) && gitstatus+=( "%{$prompt_red%}${promptbehind}${behind}%{$prompt_reset%}" )
 
     if [[ ! -z $remote ]]; then
-        remsplit=":"
+        remsplit=$remotetrack
     fi
 
     if [[ ! -z $gitstatus ]]; then
         absplit=":"
     fi
 
-    hook_com[branch]="${hook_com[branch]}%{$prompt_reset%}${remsplit}${remote}${absplit}${(j:/:)gitstatus}"
+    hook_com[branch]="${hook_com[branch]}%{$prompt_reset%}${remsplit}%{$prompt_yellow%}${remote}%{$prompt_reset%}${absplit}${(j:/:)gitstatus}"
   fi
 
   unset remsplit absplit
@@ -112,7 +112,7 @@ function +vi-git-stash() {
 
   if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
     stashes=$(git stash list 2>/dev/null | wc -l)
-    hook_com[misc]+=" (%{$prompt_dull%}${stashes} stashed%{$prompt_reset%})"
+    hook_com[misc]+=" ${bropen}%{$prompt_dull%}${stashes} stashed%{$prompt_reset%}${brclose}"
   fi
 }
 
@@ -166,7 +166,18 @@ function prompt_dotphiles_setup {
       prompt_cyan="%b%F{cyan}" # cyan cyan
       prompt_green="%b%F{green}" # green green
     fi
+
     RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}%(?:: %{${prompt_red}%}[$?]%{$prompt_reset%})${VIM:+" %B%{$prompt_green%}V%b%{$prompt_reset%}"}'
+
+    userprompt="❯❯"
+    bropen="❮"
+    brclose="❯"
+    unstaged="✱"
+    staged="✚"
+    dirty="✖"
+    promptahead="⬆"
+    promptbehind="⬇"
+    remotetrack="➜"
   else
     prompt_base03="$fg_bold[black]"  # brblack base03
     prompt_base02="$fg[black]"  # black base02
@@ -184,18 +195,20 @@ function prompt_dotphiles_setup {
     prompt_blue="%fg[blue]" # blue blue
     prompt_cyan="$fg[cyan]" # cyan cyan
     prompt_green="$fg[green]" # green green
+
     RPROMPT=''
+
+    userprompt=">>"
+    bropen="("
+    brclose=")"
+    unstaged="x"
+    staged="+"
+    dirty="*"
+    promptahead="+"
+    promptbehind="-"
+    remotetrack=">"
   fi
   unset min_zsh_version
-
-  userprompt=">>"
-  branchopen="("
-  branchclose=")"
-  unstaged="x"
-  staged="+"
-  dirty="*"
-  promptahead="+"
-  promptbehind="-"
 
   prompt_theme=${1:-'soldark'}
   _prompt_host=${2:-'green'}
@@ -230,8 +243,8 @@ function prompt_dotphiles_setup {
   # %a - action (e.g. rebase-i)
   # %R - repository path
   # %S - path in the repository
-  local fmt_branch="%{$prompt_reset%}${branchopen}%s:%{$prompt_orange%}%b%{$prompt_reset%}${branchclose} %u%c%m"
-  local fmt_action="%{$prompt_reset%}(%{$prompt_yellow%}%a%{$prompt_reset%})"
+  local fmt_branch="%{$prompt_reset%}${bropen}%s:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %u%c%m"
+  local fmt_action="%{$prompt_reset%}${bropen}%{$prompt_yellow%}%a%{$prompt_reset%}${brclose}"
   local fmt_unstaged="%{$prompt_cyan%}${unstaged}%{$prompt_reset%}"
   local fmt_staged="%{$prompt_green%}${staged}%{$prompt_reset%}"
 
