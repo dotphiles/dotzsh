@@ -178,6 +178,7 @@ function prompt_dotphiles_setup {
     promptahead="⬆"
     promptbehind="⬇"
     remotetrack="➜"
+    over="♺"
   else
     prompt_base03="$fg_bold[black]"  # brblack base03
     prompt_base02="$fg[black]"  # black base02
@@ -207,6 +208,7 @@ function prompt_dotphiles_setup {
     promptahead="+"
     promptbehind="-"
     remotetrack=">"
+    over="O"
   fi
   unset min_zsh_version
 
@@ -254,8 +256,8 @@ function prompt_dotphiles_setup {
   zstyle ':vcs_info:*:prompt:*' formats       "${fmt_branch}"
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
-  zstyle ':dotzsh:module:editor:keymap:primary' overwrite " %{$prompt_red%}♺%{$prompt_reset%}"
-  zstyle ':dotzsh:module:editor:keymap' alternate " %{$prompt_yellow%}<%{$prompt_reset%}%B%{$prompt_red%}<%{$prompt_reset%}%b%{$prompt_red%}<%{$prompt_reset%}"
+  zstyle ':dotzsh:module:editor:keymap:primary' overwrite " %{$prompt_red%}${over}%{$prompt_reset%}"
+  zstyle ':dotzsh:module:editor:keymap' alternate " %{$prompt_yellow%}${bropen}%{$prompt_orange%}${bropen}%{$prompt_red%}${bropen}%{$prompt_reset%}"
 
   SPROMPT='zsh: correct %{$prompt_red%}%R%{$prompt_reset%} to %{$prompt_green%}%r%{$prompt_reset%} [nyae]? '
   PROMPT='%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_hi%} at %{$prompt_host%}%m%{$prompt_hi%} in %{$prompt_dull%}%~ ${vcs_info_msg_0_}
