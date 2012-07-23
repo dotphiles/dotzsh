@@ -84,12 +84,12 @@ function +vi-git-st() {
     # for git prior to 1.7
     # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
     ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
-    (( $ahead )) && gitstatus+=( "%{$prompt_green%}${promptahead} ${ahead}%{$prompt_reset%}" )
+    (( $ahead )) && gitstatus+=( "%{$prompt_green%}${promptahead}${ahead}%{$prompt_reset%}" )
 
     # for git prior to 1.7
     # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)
     behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
-    (( $behind )) && gitstatus+=( "%{$prompt_red%}${promptbehind} ${behind}%{$prompt_reset%}" )
+    (( $behind )) && gitstatus+=( "%{$prompt_red%}${promptbehind}${behind}%{$prompt_reset%}" )
 
     if [[ ! -z $remote ]]; then
         remsplit=$remotetrack
@@ -175,8 +175,8 @@ function prompt_dotphiles_setup {
     unstaged="✱"
     staged="✚"
     dirty="✭"
-    promptahead="⬆"
-    promptbehind="⬇"
+    promptahead="⬆ "
+    promptbehind="⬇ "
     remotetrack="➜"
     over="♺"
   else
@@ -233,8 +233,8 @@ function prompt_dotphiles_setup {
 
   # check-for-changes can be really slow.
   # You should disable it if you work with large repositories.
-  zstyle ':vcs_info:*:prompt:*' check-for-changes true
-  zstyle ':vcs_info:git*:*' get-revision true
+  zstyle ':vcs_info:(hg*|git*):*' check-for-changes true
+  zstyle ':vcs_info:(hg*|git*):*' get-revision true
 
   zstyle ':vcs_info:git*+set-message:*' hooks git-st git-stash
 
