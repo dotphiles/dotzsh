@@ -1,7 +1,7 @@
 grc
 ===
 
-Setup grc[1] to colour output of Commands
+Setup [grc][1] to colour output of various commands
 
 Settings
 --------
@@ -16,7 +16,25 @@ To colourify a different set of commands, add the following to *zshrc*:
       'command3' \
       'command4'
 
-  *This will over ride the default list of commands*
+By default the following commands are colourified, if available
+
+   - `cat`
+   - `tail`
+   - `configure`
+   - `diff`
+   - `make`
+   - `gcc`
+   - `g++`
+   - `as`
+   - `gas`
+   - `ps`
+   - `ld`
+   - `netstat`
+   - `ping`
+   - `ping6`
+   - `traceroute`
+   - `traceroute6`
+   - `nmap`
 
 Authors
 -------
