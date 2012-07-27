@@ -181,7 +181,7 @@ function dzinfo {
   zstyle -a ':dotzsh:load' dzmodule 'dzmodules'
   zstyle -a ":dotzsh:load" elapsed 'dzmodload_elapsed'
   print >&1
-  print -n "  dotzsh $DOTZSHVER on $OSTYPE running zsh $ZSH_VERSION"  >&1
+  print -n "  dotzsh $DOTZSH_VERSION on $OSTYPE running zsh $ZSH_VERSION"  >&1
   if zstyle -t ":dotzsh:load" timing; then
     print -n ", startup in $(format-elapsed ${dzmodload_elapsed})"  >&1
   fi
