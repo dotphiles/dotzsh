@@ -12,13 +12,17 @@ if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
   return 1
 fi
 
+if [[ -d ${0:h}/external/ ]]; then
+  path=(${0:h}/external $path)
+fi
+
 if (( ! $+commands[fasd] )); then
   return 1
 fi
 
 cache_file="${0:h}/cache.zsh"
 
-if [[ "${o:h}/external/fasd" -nt "$cache_file" || ! -s "$cache_file"  ]]; then
+if [[ $commands[fasd] -nt "$cache_file" || ! -s "$cache_file"  ]]; then
   # Base init arguments
   init_args='posix-alias zsh-hook'
 
