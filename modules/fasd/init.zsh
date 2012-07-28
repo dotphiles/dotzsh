@@ -12,11 +12,9 @@ if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
   return 1
 fi
 
-if [[ ! -s "${0:h}/external/fasd" ]]; then
+if (( ! $+commands[fasd] )); then
   return 1
 fi
-
-source "${0:h}/external/fasd"
 
 cache_file="${0:h}/cache.zsh"
 
