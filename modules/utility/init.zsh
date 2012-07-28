@@ -109,7 +109,11 @@ fi
 # Miscellaneous
 
 # Serves a directory via HTTP.
-alias http-serve='python -m SimpleHTTPServer'
+function http-serve {
+  local port="${1:-8000}"
+  sleep 1 && open "http://localhost:${port}/" &
+  python -m SimpleHTTPServer ${port}
+}
 
 
 # Functions
