@@ -14,9 +14,6 @@
 [submodule "modules/completion/functions"]
 	path = modules/completion/functions
     url = https://github.com/zsh-users/zsh-completions.git
-[submodule "modules/fasd/external"]
-	path = modules/fasd/external
-	url = https://github.com/clvv/fasd.git
 [submodule "modules/auto-fu/external"]
 	path = modules/auto-fu/external
 	url = https://github.com/hchbaw/auto-fu.zsh.git
