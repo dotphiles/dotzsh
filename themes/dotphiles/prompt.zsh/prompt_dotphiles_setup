@@ -177,7 +177,7 @@ function prompt_dotphiles_setup {
     dirty="✭"
     promptahead="⬆ "
     promptbehind="⬇ "
-    remotetrack="➜"
+    remotetrack="▸"
     over="♺"
   else
     prompt_base03="$fg_bold[black]"  # brblack base03
