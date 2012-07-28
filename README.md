@@ -63,7 +63,7 @@ accompanying README files to learn of what is available.
 
 ### Modules
 
-  1. Browse *~/.zsh/modules/* to see what is available.
+  1. Browse [~/.zsh/modules/][15] to see what is available.
   2. Load the modules you need in *~/.zshrc* then open a new Zsh terminal window
      or tab.
 
@@ -192,4 +192,5 @@ SOFTWARE.
 [12]: https://help.github.com/articles/using-pull-requests
 [13]: http://daringfireball.net/projects/markdown/syntax#img
 [14]: https://github.com/dotphiles/dotzsh/issues
+[15]: https://github.com/dotphiles/dotzsh/tree/master/modules
 
