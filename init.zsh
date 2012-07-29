@@ -9,7 +9,7 @@
 #   Ben O'Hara <bohara@gmail.com>
 #
 
-export DOTZSH_VERSION=0.1.0
+export DOTZSH_VERSION=0.1.1
 
 if [ -z "${DOTZSHLOCAL}" ]; then
  export DOTZSHLOCAL="$DOTZSH.local"
