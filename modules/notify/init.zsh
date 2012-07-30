@@ -48,7 +48,7 @@ notify_precmd() {
         message="Failed with status $exitstatus after $(format-elapsed $elapsed)"
       fi
       if [[ -d /Applications/terminal-notifier.app/ ]]; then
-        /Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -group dotzshnotify -message ${message} -title ${notify_cmd:-Some command}
+        /Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -group dotzshnotify -message ${message} -title ${notify_cmd:-Some command} > /dev/null
       else
         growlnotify -n "dotzshnotify" -m ${message} ${notify_cmd:-Some command}
       fi 
