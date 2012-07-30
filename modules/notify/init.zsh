@@ -1,14 +1,21 @@
 #
 # dotzsh : https://github.com/dotphiles/dotzsh
 #
-# Notify when long running commands finish with growl on OSX
+# Notify when long running commands finish with growl on OSX Lion
+# or terminal-notify on OSX Mountain Lion.
 #
 # Authors:
 #   Ben O'Hara <bohara@gmail.com>
 #
 
-if (( ! $+commands[growlnotify] )); then
+if (( ! $+commands[growlnotify] )) || [[ ! -d /Applications/terminal-notifier.app ]]; then
   return 1
+fi
+
+if [[ -d /Applications/terminal-notifier.app/ ]]; then
+  notify_exec="/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier"
+else
+  notify_exec="growlnotify"
 fi
 
 zstyle -a ':dotzsh:module:notify' elapsed '_elapsed'
@@ -40,7 +47,11 @@ notify_precmd() {
       else
         message="Failed with status $exitstatus after $(format-elapsed $elapsed)"
       fi
-      growlnotify -n "dotzshnotify" -m ${message} ${notify_cmd:-Some command}
+      if [[ -d /Applications/terminal-notifier.app/ ]]; then
+        /Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -group dotzshnotify -message ${message} -title ${notify_cmd:-Some command} > /dev/null
+      else
+        growlnotify -n "dotzshnotify" -m ${message} ${notify_cmd:-Some command}
+      fi 
     fi
   fi
   notify_cmd=
