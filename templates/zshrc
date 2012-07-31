@@ -39,8 +39,6 @@ zstyle ':dotzsh:load' dzmodule \
   'terminal' \
   'editor' \
   'history' \
-  'directory' \
-  'spectrum' \
   'utility' \
   'completion' \
   'theme'
