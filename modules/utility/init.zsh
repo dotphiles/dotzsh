@@ -23,21 +23,13 @@ alias dzD='setopt XTRACE && echo "DEBUG ENABLED" && dzs'
 alias dzd='unsetopt XTRACE && dzs'
 
 # Disable correction.
-alias ack='nocorrect ack'
-alias cd='nocorrect cd'
-alias cp='nocorrect cp'
-alias ebuild='nocorrect ebuild'
-alias gcc='nocorrect gcc'
-alias gist='nocorrect gist'
-alias grep='nocorrect grep'
-alias heroku='nocorrect heroku'
-alias ln='nocorrect ln'
-alias man='nocorrect man'
-alias mkdir='nocorrect mkdir'
-alias mv='nocorrect mv'
-alias mysql='nocorrect mysql'
-alias rm='nocorrect rm'
-alias scp='nocorrect scp'
+for command in ack cd cp ebuild gcc gist grep heroku \
+  ln man mkdir mv mysql rm scp
+do
+  if (( $+commands[$command] )); then
+    alias $command="nocorrect ${command}"
+  fi
+done
 
 # Disable globbing.
 alias fc='noglob fc'
@@ -109,7 +101,11 @@ fi
 # Miscellaneous
 
 # Serves a directory via HTTP.
-alias http-serve='python -m SimpleHTTPServer'
+function http-serve {
+  local port="${1:-8000}"
+  sleep 1 && open "http://localhost:${port}/" &
+  python -m SimpleHTTPServer ${port}
+}
 
 
 # Functions
