@@ -13,6 +13,8 @@ if [[ "$TERM" == 'dumb' ]]; then
   return 1
 fi
 
+fpath=($DOTZSH/modules/completion/external/src $fpath)
+
 # Load and initialize the completion system ignoring insecure directories.
 autoload -Uz compinit && compinit -i
 
