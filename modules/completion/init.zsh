@@ -15,6 +15,11 @@ fi
 
 fpath=($DOTZSH/modules/completion/external/src $fpath)
 
+for dzfunction in $DOTZSH/modules/completion/external/src/^([_.]*|README*)(.N:t)
+do
+  autoload -Uz "$dzfunction"
+done
+
 # Load and initialize the completion system ignoring insecure directories.
 autoload -Uz compinit && compinit -i
 
