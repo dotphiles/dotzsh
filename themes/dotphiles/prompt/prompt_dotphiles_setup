@@ -121,111 +121,117 @@ function prompt_dotphiles_setup {
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
 
-  # Check for the minimum supported version.
-  min_zsh_version='4.3.10'
-  if autoload -Uz is-at-least && is-at-least "$min_zsh_version"; then
-    autoload -Uz add-zsh-hook
-    autoload -Uz vcs_info
-    add-zsh-hook precmd prompt_dotphiles_precmd
-    add-zsh-hook preexec prompt_dotphiles_preexec
-    add-zsh-hook chpwd prompt_dotphiles_chpwd
-    __PROMPT_dotphiles_VCS_UPDATE=1
-
-    if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
-      prompt_base03="%F{234}"  # brblack base03
-      prompt_base02="%F{235}"  # black base02
-      prompt_base01="%F{240}"  # brgreen base01
-      prompt_base00="%F{241}"  # bryellow base00
-      prompt_base0="%F{244}"  # brblue base0
-      prompt_base1="%F{245}"  # brcyan base1
-      prompt_base2="%F{254}" # white base2
-      prompt_base3="%F{230}" # brwhite base3
-      prompt_yellow="%F{136}" # yellow yellow
-      prompt_orange="%F{166}" # brred orange
-      prompt_red="%F{160}" # red red
-      prompt_magenta="%F{125}" # magenta magenta
-      prompt_violet="%F{61}" # brmagenta violet
-      prompt_blue="%F{33}" # blue blue
-      prompt_cyan="%F{37}" # cyan cyan
-      prompt_green="%F{64}" # green green
-    else
-      prompt_base03="%B%F{black}"  # brblack base03
-      prompt_base02="%b%F{black}"  # black base02
-      prompt_base01="%B%F{green}"  # brgreen base01
-      prompt_base00="%B%F{yellow}"  # bryellow base00
-      prompt_base0="%B%F{blue}"  # brblue base0
-      prompt_base1="%B%F{cyan}"  # brcyan base1
-      prompt_base2="%b%F{white}" # white base2
-      prompt_base3="%B%F{white}" # brwhite base3
-      prompt_yellow="%b%F{yellow}" # yellow yellow
-      prompt_orange="%B%F{red}" # brred orange
-      prompt_red="%b%F{red}" # red red
-      prompt_magenta="%b%F{magenta}" # magenta magenta
-      prompt_violet="%B%F{magenta}" # brmagenta violet
-      prompt_blue="%b%F{blue}" # blue blue
-      prompt_cyan="%b%F{cyan}" # cyan cyan
-      prompt_green="%b%F{green}" # green green
-    fi
-
-    RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}%(?:: %{${prompt_red}%}[$?]%{$prompt_reset%})${VIM:+" %B%{$prompt_green%}V%b%{$prompt_reset%}"}'
-
-    userprompt="❯❯"
-    bropen="❮"
-    brclose="❯"
-    unstaged="✱"
-    staged="✚"
-    dirty="✭"
-    promptahead="⬆ "
-    promptbehind="⬇ "
-    remotetrack="▸"
-    over="♺"
-  else
-    prompt_base03="$fg_bold[black]"  # brblack base03
-    prompt_base02="$fg[black]"  # black base02
-    prompt_base01="$fg_bold[green]"  # brgreen base01
-    prompt_base00="$fg_bold[yellow]"  # bryellow base00
-    prompt_base0="$fg_bold[blue]"  # brblue base0
-    prompt_base1="$fg_bold[cyan]"  # brcyan base1
-    prompt_base2="$fg[white]" # white base2
-    prompt_base3="$fg_bold[white]" # brwhite base3
-    prompt_yellow="$fg[yellow]" # yellow yellow
-    prompt_orange="$fg_bold[red]" # brred orange
-    prompt_red="$fg[red]" # red red
-    prompt_magenta="$fg[magenta]" # magenta magenta
-    prompt_violet="$fg_bold[magenta]" # brmagenta violet
-    prompt_blue="%fg[blue]" # blue blue
-    prompt_cyan="$fg[cyan]" # cyan cyan
-    prompt_green="$fg[green]" # green green
-
-    RPROMPT=''
-
-    userprompt=">>"
-    bropen="("
-    brclose=")"
-    unstaged="x"
-    staged="+"
-    dirty="*"
-    promptahead="+"
-    promptbehind="-"
-    remotetrack=">"
-    over="O"
-  fi
-  unset min_zsh_version
-
   prompt_theme=${1:-'soldark'}
   _prompt_host=${2:-'green'}
 
+  if [[ "$prompt_theme" = sol* ]]; then
+    # Check for the minimum supported version.
+    min_zsh_version='4.3.10'
+    if autoload -Uz is-at-least && is-at-least "$min_zsh_version"; then
+      autoload -Uz add-zsh-hook
+      autoload -Uz vcs_info
+      add-zsh-hook precmd prompt_dotphiles_precmd
+      add-zsh-hook preexec prompt_dotphiles_preexec
+      add-zsh-hook chpwd prompt_dotphiles_chpwd
+      __PROMPT_dotphiles_VCS_UPDATE=1
+
+      if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
+        prompt_brblack="%F{234}"  # brblack base03
+        prompt_black="%F{235}"  # black base02
+        prompt_brgreen="%F{240}"  # brgreen base01
+        prompt_bryellow="%F{241}"  # bryellow base00
+        prompt_brblue="%F{244}"  # brblue base0
+        prompt_brcyan="%F{245}"  # brcyan base1
+        prompt_white="%F{254}" # white base2
+        prompt_brwhite="%F{230}" # brwhite base3
+        prompt_yellow="%F{136}" # yellow yellow
+        prompt_orange="%F{166}" # brred orange
+        prompt_red="%F{160}" # red red
+        prompt_magenta="%F{125}" # magenta magenta
+        prompt_violet="%F{61}" # brmagenta violet
+        prompt_blue="%F{33}" # blue blue
+        prompt_cyan="%F{37}" # cyan cyan
+        prompt_green="%F{64}" # green green
+      else
+        prompt_brblack="%B%F{black}"  # brblack base03
+        prompt_black="%b%F{black}"  # black base02
+        prompt_brgreen="%B%F{green}"  # brgreen base01
+        prompt_bryellow="%B%F{yellow}"  # bryellow base00
+        prompt_brblue="%B%F{blue}"  # brblue base0
+        prompt_brcyan="%B%F{cyan}"  # brcyan base1
+        prompt_white="%b%F{white}" # white base2
+        prompt_brwhite="%B%F{white}" # brwhite base3
+        prompt_yellow="%b%F{yellow}" # yellow yellow
+        prompt_orange="%B%F{red}" # brred orange
+        prompt_red="%b%F{red}" # red red
+        prompt_magenta="%b%F{magenta}" # magenta magenta
+        prompt_violet="%B%F{magenta}" # brmagenta violet
+        prompt_blue="%b%F{blue}" # blue blue
+        prompt_cyan="%b%F{cyan}" # cyan cyan
+        prompt_green="%b%F{green}" # green green
+      fi
+
+      RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}%(?:: %{${prompt_red}%}[$?]%{$prompt_reset%})${VIM:+" %B%{$prompt_green%}V%b%{$prompt_reset%}"}'
+
+      userprompt="❯❯"
+      bropen="❮"
+      brclose="❯"
+      unstaged="✱"
+      staged="✚"
+      dirty="✭"
+      promptahead="⬆ "
+      promptbehind="⬇ "
+      remotetrack="▸"
+      over="♺"
+    else
+      prompt_brblack="$fg_bold[black]"  # brblack base03
+      prompt_black="$fg[black]"  # black base02
+      prompt_brgreen="$fg_bold[green]"  # brgreen base01
+      prompt_bryellow="$fg_bold[yellow]"  # bryellow base00
+      prompt_brblue="$fg_bold[blue]"  # brblue base0
+      prompt_brcyan="$fg_bold[cyan]"  # brcyan base1
+      prompt_white="$fg[white]" # white base2
+      prompt_brwhite="$fg_bold[white]" # brwhite base3
+      prompt_yellow="$fg[yellow]" # yellow yellow
+      prompt_orange="$fg_bold[red]" # brred orange
+      prompt_red="$fg[red]" # red red
+      prompt_magenta="$fg[magenta]" # magenta magenta
+      prompt_violet="$fg_bold[magenta]" # brmagenta violet
+      prompt_blue="%fg[blue]" # blue blue
+      prompt_cyan="$fg[cyan]" # cyan cyan
+      prompt_green="$fg[green]" # green green
+
+      RPROMPT=''
+
+      userprompt=">>"
+      bropen="("
+      brclose=")"
+      unstaged="x"
+      staged="+"
+      dirty="*"
+      promptahead="+"
+      promptbehind="-"
+      remotetrack=">"
+      over="O"
+    fi
+    unset min_zsh_version
+
+  elif [[ "$prompt_theme" = 'zenburn' ]]; then
+    #TODO
+  fi
+
   eval prompt_host="$"prompt_$_prompt_host""
-  if [ "prompt_theme" = 'sollight' ]; then
-    prompt_reset="$prompt_base00"
-    prompt_hi="$prompt_base01"
-    prompt_dull="$prompt_base1"
-    zstyle ':dotzsh:module:editor' completing '%{$prompt_base1%}...%{$prompt_reset%}'
-  else
-    prompt_reset="$prompt_base0"
-    prompt_hi="$prompt_base1"
-    prompt_dull="$prompt_base01"
-    zstyle ':dotzsh:module:editor' completing '%{$prompt_base01%}...%{$prompt_reset%}'
+
+  if [ "$prompt_theme" = 'sollight' ]; then
+    prompt_reset="$prompt_bryellow"
+    prompt_hi="$prompt_brgreen"
+    prompt_dull="$prompt_brcyan"
+    zstyle ':dotzsh:module:editor' completing '%{$prompt_brcyan%}...%{$prompt_reset%}'
+  elif [ "$prompt_theme" = 'soldark' ]; then
+    prompt_reset="$prompt_brblue"
+    prompt_hi="$prompt_brcyan"
+    prompt_dull="$prompt_brgreen"
+    zstyle ':dotzsh:module:editor' completing '%{$prompt_brgreen%}...%{$prompt_reset%}'
   fi
   
   # Enable VCS systems you use.
