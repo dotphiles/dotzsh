@@ -7,6 +7,8 @@
 #   Ben O'Hara <bohara@gmail.com>
 #
 
+export DOTZSH_VERSION=$(head -1 ~/.zsh/.dotzsh)
+
 # Paths
 typeset -gU cdpath fpath mailpath manpath path
 typeset -gUT INFOPATH infopath
