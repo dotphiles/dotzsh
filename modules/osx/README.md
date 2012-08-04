@@ -10,6 +10,11 @@ To alias all your applications, add the following to *zshrc*
 
     zstyle ':dotzsh:module:osx' launcher 'yes'
 
+To make Terminal.app correctly resume open tabs to the same directory and to
+make new tabs open in the same directory add this to your *zshrc*
+
+    zstyle ':dotzsh:module:osx' terminal-resume 'yes'
+
 Aliases
 -------
 
