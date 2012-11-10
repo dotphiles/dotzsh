@@ -43,6 +43,7 @@ EOH
 function prompt_dotphiles_precmd {
   q="- $(date +%T)"; while [[ ${#q} -lt $COLUMNS ]]; do q="${q:0:1}$q"; done;
   prompt_seperator=$q
+
   if [[ -n "$__PROMPT_dotphiles_VCS_UPDATE" ]] ; then
     # Check for untracked files or updated submodules since vcs_info doesn't.
     if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
@@ -55,6 +56,11 @@ function prompt_dotphiles_precmd {
 
     vcs_info 'prompt'
     __PROMPT_dotphiles_VCS_UPDATE=''
+  fi
+  if [[ $COLUMNS -gt 80 ]]; then
+    prompt_detail="%{${vcs_info_msg_0_}%}"
+  else
+    prompt_details=""
   fi
 }
 
@@ -268,7 +274,7 @@ function prompt_dotphiles_setup {
   zstyle ':dotzsh:module:editor:keymap' alternate " %{$prompt_yellow%}${bropen}%{$prompt_orange%}${bropen}%{$prompt_red%}${bropen}%{$prompt_reset%}"
 
   SPROMPT='zsh: correct %{$prompt_red%}%R%{$prompt_reset%} to %{$prompt_green%}%r%{$prompt_reset%} [nyae]? '
-  PROMPT='%{$prompt_dull%}$prompt_seperator%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_hi%} at %{$prompt_host%}%m%{$prompt_hi%} in %{$prompt_dull%}%~ ${vcs_info_msg_0_}
+  PROMPT='$prompt_seperator%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_hi%} on %{$prompt_host%}%m%{$prompt_hi%} in %{$prompt_dull%}%~ %{$prompt_detail%}
 %{$prompt_hi%} ${userprompt} %{$prompt_reset%}'
 }
 
