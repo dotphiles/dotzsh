@@ -242,7 +242,7 @@ function prompt_dotphiles_setup {
     prompt_dull="$prompt_brgreen"
     zstyle ':dotzsh:module:editor' completing '%{$prompt_brgreen%}...%{$prompt_reset%}'
   fi
-  
+
   # Enable VCS systems you use.
   zstyle ':vcs_info:*' enable git hg svn cvs
 
@@ -276,7 +276,7 @@ function prompt_dotphiles_setup {
 
   SPROMPT='zsh: correct %{$prompt_red%}%R%{$prompt_reset%} to %{$prompt_green%}%r%{$prompt_reset%} [nyae]? '
   PROMPT='%{$prompt_dull%}$prompt_seperator%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_hi%} on %{$prompt_host%}%m%{$prompt_hi%} in %{$prompt_dull%}%~ %{$prompt_detail%}
-%{$prompt_hi%} ${userprompt} %{$prompt_reset%}'
+%{$prompt_hi%} ${userprompt} %{$prompt_reset%}%$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$PWD")'
 }
 
 prompt_dotphiles_setup "$@"
