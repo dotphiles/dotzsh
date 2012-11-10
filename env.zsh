@@ -62,7 +62,7 @@ if [[ "$OSTYPE" = darwin* ]]; then
     $manpath
   )
   path=(
-    /{opt,usr}/local/{bin,sbin}
+    /opt/local/{bin,sbin}
     $path
   )
 fi

@@ -275,7 +275,7 @@ function prompt_dotphiles_setup {
   zstyle ':dotzsh:module:editor:keymap' alternate " %{$prompt_yellow%}${bropen}%{$prompt_orange%}${bropen}%{$prompt_red%}${bropen}%{$prompt_reset%}"
 
   SPROMPT='zsh: correct %{$prompt_red%}%R%{$prompt_reset%} to %{$prompt_green%}%r%{$prompt_reset%} [nyae]? '
-  PROMPT='$prompt_seperator%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_hi%} on %{$prompt_host%}%m%{$prompt_hi%} in %{$prompt_dull%}%~ %{$prompt_detail%}
+  PROMPT='%{$prompt_dull%}$prompt_seperator%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_hi%} on %{$prompt_host%}%m%{$prompt_hi%} in %{$prompt_dull%}%~ %{$prompt_detail%}
 %{$prompt_hi%} ${userprompt} %{$prompt_reset%}'
 }
 
