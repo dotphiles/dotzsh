@@ -41,8 +41,6 @@ EOH
 }
 
 function prompt_dotphiles_precmd {
-  q="- $(date +%T)"; while [[ ${#q} -lt $COLUMNS ]]; do q="${q:0:1}$q"; done;
-  prompt_seperator=$q
 
   if [[ -n "$__PROMPT_dotphiles_VCS_UPDATE" ]] ; then
     # Check for untracked files or updated submodules since vcs_info doesn't.
@@ -58,9 +56,12 @@ function prompt_dotphiles_precmd {
     __PROMPT_dotphiles_VCS_UPDATE=''
   fi
   if [[ $COLUMNS -gt 80 ]]; then
+    q="- $(date +%T)"; while [[ ${#q} -lt $COLUMNS ]]; do q="${q:0:1}$q"; done;
+    prompt_seperator=$q
     prompt_detail="%{${vcs_info_msg_0_}%}"
   else
     prompt_detail=""
+    prompt_seperator=""
   fi
 }
 
