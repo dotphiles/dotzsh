@@ -60,7 +60,7 @@ function prompt_dotphiles_precmd {
   if [[ $COLUMNS -gt 80 ]]; then
     prompt_detail="%{${vcs_info_msg_0_}%}"
   else
-    prompt_details=""
+    prompt_detail=""
   fi
 }
 
