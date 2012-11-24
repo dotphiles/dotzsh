@@ -56,7 +56,7 @@ function prompt_dotphiles_precmd {
     __PROMPT_dotphiles_VCS_UPDATE=''
   fi
   if [[ $COLUMNS -gt 80 ]]; then
-    q="- $(date +%T)"; while [[ ${#q} -lt $COLUMNS ]]; do q="${q:0:1}$q"; done;
+    q="- $(date +%T)"; while [[ ${#q} -lt $COLUMNS ]]; do q="-$q"; done;
     prompt_seperator=$q
     prompt_detail="%{${vcs_info_msg_0_}%}"
   else
