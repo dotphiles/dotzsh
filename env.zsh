@@ -52,7 +52,7 @@ done
 unset path_file
 
 # MacOSX
-if [[ "$OSTYPE" = darwin* ]]; then
+if [[ "$OSTYPE" = darwin*  && -d /opt/local ]]; then
   infopath=(
     /opt/local/share/info
     $infopath
