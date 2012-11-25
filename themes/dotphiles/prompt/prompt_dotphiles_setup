@@ -285,7 +285,7 @@ function prompt_dotphiles_setup {
 
   SPROMPT='zsh: correct %{$prompt_red%}%R%{$prompt_reset%} to %{$prompt_green%}%r%{$prompt_reset%} [nyae]? '
   MAINPROMPT="%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_hi%} on %{$prompt_host%}%m%{$prompt_hi%} in %{$prompt_dull%}%~ "
-  PROMPT='$MAINPROMPT%{$prompt_detail%}%{$prompt_dull%}$prompt_seperator
+  PROMPT='%{$MAINPROMPT%}%{$prompt_detail%}%{$prompt_dull%}%{$prompt_seperator%}
 %{$prompt_hi%} ${userprompt} %{$prompt_reset%}%$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$PWD")'
 }
 
