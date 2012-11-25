@@ -57,14 +57,14 @@ function prompt_dotphiles_precmd {
   fi
   if [[ $COLUMNS -gt 80 ]]; then
     prompt_detail="%{${vcs_info_msg_0_}%}"
-    sep="- $prompt_hi$(date +%T)"
+    sep="$prompt_dull$dash $prompt_hi$(date +%T)"
     local zero='%([BSUbfksu]|([FB]|){*})'
     SEPLENGTH=${#${(S%%)sep//$~zero/}}
     DETAILLENGTH=${#${(S%%)prompt_detail//$~zero/}}
     MAINLENGTH=${#${(S%%)MAINPROMPT//$~zero/}}
     (( j=$SEPLENGTH+$MAINLENGTH+$DETAILLENGTH ))
     while [[ $j -lt $COLUMNS ]]; do
-        sep="-$sep"
+        sep="$prompt_dull$dash$sep"
         j=$j+1
     done
     prompt_seperator=$sep
@@ -87,6 +87,7 @@ function prompt_dotphiles_preexec {
 
 function prompt_dotphiles_chpwd {
   __PROMPT_dotphiles_VCS_UPDATE=1
+  [ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$PWD"
 }
 
 # Show remote ref name and number of commits ahead-of or behind
@@ -189,7 +190,6 @@ function prompt_dotphiles_setup {
         prompt_green="%b%F{green}" # green green
       fi
 
-
       userprompt="❯❯"
       bropen="❮"
       brclose="❯"
@@ -200,7 +200,8 @@ function prompt_dotphiles_setup {
       promptbehind="⬇ "
       remotetrack="▸"
       over="♺"
-      RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}${VIM:+" %B%{$prompt_green%}V%b%{$prompt_reset%}"}%(?:: %{${prompt_dull}%}${bropen}%{${prompt_red}%}$?%{${prompt_dull}%}${brclose}%{$prompt_reset%})'
+      dash="⋅"
+      RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}${VIM:+" %B%{$prompt_green%}V%b%{$prompt_reset%}"}'
     else
       prompt_brblack="$fg_bold[black]"  # brblack base03
       prompt_black="$fg[black]"  # black base02
@@ -231,6 +232,7 @@ function prompt_dotphiles_setup {
       promptbehind="-"
       remotetrack=">"
       over="O"
+      dash="-"
     fi
     unset min_zsh_version
 
@@ -285,8 +287,9 @@ function prompt_dotphiles_setup {
 
   SPROMPT='zsh: correct %{$prompt_red%}%R%{$prompt_reset%} to %{$prompt_green%}%r%{$prompt_reset%} [nyae]? '
   MAINPROMPT="%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_dull%} on %{$prompt_host%}%m%{$prompt_dull%} in %{$prompt_hi%}%~ "
-  PROMPT='%{$MAINPROMPT%}%{$prompt_detail%}%{$prompt_dull%}%{$prompt_seperator%}
-%{$prompt_hi%} ${userprompt} %{$prompt_reset%}%$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$PWD")'
+  SUBPROMPT="%(?:%{${prompt_hi}%}:%{${prompt_red}%}) ${userprompt} %{$prompt_reset%}"
+  PROMPT='%{$MAINPROMPT%}%{$prompt_detail%}%{$prompt_seperator%}
+$SUBPROMPT'
 }
 
 prompt_dotphiles_setup "$@"
