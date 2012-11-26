@@ -87,7 +87,7 @@ function prompt_dotphiles_preexec {
 
 function prompt_dotphiles_chpwd {
   __PROMPT_dotphiles_VCS_UPDATE=1
-  [ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#I_#P") "$PWD"
+  [ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD"
 }
 
 # Show remote ref name and number of commits ahead-of or behind
@@ -278,7 +278,7 @@ function prompt_dotphiles_setup {
   # %S - path in the repository
   local fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose}%u%c%m"
   local fmt_action="%{$prompt_reset%}${bropen}%{$prompt_yellow%}%a%{$prompt_reset%}${brclose} "
-  local fmt_unstaged="%{$prompt_cyan%}${unstaged}%{$prompt_reset%} "
+  local fmt_unstaged="%{$prompt_red%}${unstaged}%{$prompt_reset%} "
   local fmt_staged="%{$prompt_green%}${staged}%{$prompt_reset%} "
 
   zstyle ':vcs_info:*:prompt:*' unstagedstr   "${fmt_unstaged}"
