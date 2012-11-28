@@ -31,7 +31,11 @@ if [[ -f "${HOME}/.ssh/known_hosts" ]]; then
       if [[ ! "$host" == (*.*|*:*|$HOST|loopback|ip6-loopback|localhost|\
         ip6-localhost|ip6-allhosts|ip6-allnodes|ip6-allrouters|ip6-localnet|\
         ip6-mcastprefix|localhost4|localhost6|broadcasthost) ]]; then
-        alias $host="${aliases[ssh]:-ssh} $host"
+        if [[ ! -z "$TMUX" ]]; then
+          alias $host="onto $host"
+        else
+          alias $host="${aliases[ssh]:-ssh} $host"
+        fi
       fi
       done
     fi
