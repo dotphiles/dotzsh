@@ -97,10 +97,13 @@ function set-title-precmd {
       printf '\e]7;%s\a' "file://$HOST${PWD// /%20}"
     fi
 
-    set-window-title "${(%):-%~}"
+    if [[ ! -z $SSH_CONNECTION ]]; then
+      SSHHOST="$HOST:"
+    fi
+    set-window-title "$SSHHOST${(%):-%~}"
     for kind in tab screen; do
       # Left-truncate the current working directory to 15 characters.
-      set-${kind}-title "${(%):-%15<...<%~%<<}"
+      set-${kind}-title "$SSHHOST${(%):-%15<...<%~%<<}"
     done
   fi
 }
