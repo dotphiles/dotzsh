@@ -14,7 +14,7 @@ fi
 
 # Auto Start
 if [[ -z "$TMUX" ]] && zstyle -t ':dotzsh:module:tmux' auto-start; then
-  tmux_session='#DOTZSH'
+  tmux_session="$HOST"
 
   if ! tmux has-session -t "$tmux_session" 2> /dev/null; then
     # Disable the destruction of unattached sessions globally.
