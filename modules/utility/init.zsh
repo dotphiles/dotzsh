@@ -154,3 +154,21 @@ function up {
   done
 }
 
+function scratch {
+  _scratch=$HOME/scratch
+  if [[ "$1" == "" ]]; then
+    echo "Usage: $0 \"name\""
+    echo
+    ls $_scratch/
+    echo
+  else
+    _scratch=$_scratch/$1
+    if [[ -d $_scratch ]]; then
+      cd $_scratch
+    else
+      mkdir -p $_scratch
+      cd $_scratch
+    fi
+  fi
+  unset _scratch
+}
