@@ -7,7 +7,7 @@
 #   Ben O'Hara <bohara@gmail.com>
 #
 
-export DOTZSH_VERSION=$(head -1 ~/.zsh/.dotzsh)
+export DOTZSH_VERSION=$(head -1 "$DOTZSH/.dotzsh")
 
 # Paths
 typeset -gU cdpath fpath mailpath manpath path
@@ -42,7 +42,7 @@ path=(
   /usr/local/{bin,sbin}
   /usr/{bin,sbin}
   /{bin,sbin}
-  ~/bin/
+  ~/bin
   $path
 )
 
@@ -52,7 +52,7 @@ done
 unset path_file
 
 # MacOSX
-if [[ "$OSTYPE" = darwin* ]]; then
+if [[ "$OSTYPE" = darwin*  && -d /opt/local ]]; then
   infopath=(
     /opt/local/share/info
     $infopath
@@ -62,7 +62,7 @@ if [[ "$OSTYPE" = darwin* ]]; then
     $manpath
   )
   path=(
-    /{opt,usr}/local/{bin,sbin}
+    /opt/local/{bin,sbin}
     $path
   )
 fi

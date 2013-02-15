@@ -54,11 +54,14 @@ if [[ "$editor" == (less|) ]]; then
     export LESS='-F -g -i -M -R -S -w -X -z-4'
   fi
   # Set the Less input preprocessor.
-   if (( $+commands[lesspipe.sh] )); then
-     export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
-   fi
+  
+  if (( $+commands[src-hilite-lesspipe.sh] )); then
+    export LESSOPEN='| /usr/bin/env src-hilite-lesspipe.sh %s 2>&-'
+  elif (( $+commands[lesspipe.sh] )); then
+    export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
+  fi
 
-   export LESSHISTFILE="$HOME/.history/less"
+  export LESSHISTFILE="$HOME/.history/less"
 
   # Termcap
   if zstyle -t ':dotzsh:module:environment:termcap' color; then

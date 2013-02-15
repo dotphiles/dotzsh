@@ -41,6 +41,7 @@ EOH
 }
 
 function prompt_dotphiles_precmd {
+
   if [[ -n "$__PROMPT_dotphiles_VCS_UPDATE" ]] ; then
     # Check for untracked files or updated submodules since vcs_info doesn't.
     if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
@@ -53,6 +54,23 @@ function prompt_dotphiles_precmd {
 
     vcs_info 'prompt'
     __PROMPT_dotphiles_VCS_UPDATE=''
+  fi
+  if [[ $COLUMNS -gt 80 ]]; then
+    prompt_detail="%{${vcs_info_msg_0_}%}"
+    sep="$dash %(?:%{${prompt_hi}%}:%{${prompt_red}%})$(date +%T)"
+    local zero='%([BSUbfksu]|([FB]|){*})'
+    SEPLENGTH=${#${(S%%)sep//$~zero/}}
+    DETAILLENGTH=${#${(S%%)prompt_detail//$~zero/}}
+    MAINLENGTH=${#${(S%%)MAINPROMPT//$~zero/}}
+    (( j=$SEPLENGTH+$MAINLENGTH+$DETAILLENGTH ))
+    while [[ $j -lt $COLUMNS ]]; do
+        sep="$dash$sep"
+        j=$j+1
+    done
+    prompt_seperator="%{${prompt_dull}%}$sep"
+  else
+    prompt_detail=""
+    prompt_seperator=""
   fi
 }
 
@@ -69,6 +87,7 @@ function prompt_dotphiles_preexec {
 
 function prompt_dotphiles_chpwd {
   __PROMPT_dotphiles_VCS_UPDATE=1
+  [ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD"
 }
 
 # Show remote ref name and number of commits ahead-of or behind
@@ -171,18 +190,18 @@ function prompt_dotphiles_setup {
         prompt_green="%b%F{green}" # green green
       fi
 
-      RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}%(?:: %{${prompt_red}%}[$?]%{$prompt_reset%})${VIM:+" %B%{$prompt_green%}V%b%{$prompt_reset%}"}'
-
       userprompt="❯❯"
       bropen="❮"
       brclose="❯"
       unstaged="✱"
       staged="✚"
-      dirty="✭"
+      dirty="✭ "
       promptahead="⬆ "
       promptbehind="⬇ "
       remotetrack="▸"
       over="♺"
+      dash="⋅"
+      RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}${VIM:+" %B%{$prompt_green%}V%b%{$prompt_reset%}"}'
     else
       prompt_brblack="$fg_bold[black]"  # brblack base03
       prompt_black="$fg[black]"  # black base02
@@ -213,14 +232,20 @@ function prompt_dotphiles_setup {
       promptbehind="-"
       remotetrack=">"
       over="O"
+      dash="-"
     fi
     unset min_zsh_version
 
   elif [[ "$prompt_theme" = 'zenburn' ]]; then
     #TODO
   fi
-
   eval prompt_host="$"prompt_$_prompt_host""
+
+  if [[ ! -z $SSH_CONNECTION ]]; then
+    prompt_at="on"
+  else
+    prompt_at="at"
+  fi
 
   if [ "$prompt_theme" = 'sollight' ]; then
     prompt_reset="$prompt_bryellow"
@@ -233,7 +258,7 @@ function prompt_dotphiles_setup {
     prompt_dull="$prompt_brgreen"
     zstyle ':dotzsh:module:editor' completing '%{$prompt_brgreen%}...%{$prompt_reset%}'
   fi
-  
+
   # Enable VCS systems you use.
   zstyle ':vcs_info:*' enable git hg svn cvs
 
@@ -251,10 +276,10 @@ function prompt_dotphiles_setup {
   # %a - action (e.g. rebase-i)
   # %R - repository path
   # %S - path in the repository
-  local fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %u%c%m"
-  local fmt_action="%{$prompt_reset%}${bropen}%{$prompt_yellow%}%a%{$prompt_reset%}${brclose}"
-  local fmt_unstaged="%{$prompt_cyan%}${unstaged}%{$prompt_reset%}"
-  local fmt_staged="%{$prompt_green%}${staged}%{$prompt_reset%}"
+  local fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose}%u%c%m"
+  local fmt_action="%{$prompt_reset%}${bropen}%{$prompt_yellow%}%a%{$prompt_reset%}${brclose} "
+  local fmt_unstaged="%{$prompt_red%}${unstaged}%{$prompt_reset%} "
+  local fmt_staged="%{$prompt_green%}${staged}%{$prompt_reset%} "
 
   zstyle ':vcs_info:*:prompt:*' unstagedstr   "${fmt_unstaged}"
   zstyle ':vcs_info:*:prompt:*' stagedstr     "${fmt_staged}"
@@ -264,10 +289,11 @@ function prompt_dotphiles_setup {
 
   zstyle ':dotzsh:module:editor:keymap:primary' overwrite " %{$prompt_red%}${over}%{$prompt_reset%}"
   zstyle ':dotzsh:module:editor:keymap' alternate " %{$prompt_yellow%}${bropen}%{$prompt_orange%}${bropen}%{$prompt_red%}${bropen}%{$prompt_reset%}"
-
   SPROMPT='zsh: correct %{$prompt_red%}%R%{$prompt_reset%} to %{$prompt_green%}%r%{$prompt_reset%} [nyae]? '
-  PROMPT='%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_hi%} at %{$prompt_host%}%m%{$prompt_hi%} in %{$prompt_dull%}%~ ${vcs_info_msg_0_}
-%{$prompt_hi%} ${userprompt} %{$prompt_reset%}'
+  MAINPROMPT="%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_dull%} ${prompt_at} %{$prompt_host%}%m%u%{$prompt_dull%} in %{$prompt_hi%}%~ "
+  SUBPROMPT="%{${prompt_hi}%} ${userprompt} %{$prompt_reset%}"
+  PROMPT='%{$MAINPROMPT%}%{$prompt_detail%}%{$prompt_seperator%}
+$SUBPROMPT'
 }
 
 prompt_dotphiles_setup "$@"

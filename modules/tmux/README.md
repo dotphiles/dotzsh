@@ -46,7 +46,7 @@ connected** to be displayed, which can be fixed by installing
 [reattach-to-user-namespace][3], available in [Homebrew][4], and adding the
 following to *tmux.conf*:
 
-  if-shell 'test "$(uname)" = "Darwin"' set-option -g default-command "reattach-to-user-namespace -l $SHELL -l"
+  if-shell 'test "$(uname)" = "Darwin"' set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 
 Furthermore, tmux is known to cause **kernel panics** on Mac OS X. A discussion
 about this and DOTZSH has already been [opened][2].
