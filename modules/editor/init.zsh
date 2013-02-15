@@ -294,6 +294,7 @@ elif [[ "$editor" == emacs ]]; then
 elif [[ "$editor" == vi ]]; then
   export EDITOR='vim'
   export VISUAL='vim'
+  alias vi=vim
 else
   print "dotzsh: invalid editor: $editor" >&2
 fi
