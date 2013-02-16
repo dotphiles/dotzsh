@@ -12,7 +12,9 @@ if (( ! $+commands[screen] )); then
 fi
 
 # Auto Start
-if [[ -z "$STY" ]] && zstyle -t ':dotzsh:module:screen' auto-start; then
+if [[ -z "$STY" ]] && ( zstyle -t ':dotzsh:module:screen' auto-start \
+    || [[ -n "$SSH_TTY" ]] && zstyle -m ':dotzsh:module:screen' auto-start 'remote' \
+    || [[ -z "$SSH_TTY" ]] && zstyle -m ':dotzsh:module:screen' auto-start 'local' ); then
   session="$(
     screen -list 2> /dev/null \
       | sed '1d;$d' \

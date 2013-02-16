@@ -14,6 +14,14 @@ To enable this feature, add the following line to *zshrc*:
 
     zstyle ':dotzsh:module:screen' auto-start 'yes'
 
+To only enable auto-start for SSH connections, use the following line instead:
+
+    zstyle ':dotzsh:module:screen' auto-start 'remote'
+
+To only enable auto-start for local terminals, use the following line instead:
+
+    zstyle ':dotzsh:module:screen' auto-start 'local'
+
 Aliases
 -------
 
