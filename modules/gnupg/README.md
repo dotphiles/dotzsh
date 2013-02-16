@@ -8,7 +8,7 @@ Settings
 
 ### SSH-Agent Protocol Emulation
 
-To enable SSH-Agent protocol emulation, add the following line to *zpreztorc*:
+To enable ssh-agent protocol emulation, add the following line to *zshrc*:
 
     zstyle ':dotzsh:module:gnupg' agent-ssh-support 'yes'
 
