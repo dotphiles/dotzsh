@@ -190,21 +190,36 @@ function dzinfo {
   fi
   print >&1
   print >&1
-  print " module                            global local   aliases colour  startup">&1
-  print " ======                            ====== =====   ======= ======  =======">&1
+  if zstyle -t ":dotzsh:load" timing; then
+    print " module                            global local   aliases colour  startup">&1
+    print " ======                            ====== =====   ======= ======  =======">&1
+  else
+    print " module                            global local   aliases colour">&1
+    print " ======                            ====== =====   ======= ======">&1
+  fi 
   for dzmodule in "$dzmodules[@]"; do
     zstyle -a ":dotzsh:module:$dzmodule" loaded 'dzmodload_module_loaded'
     zstyle -a ":dotzsh:module:local:$dzmodule" loaded 'dzmodload_local_module_loaded'
     zstyle -a ":dotzsh:module:$dzmodule" elapsed 'dzmodload_module_elapsed'
     zstyle -a ":dotzsh:module:$dzmodule" aliases 'dzmodload_module_aliases'
     zstyle -a ":dotzsh:module:$dzmodule" color 'dzmodload_module_color'
-    printf " %-35s %4s %-3s  %10s %-3s  %10s\n" \
-      ${dzmodule} \
-      ${dzmodload_module_loaded} \
-      ${dzmodload_local_module_loaded} \
-      ${dzmodload_module_aliases} \
-      ${dzmodload_module_color} \
-      "$(format-elapsed ${dzmodload_module_elapsed})" >&1
+
+    if zstyle -t ":dotzsh:load" timing; then
+      printf " %-35s %4s %-3s  %10s %-3s  %10s\n" \
+        ${dzmodule} \
+        ${dzmodload_module_loaded} \
+        ${dzmodload_local_module_loaded} \
+        ${dzmodload_module_aliases} \
+        ${dzmodload_module_color} \
+        "$(format-elapsed ${dzmodload_module_elapsed})" >&1
+    else
+      printf " %-35s %4s %-3s  %10s %-3s\n" \
+        ${dzmodule} \
+        ${dzmodload_module_loaded} \
+        ${dzmodload_local_module_loaded} \
+        ${dzmodload_module_aliases} \
+        ${dzmodload_module_color} >&1
+    fi
   done
   print >&1
 
