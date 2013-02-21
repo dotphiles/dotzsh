@@ -18,7 +18,6 @@ fpath=($DOTZSH/modules/completion/external/src $fpath)
 # Load and initialize the completion system ignoring insecure directories.
 autoload -Uz compinit && compinit -i
 
-setopt NO_cdable_vars      # First completion after startup is slow without this.
 setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
 setopt ALWAYS_TO_END       # Move cursor to the end of a completed word.
 setopt PATH_DIRS           # Perform path search even on command names with slashes.
