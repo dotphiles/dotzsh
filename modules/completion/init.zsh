@@ -35,8 +35,8 @@ colors
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 # Use caching to make completion for cammands such as dpkg and apt usable.
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "$HOME/.zcache"
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "~/.zcache"
 
 # Case-insensitive (all), partial-word, and then substring completion.
 if zstyle -t ':dotzsh:module:completion:*' case-sensitive; then
@@ -81,6 +81,7 @@ zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-d
 zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
 zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
 zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*' special-dirs true
 
 # History
 zstyle ':completion:*:history-words' stop yes
@@ -150,4 +151,17 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<-
 # Ping/Traceroute
 compdef ping6=ping
 compdef traceroute6=traceroute
+
+globalias() {
+  if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
+    zle _expand_alias
+  fi
+  zle self-insert
+}
+
+zle -N globalias
+
+bindkey " " globalias
+bindkey "^ " magic-space           # control-space to bypass completion
+bindkey -M isearch " " magic-space # normal space during searches
 
