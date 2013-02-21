@@ -53,7 +53,7 @@ Available Modules
   - `node` - Provides utility functions for Node.js and loads npm completion.
   - `osx` - Defines Mac OS X aliases and functions.
   - `pacman` - Provides aliases and functions for the Pacman package manager and frontends.
-  - `perl` - Enables local Perl module installation on Mac OS X and defines alises.
+  - `perl` - Enables local Perl module installation on Mac OS X and defines aliases.
   - `python` - Enables local Python and local Python package installation.
   - `rails` - Defines Ruby on Rails aliases.
   - `rsync` - Defines rsync aliases.
