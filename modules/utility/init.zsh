@@ -98,7 +98,18 @@ else
   alias topm='top -o vsize'
 fi
 
-# Miscellaneous
+#### global aliases
+# zsh buch s.82 (z.B. find / ... NE)
+#alias -g NE='2>|/dev/null'
+#alias -g NO='&>|/dev/null'
+
+alias -g G='| grep -'
+alias -g P='2>&1 | $PAGER'
+alias -g L='| less'
+alias -g M='| most'
+alias -g C='| wc -l'
+
+### Functions
 
 # Serves a directory via HTTP.
 function http-serve {
@@ -106,9 +117,6 @@ function http-serve {
   sleep 1 && open "http://localhost:${port}/" &
   python -m SimpleHTTPServer ${port}
 }
-
-
-# Functions
 
 # Makes a directory and changes to it.
 function mkdcd {
