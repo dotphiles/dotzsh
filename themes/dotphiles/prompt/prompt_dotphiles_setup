@@ -57,17 +57,14 @@ function prompt_dotphiles_precmd {
   fi
   if [[ $COLUMNS -gt 80 ]]; then
     prompt_detail="%{${vcs_info_msg_0_}%}"
-    sep="$dash %(?:%{${prompt_hi}%}:%{${prompt_red}%})$(date +%T)"
+    end="$dash %(?:%{${prompt_hi}%}:%{${prompt_red}%})$(date +%T)"
     local zero='%([BSUbfksu]|([FB]|){*})'
-    SEPLENGTH=${#${(S%%)sep//$~zero/}}
+    SEPLENGTH=${#${(S%%)end//$~zero/}}
     DETAILLENGTH=${#${(S%%)prompt_detail//$~zero/}}
     MAINLENGTH=${#${(S%%)MAINPROMPT//$~zero/}}
-    (( j=$SEPLENGTH+$MAINLENGTH+$DETAILLENGTH ))
-    while [[ $j -lt $COLUMNS ]]; do
-        sep="$dash$sep"
-        j=$j+1
-    done
-    prompt_seperator="%{${prompt_dull}%}$sep"
+    (( j=$SEPLENGTH+$MAINLENGTH+$DETAILLENGTH+1 ))
+    fill=$(printf "$dash%.s" {$j..$COLUMNS})
+    prompt_seperator="%{${prompt_dull}%}$fill$end"
   else
     prompt_detail=""
     prompt_seperator=""
