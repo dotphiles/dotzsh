@@ -13,8 +13,10 @@ if (( ! $+commands[tmux] )); then
 fi
 
 # Auto Start
-if [[ -z "$TMUX" ]] && zstyle -t ':dotzsh:module:tmux' auto-start; then
-  tmux_session='#DOTZSH'
+if [[ -z "$TMUX" ]] && ( zstyle -t ':dotzsh:module:tmux' auto-start \
+    || ( [[ -n "$SSH_TTY" ]] && zstyle -m ':dotzsh:module:tmux' auto-start 'remote' ) \
+    || ( [[ -z "$SSH_TTY" ]] && zstyle -m ':dotzsh:module:tmux' auto-start 'local' ) ); then
+  tmux_session="#DOTZSH"
 
   if ! tmux has-session -t "$tmux_session" 2> /dev/null; then
     # Disable the destruction of unattached sessions globally.

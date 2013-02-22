@@ -38,7 +38,8 @@ if [[ -f "${HOME}/.ssh/known_hosts" ]]; then
   fi
 fi
 
-for _ssh_alias in [ 1 2 4 6 A C D F I L M N O P R S T V X Y a b c e f g i k l m n o p q s t v x ]
+for _ssh_alias in \1 \2 \4 \6 \A \C \D \F \I \L \M \N \O \P \R \S \T \V \X \
+                  \Y \a \b \c \e \f \g \i \k \l \m \n \o \p \q \s \t \v \x
 do
   alias "ssh${_ssh_alias}"="ssh -${_ssh_alias}"
 done

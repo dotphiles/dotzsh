@@ -12,10 +12,19 @@ if (( ! $+commands[gpg-agent] )); then
   return 1
 fi
 
-_gpg_env="$HOME/.gnupg/gpg-agent.env"
+# Make sure to use the $GNUPGHOME first.
+_gpg_env="${GNUPGHOME:-$HOME/.gnupg}/gpg-agent.env"
 
 function _gpg-agent-start {
-  gpg-agent --daemon --write-env-file "${_gpg_env}" > /dev/null
+  local ssh_support
+
+  zstyle -b ':dotzsh:module:gnupg' agent-ssh-support 'ssh_support' \
+    || ssh_support=''
+
+  gpg-agent \
+    --daemon ${ssh_support:+'--enable-ssh-support'}
+    --write-env-file "${_gpg_env}" > /dev/null
+
   chmod 600 "${_gpg_env}"
   source "${_gpg_env}" > /dev/null
 }

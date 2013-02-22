@@ -17,6 +17,14 @@ To enable this feature, add the following line to *zshrc*:
 It will create a background session named _#DOTZSH_ and attach every new shell to
 it.
 
+To only enable auto-start for SSH connections, use the following line instead:
+
+    zstyle ':dotzsh:module:tmux' auto-start 'remote'
+
+To only enable auto-start for local terminals, use the following line instead:
+
+    zstyle ':dotzsh:module:tmux' auto-start 'local'
+
 To avoid keeping open sessions, this module sets `destroy-unattached off` on
 the background session and `destroy-unattached on` on every other session
 (global setting).
@@ -46,7 +54,7 @@ connected** to be displayed, which can be fixed by installing
 [reattach-to-user-namespace][3], available in [Homebrew][4], and adding the
 following to *tmux.conf*:
 
-  if-shell 'test "$(uname)" = "Darwin"' set-option -g default-command "reattach-to-user-namespace -l $SHELL -l"
+  if-shell 'test "$(uname)" = "Darwin"' set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 
 Furthermore, tmux is known to cause **kernel panics** on Mac OS X. A discussion
 about this and DOTZSH has already been [opened][2].

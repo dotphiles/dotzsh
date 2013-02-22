@@ -8,14 +8,12 @@
 #   Ben O'Hara <bohara@gmail.com>
 #
 
-if (( ! $+commands[growlnotify] )) || [[ ! -d /Applications/terminal-notifier.app ]]; then
-  return 1
-fi
-
-if [[ -d /Applications/terminal-notifier.app/ ]]; then
+if (( $+commands[growlnotify] )); then
+  notify_exec="growlnotify"
+elif [[ -d /Applications/terminal-notifier.app ]]; then
   notify_exec="/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier"
 else
-  notify_exec="growlnotify"
+  return 1
 fi
 
 zstyle -a ':dotzsh:module:notify' elapsed '_elapsed'

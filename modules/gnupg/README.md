@@ -3,6 +3,15 @@ GNUPG
 
 Provides for an easier use of [gnupg][1] and [gpg-agent][2].
 
+Settings
+--------
+
+### SSH-Agent Protocol Emulation
+
+To enable ssh-agent protocol emulation, add the following line to *zshrc*:
+
+    zstyle ':dotzsh:module:gnupg' agent-ssh-support 'yes'
+
 Aliases
 -------
 
