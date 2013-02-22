@@ -6,6 +6,7 @@
 # Authors:
 #   James Cox <james@imaj.es>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Ben O'Hara <bohara@gmail.com>
 #
 
 # Check for the minimum supported version.

@@ -6,6 +6,7 @@
 # Authors:
 #   Simon <contact@saimon.org>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Ben O'Hara <bohara@gmail.com>
 #
 
 if (( ! $+commands[yum] )); then

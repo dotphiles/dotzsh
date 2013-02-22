@@ -6,6 +6,7 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #   Colin Hebert <hebert.colin@gmail.com>
+#   Ben O'Hara <bohara@gmail.com>
 #
 
 if (( ! $+commands[tmux] )); then

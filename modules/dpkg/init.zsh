@@ -7,7 +7,7 @@
 #   Daniel Bolton <dbb@9y.com>
 #   Benjamin Boudreau <boudreau.benjamin@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+#   Ben O'Hara <bohara@gmail.com>
 
 if (( ! $+commands[dpkg] )); then
   return 1

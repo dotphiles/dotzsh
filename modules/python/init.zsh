@@ -6,6 +6,7 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #   Sebastian Wiesner <lunaryorn@googlemail.com>
+#   Ben O'Hara <bohara@gmail.com>
 #
 
 if (( ! $+commands[python] )); then

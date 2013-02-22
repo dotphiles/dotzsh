@@ -6,6 +6,7 @@
 # Authors:
 #   P.C. Shyamshankar <sykora@lucentbeing.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Ben O'Hara <bohara@gmail.com>
 #
 
 typeset -gA FX FG BG

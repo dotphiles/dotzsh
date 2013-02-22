@@ -7,6 +7,7 @@
 #   Robby Russell <robby@planetargon.com>
 #   Suraj N. Kurapati <sunaku@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Ben O'Hara <bohara@gmail.com>
 #
 
 # Load dependencies.

@@ -5,7 +5,7 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+#   Ben O'Hara <bohara@gmail.com>
 
 # Dumb terminals lack support.
 if [[ "$TERM" == 'dumb' ]]; then

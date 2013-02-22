@@ -5,7 +5,7 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+#   Ben O'Hara <bohara@gmail.com>
 
 # Get the prefix or use the default.
 zstyle -s ':dotzsh:module:gnu-utility' prefix '_gnu_utility_p' || _gnu_utility_p='g'

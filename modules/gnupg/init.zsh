@@ -6,6 +6,7 @@
 # Authors:
 #   Florian Walch <florian.walch@gmx.at>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Ben O'Hara <bohara@gmail.com>
 #
 
 if (( ! $+commands[gpg-agent] )); then
