@@ -34,6 +34,7 @@ colors
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 # Use caching to make completion for cammands such as dpkg and apt usable.
+zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "~/.zcache"
 
