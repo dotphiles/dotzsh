@@ -15,6 +15,13 @@ To enable case-sensitivity for this module only, add the following line to
 
     zstyle ':dotzsh:module:completion' case-sensitive 'yes'
 
+### Expand Global Aliases
+
+To auto expand global aliases as they are typed, add the following line to
+*zshrc*
+
+    zstyle ':dotzsh:module:completion' expand-global-aliases 'yes'
+
 Contributors
 ------------
 

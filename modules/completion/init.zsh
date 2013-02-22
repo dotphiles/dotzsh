@@ -152,16 +152,19 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<-
 compdef ping6=ping
 compdef traceroute6=traceroute
 
-globalias() {
-  if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
-    zle _expand_alias
-  fi
-  zle self-insert
-}
+# Auto expand global aliases
+if zstyle -t ':dotzsh:module:completion' expand-global-aliases; then
+  globalias() {
+    if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
+      zle _expand_alias
+    fi
+   zle self-insert
+  }
 
-zle -N globalias
+  zle -N globalias
 
-bindkey " " globalias
-bindkey "^ " magic-space           # control-space to bypass completion
-bindkey -M isearch " " magic-space # normal space during searches
+  bindkey " " globalias
+  bindkey "^ " magic-space           # control-space to bypass completion
+  bindkey -M isearch " " magic-space # normal space during searches
+fi
 
