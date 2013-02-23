@@ -88,7 +88,6 @@ function prompt_dotphiles_preexec {
     (*vi*)
       __PROMPT_dotphiles_VCS_UPDATE=1
     ;;
- 
   esac
 }
 
