@@ -84,6 +84,41 @@ accompanying README files to learn of what is available.
 
   `dzinfo` will show which module are loaded and how long they took to start.
 
+      dotzsh 0.2.0 on darwin12.2.0 running zsh 5.0.0
+
+     module                            global local   aliases colour  startup
+     ======                            ====== =====   ======= ======  =======
+     gnu-utility                          yes no          yes yes        5 ms
+     environment                          yes no          yes yes        9 ms
+     terminal                             yes no          yes yes        6 ms
+     editor                               yes no          yes yes        7 ms
+     history                              yes no          yes yes        3 ms
+     utility                              yes no          yes yes       19 ms
+     completion                           yes no          yes yes       29 ms
+     directory                            yes no          yes yes        3 ms
+     ssh                                  yes no          yes yes       34 ms
+     gnupg                                yes no          yes yes       33 ms
+     osx                                  yes no          yes yes        3 ms
+     archive                              yes no          yes yes        2 ms
+     git                                  yes no          yes yes        4 ms
+     yum                                   no no          yes yes        3 ms
+     tmux                                 yes no          yes yes        4 ms
+     syntax-highlighting                  yes no          yes yes       14 ms
+     perl                                 yes no          yes yes        7 ms
+     rsync                                yes no          yes yes        7 ms
+     grc                                  yes no          yes yes        3 ms
+     node                                 yes no          yes yes        3 ms
+     mercurial                            yes no          yes yes        3 ms
+     notify                               yes no          yes yes        3 ms
+     dotsync                              yes no          yes yes        6 ms
+     fasd                                 yes no          yes yes       12 ms
+     taskwarrior                          yes no          yes yes        2 ms
+     history-substring-search             yes no          yes yes        6 ms
+     theme                                yes no          yes yes       28 ms
+                                                                      =======
+                                                   modules Loaded in   273 ms
+                                                    dotzsh Loaded in   359 ms
+
 Customization
 -------------
 
