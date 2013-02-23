@@ -166,9 +166,9 @@ function up {
 function scratch {
   _scratch=$HOME/scratch
   if [[ "$1" == "" ]]; then
-    echo "Usage: $0 \"name\""
-    echo
-    echo "Existing scratch dirs:"
+    echo -e "Usage: $0 \"name\"\n"
+    echo -e "Existing scratch dirs:\n"
+    echo -n "   "
     ls $_scratch/
     echo
   else
