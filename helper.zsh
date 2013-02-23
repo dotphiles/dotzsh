@@ -64,6 +64,7 @@ function dzmodload {
   local dzmodload_module_start
   local dzmodload_module_stop
   local dzmodload_module_elapsed
+  local dzmodload_module_elapsed_total=0
   local type
 
   if zstyle -t ":dotzsh:load" timing && (( $+commands[gdate] )); then
@@ -157,6 +158,7 @@ function dzmodload {
     if zstyle -t ":dotzsh:module:${dzmodule}" timing && (( $+commands[gdate] )); then
       let dzmodload_module_stop=$(gdate +'%s%N')
       (( dzmodload_module_elapsed = $dzmodload_module_stop - $dzmodload_module_start ))
+      (( dzmodload_module_elapsed_total = $dzmodload_module_elapsed_total + $dzmodload_module_elapsed ))
     else
       dzmodload_module_elapsed=0
     fi
@@ -166,6 +168,7 @@ function dzmodload {
   if zstyle -t ":dotzsh:load" timing && (( $+commands[gdate] )); then
     let dzmodload_stop=$(gdate +'%s%N')
     (( dzmodload_elapsed=$dzmodload_stop-$dzmodload_start ))
+    zstyle ":dotzsh:module" elapsed ${dzmodload_module_elapsed_total}
   fi
   zstyle ":dotzsh:load" elapsed ${dzmodload_elapsed}
 
@@ -178,16 +181,15 @@ function dzinfo {
   local dzmodload_elapsed
   local dzmodload_module_loaded
   local dzmodload_module_elapsed
+  local dzmodload_module_elapsed_total
   local dzmodload_module_color
   local dzmodload_module_aliases
 
   zstyle -a ':dotzsh:load' dzmodule 'dzmodules'
   zstyle -a ":dotzsh:load" elapsed 'dzmodload_elapsed'
+  zstyle -a ":dotzsh:module" elapsed 'dzmodload_module_elapsed_total'
   print >&1
   print -n "  dotzsh $DOTZSH_VERSION on $OSTYPE running zsh $ZSH_VERSION"  >&1
-  if zstyle -t ":dotzsh:load" timing; then
-    print -n ", startup in $(format-elapsed ${dzmodload_elapsed})"  >&1
-  fi
   print >&1
   print >&1
   if zstyle -t ":dotzsh:load" timing; then
@@ -221,6 +223,13 @@ function dzinfo {
         ${dzmodload_module_color} >&1
     fi
   done
+  if zstyle -t ":dotzsh:load" timing; then
+    print "                                                                  =======">&1
+    printf "                                               modules Loaded in %8s\n" \
+      "$(format-elapsed ${dzmodload_module_elapsed_total})" >&1
+    printf "                                                dotzsh Loaded in %8s\n" \
+      "$(format-elapsed ${dzmodload_elapsed})" >&1
+  fi
   print >&1
 
   unset dzmodule{s,} dzmodload_module_{loaded,elapsed,color,aliases}
