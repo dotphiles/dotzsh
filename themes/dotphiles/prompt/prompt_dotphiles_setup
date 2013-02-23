@@ -195,7 +195,7 @@ function prompt_dotphiles_setup {
       brclose="❯"
       unstaged="✱"
       staged="✚"
-      dirty="✭ "
+      dirty="✭"
       promptahead="⬆ "
       promptbehind="⬇ "
       remotetrack="▸"
@@ -276,14 +276,14 @@ function prompt_dotphiles_setup {
   # %a - action (e.g. rebase-i)
   # %R - repository path
   # %S - path in the repository
-  local fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose}%u%c%m"
+  local fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %u%c%m"
   local fmt_action="%{$prompt_reset%}${bropen}%{$prompt_yellow%}%a%{$prompt_reset%}${brclose} "
   local fmt_unstaged="%{$prompt_red%}${unstaged}%{$prompt_reset%} "
   local fmt_staged="%{$prompt_green%}${staged}%{$prompt_reset%} "
 
   zstyle ':vcs_info:*:prompt:*' unstagedstr   "${fmt_unstaged}"
   zstyle ':vcs_info:*:prompt:*' stagedstr     "${fmt_staged}"
-  zstyle ':vcs_info:*:prompt:*' actionformats "${fmt_branch} ${fmt_action}"
+  zstyle ':vcs_info:*:prompt:*' actionformats "${fmt_branch}${fmt_action}"
   zstyle ':vcs_info:*:prompt:*' formats       "${fmt_branch}"
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
