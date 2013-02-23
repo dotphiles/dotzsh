@@ -87,7 +87,8 @@ accompanying README files to learn of what is available.
      zstyle ':dotzsh:load' timing 'yes'
      zstyle ':dotzsh:module:*' timing 'yes'
 
-  - `dzinfo` will show which module are loaded and how long they took to start.
+  `dzinfo` will show which module are loaded and how long they took to start.
+
 
       dotzsh 0.2.0 on darwin12.2.0 running zsh 5.0.0
 
@@ -124,9 +125,11 @@ accompanying README files to learn of what is available.
                                                    modules Loaded in   273 ms
                                                     dotzsh Loaded in   359 ms
 
-  - `dzD` will enable ZTRACE and reload *zshrc*
-  - `dzd` will disable XTRACE and reload *zshrc*
-  - `dzs` will reload *zshrc*
+  `dzD` will enable ZTRACE and reload *zshrc*
+
+  `dzd` will disable XTRACE and reload *zshrc*
+
+  `dzs` will reload *zshrc*
 
 Customization
 -------------
