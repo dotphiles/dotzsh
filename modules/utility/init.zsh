@@ -101,8 +101,8 @@ fi
 
 #### global aliases
 # zsh buch s.82 (z.B. find / ... NE)
-#alias -g NE='2>|/dev/null'
-#alias -g NO='&>|/dev/null'
+alias -g NE='2>|/dev/null'
+alias -g NO='&>|/dev/null'
 
 alias -g G='| grep -'
 alias -g P='2>&1 | $PAGER'
@@ -168,6 +168,7 @@ function scratch {
   if [[ "$1" == "" ]]; then
     echo "Usage: $0 \"name\""
     echo
+    echo "Existing scratch dirs:"
     ls $_scratch/
     echo
   else
