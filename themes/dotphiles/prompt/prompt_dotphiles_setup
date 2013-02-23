@@ -79,6 +79,9 @@ function prompt_dotphiles_preexec {
     (*svn*)
       __PROMPT_dotphiles_VCS_UPDATE=1
     ;;
+    (*hg*)
+      __PROMPT_dotphiles_VCS_UPDATE=1
+    ;;
   esac
 }
 
