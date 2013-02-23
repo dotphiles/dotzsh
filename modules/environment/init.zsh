@@ -78,3 +78,4 @@ elif [[ "$editor" == more ]]; then
 else
   print "dotzsh: invalid pager: $pager" >&2
 fi
+

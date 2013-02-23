@@ -5,6 +5,7 @@
 #
 # Authors:
 #   Ben O'Hara <bohara@gmail.com>
+#
 
 if ! zstyle -t ':dotzsh:module:syntax-highlighting' loaded && ! zstyle -t ':dotzsh:module:history-substring-search' loaded; then
   source "${0:h}/external/auto-fu.zsh"
@@ -15,3 +16,4 @@ if ! zstyle -t ':dotzsh:module:syntax-highlighting' loaded && ! zstyle -t ':dotz
 
   zle -N zle-keymap-select auto-fu-zle-keymap-select
 fi
+

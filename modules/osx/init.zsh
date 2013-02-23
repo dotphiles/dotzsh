@@ -94,3 +94,4 @@ if is-true "${_terminal_resume}"; then
       update_terminal_cwd
   fi
 fi
+

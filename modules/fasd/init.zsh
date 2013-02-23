@@ -47,3 +47,4 @@ for keymap in 'emacs' 'viins'; do
   bindkey -M "$keymap" "$key_info[Control]X$key_info[Control]D" fasd-complete-d  # C-x C-d (directories)
   bindkey -M "$keymap" "$key_info[Control]X$key_info[Control]F" fasd-complete-f  # C-x C-f (files)
 done
+

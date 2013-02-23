@@ -39,3 +39,4 @@ fi
 if [[ -e "${rcfile}" ]]; then
   export PYTHONSTARTUP="${rcfile}"
 fi
+
