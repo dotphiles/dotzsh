@@ -6,11 +6,12 @@
 # Authors:
 #   Ben O'Hara <bohara@gmail.com>
 
-source "${0:h}/external/auto-fu.zsh"
+if ! zstyle -t ':dotzsh:module:syntax-highlighting' loaded && ! zstyle -t ':dotzsh:module:history-substring-search' loaded; then
+  source "${0:h}/external/auto-fu.zsh"
 
-zle-line-init () {auto-fu-init;}; zle -N zle-line-init
+  zle-line-init () {auto-fu-init;}; zle -N zle-line-init
 
-zstyle ':completion:*' completer _oldlist _complete
+  zstyle ':completion:*' completer _oldlist _complete
 
-zle -N zle-keymap-select auto-fu-zle-keymap-select
-
+  zle -N zle-keymap-select auto-fu-zle-keymap-select
+fi
