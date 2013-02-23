@@ -1,15 +1,3 @@
-dotzsh
-======
-
-dotzsh is a configuration framework for [Zsh][1] that enriches the command line
-interface environment with sane defaults, aliases, functions, auto completion,
-and prompt themes.
-
-dotzsh strives to be platform and version independent, some functionality may be
-lost when running under older versions of zsh, but it should degrade cleanly and
-allow you to use the same setup on multiple machines of differing OS's without
-problems.
-
 Contribute
 ----------
 
