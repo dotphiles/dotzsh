@@ -8,6 +8,10 @@
 #   Ben O'Hara <bohara@gmail.com>
 #
 
+if [[ ! -z $SSH_CONNECTION ]]; then
+  return 1
+fi
+
 if (( $+commands[growlnotify] )); then
   notify_exec="growlnotify"
 elif [[ -d /Applications/terminal-notifier.app ]]; then
