@@ -63,7 +63,7 @@ accompanying README files to learn of what is available.
 
 ### Modules
 
-  1. Browse [~/.zsh/modules/][23] to see what is available.
+  1. Browse [~/.zsh/modules/][10] to see what is available.
   2. Load the modules you need in *~/.zshrc* then open a new Zsh terminal window
      or tab.
 
@@ -160,7 +160,7 @@ dotzsh has been tested and developed to work on the following
   - OpenSolaris >= 11
 
 If you use an older version or a different OS and see problems please raise an
-issue on the [issue tracker][22]
+issue on the [issue tracker][9]
 
 License
 -------
@@ -193,20 +193,6 @@ SOFTWARE.
 [6]: http://gitref.org
 [7]: https://github.com/zsh-users/zsh-completions
 [8]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
-[9]: https://github.com/dotphiles/dotzsh/contributors
-[10]: http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/
-[11]: http://help.github.com/win-set-up-git/
-[12]: http://rogerdudler.github.com/git-guide/
-[13]: http://help.github.com/fork-a-repo/
-[14]: http://help.github.com/send-pull-requests/
-[15]: http://nvie.com/posts/a-successful-git-branching-model/
-[16]: http://www.twitter.com/nvie
-[17]: https://github.com/nvie/gitflow
-[18]: https://github.com/nvie/gitflow/wiki/Installation
-[19]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
-[20]: https://help.github.com/articles/using-pull-requests
-[21]: http://daringfireball.net/projects/markdown/syntax#img
-[22]: https://github.com/dotphiles/dotzsh/issues
-[23]: https://github.com/dotphiles/dotzsh/tree/master/modules
-[24]: https://github.com/dotphiles/dotzsh/contributors
+[9]: https://github.com/dotphiles/dotzsh/issues
+[10]: https://github.com/dotphiles/dotzsh/tree/master/modules
 
