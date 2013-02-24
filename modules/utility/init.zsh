@@ -110,6 +110,10 @@ alias -g L='| less'
 alias -g M='| most'
 alias -g C='| wc -l'
 
+# Quick exit
+alias x="exit"
+alias q="exit"
+
 ### Functions
 
 # Serves a directory via HTTP.
