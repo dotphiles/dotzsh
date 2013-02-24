@@ -19,6 +19,11 @@ alias cdf='cd "$(pfd)"'
 # Push directory to the current Finder directory.
 alias pushdf='pushd "$(pfd)"'
 
+# Flush DNS cache
+alias flushdns="dscacheutil -flushcache"
+# Aggressively flush DNS cache
+alias killdns="sudo killall -HUP mDNSResponder"
+
 zstyle -b ':dotzsh:module:osx' launcher '_osx_launcher'
 if is-true "${_osx_launcher}"; then
   app_dirs=(~/Applications /Applications /System/Library/CoreServices)
