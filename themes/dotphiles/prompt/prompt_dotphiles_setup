@@ -42,20 +42,21 @@ EOH
 
 function prompt_dotphiles_precmd {
 
-  if [[ -n "$__PROMPT_dotphiles_VCS_UPDATE" ]] ; then
-    # Check for untracked files or updated submodules since vcs_info doesn't.
-    if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-      __PROMPT_dotphiles_VCS_UPDATE=1
-      fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %{$prompt_green%}${dirty}%{$prompt_reset%} %u%c%m"
-    else
-      fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %u%c%m"
-    fi
-    zstyle ':vcs_info:(hg*|git*):*' formats "${fmt_branch}"
-
-    vcs_info 'prompt'
-    __PROMPT_dotphiles_VCS_UPDATE=''
-  fi
   if [[ $COLUMNS -gt 80 ]]; then
+    if [[ -n "$__PROMPT_dotphiles_VCS_UPDATE" ]] ; then
+      # Check for untracked files or updated submodules since vcs_info doesn't.
+      if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+        __PROMPT_dotphiles_VCS_UPDATE=1
+        fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %{$prompt_green%}${dirty}%{$prompt_reset%} %u%c%m"
+      else
+        fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %u%c%m"
+      fi
+      zstyle ':vcs_info:(hg*|git*):*' formats "${fmt_branch}"
+
+      vcs_info 'prompt'
+      __PROMPT_dotphiles_VCS_UPDATE=''
+    fi
+
     prompt_detail="%{${vcs_info_msg_0_}%}"
     end="$dash %(?:%{${prompt_hi}%}:%{${prompt_red}%})$(date +%T)"
     local zero='%([BSUbfksu]|([FB]|){*})'
