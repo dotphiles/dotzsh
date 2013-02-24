@@ -50,7 +50,7 @@ function prompt_dotphiles_precmd {
     else
       fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %u%c%m"
     fi
-    zstyle ':vcs_info:*:prompt:*' formats "${fmt_branch}"
+    zstyle ':vcs_info:(hg*|git*):*' formats "${fmt_branch}"
 
     vcs_info 'prompt'
     __PROMPT_dotphiles_VCS_UPDATE=''
@@ -141,6 +141,34 @@ function +vi-git-stash() {
   fi
 }
 
+### Store the localrev and global hash for use in other hooks
+function +vi-hg-storerev() {
+    user_data[localrev]=${hook_com[localrev]}
+    user_data[hash]=${hook_com[hash]}
+}
+
+### Show marker when the working directory is not on a branch head
+# This may indicate that running `hg up` will do something
+function +vi-hg-branchhead() {
+    local branchheadsfile i_tiphash i_branchname
+    local -a branchheads
+
+    local branchheadsfile=${hook_com[base]}/.hg/branchheads.cache
+
+    # Bail out if any mq patches are applied
+    [[ -s ${hook_com[base]}/.hg/patches/status ]] && return 0
+
+    if [[ -r ${branchheadsfile} ]] ; then
+        while read -r i_tiphash i_branchname ; do
+            branchheads+=( $i_tiphash )
+        done < ${branchheadsfile}
+
+        if [[ ! ${branchheads[(i)${user_data[hash]}]} -le ${#branchheads} ]] ; then
+            hook_com[revision]="${c4}^${c2}${hook_com[revision]}"
+        fi
+    fi
+}
+
 function prompt_dotphiles_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
@@ -201,7 +229,7 @@ function prompt_dotphiles_setup {
       brclose="❯"
       unstaged="✱"
       staged="✚"
-      dirty="✭"
+      dirty="✭ "
       promptahead="⬆ "
       promptbehind="⬇ "
       remotetrack="▸"
@@ -233,7 +261,7 @@ function prompt_dotphiles_setup {
       brclose=")"
       unstaged="x"
       staged="+"
-      dirty="*"
+      dirty="* "
       promptahead="+"
       promptbehind="-"
       remotetrack=">"
@@ -274,6 +302,7 @@ function prompt_dotphiles_setup {
   zstyle ':vcs_info:(hg*|git*):*' get-revision true
 
   zstyle ':vcs_info:git*+set-message:*' hooks git-st git-stash
+  zstyle ':vcs_info:hg*+set-message:*' hooks hg-storerev hg-branchhead
 
   # Formats:
   # %b - branchname
@@ -287,11 +316,21 @@ function prompt_dotphiles_setup {
   local fmt_unstaged="%{$prompt_red%}${unstaged}%{$prompt_reset%} "
   local fmt_staged="%{$prompt_green%}${staged}%{$prompt_reset%} "
 
-  zstyle ':vcs_info:*:prompt:*' unstagedstr   "${fmt_unstaged}"
-  zstyle ':vcs_info:*:prompt:*' stagedstr     "${fmt_staged}"
-  zstyle ':vcs_info:*:prompt:*' actionformats "${fmt_branch}${fmt_action}"
-  zstyle ':vcs_info:*:prompt:*' formats       "${fmt_branch}"
-  zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
+  zstyle ':vcs_info:(hg*|git*):*' unstagedstr   "${fmt_unstaged}"
+  zstyle ':vcs_info:(hg*|git*):*' stagedstr     "${fmt_staged}"
+  zstyle ':vcs_info:(hg*|git*):*' actionformats "${fmt_branch}${fmt_action}"
+  zstyle ':vcs_info:(hg*|git*):*' formats       "${fmt_branch}"
+  zstyle ':vcs_info:(hg*|git*):*' nvcsformats   ""
+
+  # rev+changes branch misc
+  zstyle ':vcs_info:hg*:*' get-bookmarks true
+
+  zstyle ':vcs_info:hg*:*' get-mq true
+  zstyle ':vcs_info:hg*:*' get-unapplied true
+  zstyle ':vcs_info:hg*:*' patch-format "mq(%g):%n/%c %p"
+  zstyle ':vcs_info:hg*:*' nopatch-format "mq(%g):%n/%c %p"
+  zstyle ':vcs_info:hg*:*' hgrevformat "%r" # only show local rev.
+  zstyle ':vcs_info:hg*:*' branchformat "%b" # only show branch
 
   zstyle ':dotzsh:module:editor:keymap:primary' overwrite " %{$prompt_red%}${over}%{$prompt_reset%}"
   zstyle ':dotzsh:module:editor:keymap' alternate " %{$prompt_yellow%}${bropen}%{$prompt_orange%}${bropen}%{$prompt_red%}${bropen}%{$prompt_reset%}"
