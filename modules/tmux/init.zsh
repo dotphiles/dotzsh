@@ -6,6 +6,7 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #   Colin Hebert <hebert.colin@gmail.com>
+#   Ben O'Hara <bohara@gmail.com>
 #
 
 if (( ! $+commands[tmux] )); then
@@ -13,7 +14,9 @@ if (( ! $+commands[tmux] )); then
 fi
 
 # Auto Start
-if [[ -z "$TMUX" ]] && zstyle -t ':dotzsh:module:tmux' auto-start; then
+if [[ -z "$TMUX" ]] && ( zstyle -t ':dotzsh:module:tmux' auto-start \
+    || ( [[ -n "$SSH_TTY" ]] && zstyle -m ':dotzsh:module:tmux' auto-start 'remote' ) \
+    || ( [[ -z "$SSH_TTY" ]] && zstyle -m ':dotzsh:module:tmux' auto-start 'local' ) ); then
   tmux_session="#DOTZSH"
 
   if ! tmux has-session -t "$tmux_session" 2> /dev/null; then

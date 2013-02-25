@@ -17,6 +17,14 @@ To enable this feature, add the following line to *zshrc*:
 It will create a background session named _#DOTZSH_ and attach every new shell to
 it.
 
+To only enable auto-start for SSH connections, use the following line instead:
+
+    zstyle ':dotzsh:module:tmux' auto-start 'remote'
+
+To only enable auto-start for local terminals, use the following line instead:
+
+    zstyle ':dotzsh:module:tmux' auto-start 'local'
+
 To avoid keeping open sessions, this module sets `destroy-unattached off` on
 the background session and `destroy-unattached on` on every other session
 (global setting).

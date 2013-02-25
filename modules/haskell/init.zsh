@@ -5,6 +5,7 @@
 #
 # Authors:
 #   Sebastian Wiesner <lunaryorn@googlemail.com>
+#   Ben O'Hara <bohara@gmail.com>
 #
 
 # Prepend Cabal per user directories to PATH/MANPATH.

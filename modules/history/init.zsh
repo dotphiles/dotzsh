@@ -6,6 +6,7 @@
 # Authors:
 #   Robby Russell <robby@planetargon.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Ben O'Hara <bohara@gmail.com>
 #
 
 if [[ ! -d "$HOME/.history" ]]; then

@@ -8,6 +8,15 @@
 #   Ben O'Hara <bohara@gmail.com>
 #
 
+min_zsh_version='4.3.10'
+if ! autoload -Uz is-at-least && is-at-least "$min_zsh_version"; then
+  return 1
+fi
+
+if [[ ! -z $SSH_CONNECTION ]]; then
+  return 1
+fi
+
 if (( $+commands[growlnotify] )); then
   notify_exec="growlnotify"
 elif [[ -d /Applications/terminal-notifier.app ]]; then
@@ -46,9 +55,9 @@ notify_precmd() {
         message="Failed with status $exitstatus after $(format-elapsed $elapsed)"
       fi
       if [[ -d /Applications/terminal-notifier.app/ ]]; then
-        /Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -group dotzshnotify -message ${message} -title ${notify_cmd:-Some command} > /dev/null
+        ${notify_exec} -group dotzshnotify -message ${message} -title ${notify_cmd:-Some command} > /dev/null
       else
-        growlnotify -n "dotzshnotify" -m ${message} ${notify_cmd:-Some command}
+        ${notify_exec} -n "dotzshnotify" -m ${message} ${notify_cmd:-Some command}
       fi 
     fi
   fi

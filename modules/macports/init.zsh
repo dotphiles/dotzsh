@@ -6,6 +6,7 @@
 # Authors:
 #   Matt Cable <wozz@wookie.net>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Ben O'Hara <bohara@gmail.com>
 #
 
 # This module is for Mac OS X only.

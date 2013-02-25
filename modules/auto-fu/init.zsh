@@ -1,7 +1,19 @@
-source "${0:h}/external/auto-fu.zsh"
+#
+# dotzsh : https://github.com/dotphiles/dotzsh
+#
+# Setup auto-fu, automatic completion
+#
+# Authors:
+#   Ben O'Hara <bohara@gmail.com>
+#
 
-zle-line-init () {auto-fu-init;}; zle -N zle-line-init
+if ! zstyle -t ':dotzsh:module:syntax-highlighting' loaded && ! zstyle -t ':dotzsh:module:history-substring-search' loaded; then
+  source "${0:h}/external/auto-fu.zsh"
 
-zstyle ':completion:*' completer _oldlist _complete
+  zle-line-init () {auto-fu-init;}; zle -N zle-line-init
 
-zle -N zle-keymap-select auto-fu-zle-keymap-select
+  zstyle ':completion:*' completer _oldlist _complete
+
+  zle -N zle-keymap-select auto-fu-zle-keymap-select
+fi
+

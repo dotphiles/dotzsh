@@ -1,6 +1,8 @@
 #
 # dotzsh : https://github.com/dotphiles/dotzsh
 #
+# Setup wake on lan
+#
 # Authors:
 #   Ben O'Hara <bohara@gmail.com>
 #

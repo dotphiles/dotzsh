@@ -42,32 +42,29 @@ EOH
 
 function prompt_dotphiles_precmd {
 
-  if [[ -n "$__PROMPT_dotphiles_VCS_UPDATE" ]] ; then
-    # Check for untracked files or updated submodules since vcs_info doesn't.
-    if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-      __PROMPT_dotphiles_VCS_UPDATE=1
-      fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %{$prompt_green%}${dirty}%{$prompt_reset%}%u%c%m"
-    else
-      fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %u%c%m"
-    fi
-    zstyle ':vcs_info:*:prompt:*' formats "${fmt_branch}"
-
-    vcs_info 'prompt'
-    __PROMPT_dotphiles_VCS_UPDATE=''
-  fi
   if [[ $COLUMNS -gt 80 ]]; then
+    if [[ -n "$__PROMPT_dotphiles_VCS_UPDATE" ]] ; then
+      # Check for untracked files or updated submodules since vcs_info doesn't.
+      if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+        fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %{$prompt_green%}${dirty}%{$prompt_reset%} %u%c%m"
+      else
+        fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %u%c%m"
+      fi
+      zstyle ':vcs_info:(hg*|git*):*' formats "${fmt_branch}"
+
+      vcs_info 'prompt'
+      __PROMPT_dotphiles_VCS_UPDATE=''
+    fi
+
     prompt_detail="%{${vcs_info_msg_0_}%}"
-    sep="$dash %(?:%{${prompt_hi}%}:%{${prompt_red}%})$(date +%T)"
+    end="$dash %(?:%{${prompt_hi}%}:%{${prompt_red}%})$(date +%T)"
     local zero='%([BSUbfksu]|([FB]|){*})'
-    SEPLENGTH=${#${(S%%)sep//$~zero/}}
+    SEPLENGTH=${#${(S%%)end//$~zero/}}
     DETAILLENGTH=${#${(S%%)prompt_detail//$~zero/}}
     MAINLENGTH=${#${(S%%)MAINPROMPT//$~zero/}}
-    (( j=$SEPLENGTH+$MAINLENGTH+$DETAILLENGTH ))
-    while [[ $j -lt $COLUMNS ]]; do
-        sep="$dash$sep"
-        j=$j+1
-    done
-    prompt_seperator="%{${prompt_dull}%}$sep"
+    (( j=$SEPLENGTH+$MAINLENGTH+$DETAILLENGTH+1 ))
+    fill=$(printf "$dash%.s" {$j..$COLUMNS})
+    prompt_seperator="%{${prompt_dull}%}$fill$end"
   else
     prompt_detail=""
     prompt_seperator=""
@@ -80,6 +77,9 @@ function prompt_dotphiles_preexec {
       __PROMPT_dotphiles_VCS_UPDATE=1
     ;;
     (*svn*)
+      __PROMPT_dotphiles_VCS_UPDATE=1
+    ;;
+    (*hg*)
       __PROMPT_dotphiles_VCS_UPDATE=1
     ;;
   esac
@@ -133,6 +133,34 @@ function +vi-git-stash() {
     stashes=$(git stash list 2>/dev/null | wc -l)
     hook_com[misc]+=" ${bropen}%{$prompt_dull%}${stashes} stashed%{$prompt_reset%}${brclose}"
   fi
+}
+
+### Store the localrev and global hash for use in other hooks
+function +vi-hg-storerev() {
+    user_data[localrev]=${hook_com[localrev]}
+    user_data[hash]=${hook_com[hash]}
+}
+
+### Show marker when the working directory is not on a branch head
+# This may indicate that running `hg up` will do something
+function +vi-hg-branchhead() {
+    local branchheadsfile i_tiphash i_branchname
+    local -a branchheads
+
+    local branchheadsfile=${hook_com[base]}/.hg/branchheads.cache
+
+    # Bail out if any mq patches are applied
+    [[ -s ${hook_com[base]}/.hg/patches/status ]] && return 0
+
+    if [[ -r ${branchheadsfile} ]] ; then
+        while read -r i_tiphash i_branchname ; do
+            branchheads+=( $i_tiphash )
+        done < ${branchheadsfile}
+
+        if [[ ! ${branchheads[(i)${user_data[hash]}]} -le ${#branchheads} ]] ; then
+            hook_com[revision]="${c4}^${c2}${hook_com[revision]}"
+        fi
+    fi
 }
 
 function prompt_dotphiles_setup {
@@ -195,7 +223,7 @@ function prompt_dotphiles_setup {
       brclose="❯"
       unstaged="✱"
       staged="✚"
-      dirty="✭ "
+      dirty="✭"
       promptahead="⬆ "
       promptbehind="⬇ "
       remotetrack="▸"
@@ -268,6 +296,7 @@ function prompt_dotphiles_setup {
   zstyle ':vcs_info:(hg*|git*):*' get-revision true
 
   zstyle ':vcs_info:git*+set-message:*' hooks git-st git-stash
+  zstyle ':vcs_info:hg*+set-message:*' hooks hg-storerev hg-branchhead
 
   # Formats:
   # %b - branchname
@@ -276,16 +305,26 @@ function prompt_dotphiles_setup {
   # %a - action (e.g. rebase-i)
   # %R - repository path
   # %S - path in the repository
-  local fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose}%u%c%m"
-  local fmt_action="%{$prompt_reset%}${bropen}%{$prompt_yellow%}%a%{$prompt_reset%}${brclose} "
+  local fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %u%c%m"
+  local fmt_action="%{$prompt_reset%}${bropen}%{$prompt_yellow%}%a%{$prompt_reset%}${brclose}"
   local fmt_unstaged="%{$prompt_red%}${unstaged}%{$prompt_reset%} "
   local fmt_staged="%{$prompt_green%}${staged}%{$prompt_reset%} "
 
-  zstyle ':vcs_info:*:prompt:*' unstagedstr   "${fmt_unstaged}"
-  zstyle ':vcs_info:*:prompt:*' stagedstr     "${fmt_staged}"
-  zstyle ':vcs_info:*:prompt:*' actionformats "${fmt_branch} ${fmt_action}"
-  zstyle ':vcs_info:*:prompt:*' formats       "${fmt_branch}"
-  zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
+  zstyle ':vcs_info:(hg*|git*):*' unstagedstr   "${fmt_unstaged}"
+  zstyle ':vcs_info:(hg*|git*):*' stagedstr     "${fmt_staged}"
+  zstyle ':vcs_info:(hg*|git*):*' actionformats "${fmt_branch}${fmt_action}"
+  zstyle ':vcs_info:(hg*|git*):*' formats       "${fmt_branch}"
+  zstyle ':vcs_info:(hg*|git*):*' nvcsformats   ""
+
+  # rev+changes branch misc
+  zstyle ':vcs_info:hg*:*' get-bookmarks true
+
+  zstyle ':vcs_info:hg*:*' get-mq true
+  zstyle ':vcs_info:hg*:*' get-unapplied true
+  zstyle ':vcs_info:hg*:*' patch-format "mq(%g):%n/%c %p"
+  zstyle ':vcs_info:hg*:*' nopatch-format "mq(%g):%n/%c %p"
+  zstyle ':vcs_info:hg*:*' hgrevformat "%r" # only show local rev.
+  zstyle ':vcs_info:hg*:*' branchformat "%b" # only show branch
 
   zstyle ':dotzsh:module:editor:keymap:primary' overwrite " %{$prompt_red%}${over}%{$prompt_reset%}"
   zstyle ':dotzsh:module:editor:keymap' alternate " %{$prompt_yellow%}${bropen}%{$prompt_orange%}${bropen}%{$prompt_red%}${bropen}%{$prompt_reset%}"
