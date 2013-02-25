@@ -63,7 +63,7 @@ accompanying README files to learn of what is available.
 
 ### Modules
 
-  1. Browse [~/.zsh/modules/][23] to see what is available.
+  1. Browse [~/.zsh/modules/][10] to see what is available.
   2. Load the modules you need in *~/.zshrc* then open a new Zsh terminal window
      or tab.
 
@@ -82,7 +82,54 @@ accompanying README files to learn of what is available.
 
 ### Troubleshooting
 
+  To enable debug timing, add the following to *zshrc*
+
+     zstyle ':dotzsh:load' timing 'yes'
+     zstyle ':dotzsh:module:*' timing 'yes'
+
   `dzinfo` will show which module are loaded and how long they took to start.
+
+
+      dotzsh 0.2.0 on darwin12.2.0 running zsh 5.0.0
+
+     module                            global local   aliases colour  startup
+     ======                            ====== =====   ======= ======  =======
+     gnu-utility                          yes no          yes yes        5 ms
+     environment                          yes no          yes yes        9 ms
+     terminal                             yes no          yes yes        6 ms
+     editor                               yes no          yes yes        7 ms
+     history                              yes no          yes yes        3 ms
+     utility                              yes no          yes yes       19 ms
+     completion                           yes no          yes yes       29 ms
+     directory                            yes no          yes yes        3 ms
+     ssh                                  yes no          yes yes       34 ms
+     gnupg                                yes no          yes yes       33 ms
+     osx                                  yes no          yes yes        3 ms
+     archive                              yes no          yes yes        2 ms
+     git                                  yes no          yes yes        4 ms
+     yum                                   no no          yes yes        3 ms
+     tmux                                 yes no          yes yes        4 ms
+     syntax-highlighting                  yes no          yes yes       14 ms
+     perl                                 yes no          yes yes        7 ms
+     rsync                                yes no          yes yes        7 ms
+     grc                                  yes no          yes yes        3 ms
+     node                                 yes no          yes yes        3 ms
+     mercurial                            yes no          yes yes        3 ms
+     notify                               yes no          yes yes        3 ms
+     dotsync                              yes no          yes yes        6 ms
+     fasd                                 yes no          yes yes       12 ms
+     taskwarrior                          yes no          yes yes        2 ms
+     history-substring-search             yes no          yes yes        6 ms
+     theme                                yes no          yes yes       28 ms
+                                                                      =======
+                                                   modules Loaded in   273 ms
+                                                    dotzsh Loaded in   359 ms
+
+  `dzD` will enable ZTRACE and reload *zshrc*
+
+  `dzd` will disable XTRACE and reload *zshrc*
+
+  `dzs` will reload *zshrc*
 
 Customization
 -------------
@@ -113,12 +160,12 @@ dotzsh has been tested and developed to work on the following
   - OpenSolaris >= 11
 
 If you use an older version or a different OS and see problems please raise an
-issue on the [issue tracker][22]
+issue on the [issue tracker][9]
 
 License
 -------
 
-Copyright (c) 2012 Ben O'Hara <bohara@gmail.com>
+Copyright (c) 2012 [dotzsh contributers][11]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -146,20 +193,7 @@ SOFTWARE.
 [6]: http://gitref.org
 [7]: https://github.com/zsh-users/zsh-completions
 [8]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
-[9]: https://github.com/dotphiles/dotzsh/contributors
-[10]: http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/
-[11]: http://help.github.com/win-set-up-git/
-[12]: http://rogerdudler.github.com/git-guide/
-[13]: http://help.github.com/fork-a-repo/
-[14]: http://help.github.com/send-pull-requests/
-[15]: http://nvie.com/posts/a-successful-git-branching-model/
-[16]: http://www.twitter.com/nvie
-[17]: https://github.com/nvie/gitflow
-[18]: https://github.com/nvie/gitflow/wiki/Installation
-[19]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
-[20]: https://help.github.com/articles/using-pull-requests
-[21]: http://daringfireball.net/projects/markdown/syntax#img
-[22]: https://github.com/dotphiles/dotzsh/issues
-[23]: https://github.com/dotphiles/dotzsh/tree/master/modules
-[24]: https://github.com/dotphiles/dotzsh/contributors
+[9]: https://github.com/dotphiles/dotzsh/issues
+[10]: https://github.com/dotphiles/dotzsh/tree/master/modules
+[11]: https://github.com/dotphiles/dotzsh/graphs/contributors
 
