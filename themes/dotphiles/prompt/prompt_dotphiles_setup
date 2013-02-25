@@ -46,7 +46,6 @@ function prompt_dotphiles_precmd {
     if [[ -n "$__PROMPT_dotphiles_VCS_UPDATE" ]] ; then
       # Check for untracked files or updated submodules since vcs_info doesn't.
       if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-        __PROMPT_dotphiles_VCS_UPDATE=1
         fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %{$prompt_green%}${dirty}%{$prompt_reset%} %u%c%m"
       else
         fmt_branch="%{$prompt_reset%}${bropen}%{$prompt_dull%}%s%{$prompt_reset%}:%{$prompt_orange%}%b%{$prompt_reset%}${brclose} %u%c%m"
@@ -81,12 +80,6 @@ function prompt_dotphiles_preexec {
       __PROMPT_dotphiles_VCS_UPDATE=1
     ;;
     (*hg*)
-      __PROMPT_dotphiles_VCS_UPDATE=1
-    ;;
-    (*${EDITOR}*)
-      __PROMPT_dotphiles_VCS_UPDATE=1
-    ;;
-    (*vi*)
       __PROMPT_dotphiles_VCS_UPDATE=1
     ;;
   esac
