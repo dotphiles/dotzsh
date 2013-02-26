@@ -62,9 +62,10 @@ function prompt_dotphiles_precmd {
     SEPLENGTH=${#${(S%%)end//$~zero/}}
     DETAILLENGTH=${#${(S%%)prompt_detail//$~zero/}}
     MAINLENGTH=${#${(S%%)MAINPROMPT//$~zero/}}
-    (( j=$SEPLENGTH+$MAINLENGTH+$DETAILLENGTH+1 ))
-    fill=$(printf "$dash%.s" {$j..$COLUMNS})
+    (( j=$COLUMNS-($SEPLENGTH+$MAINLENGTH+$DETAILLENGTH) ))
+    repeat $j; do fill="$fill$dash"; done
     prompt_seperator="%{${prompt_dull}%}$fill$end"
+    unset fill
   else
     prompt_detail=""
     prompt_seperator=""
