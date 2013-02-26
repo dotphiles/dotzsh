@@ -154,6 +154,11 @@ compdef ping6=ping
 compdef traceroute6=traceroute
 
 # Auto expand global aliases
+local min_zsh_version='4.3.9'
+if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
+  return 1
+fi
+
 if zstyle -t ':dotzsh:module:completion' expand-global-aliases; then
   globalias() {
     if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
