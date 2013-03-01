@@ -23,7 +23,7 @@ function _gpg-agent-start {
     || ssh_support=''
 
   gpg-agent \
-    --daemon ${ssh_support:+'--enable-ssh-support'}
+    --daemon ${ssh_support:+'--enable-ssh-support'} \
     --write-env-file "${_gpg_env}" > /dev/null
 
   chmod 600 "${_gpg_env}"
