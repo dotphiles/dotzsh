@@ -233,21 +233,21 @@ function prompt_dotphiles_setup {
       RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}${VIM:+" %B%{$prompt_green%}V%b%{$prompt_reset%}"}'
     else
       prompt_brblack="$fg_bold[black]"  # brblack base03
-      prompt_black="$fg[black]"  # black base02
+      prompt_black="$fg_no_bold[black]"  # black base02
       prompt_brgreen="$fg_bold[green]"  # brgreen base01
       prompt_bryellow="$fg_bold[yellow]"  # bryellow base00
       prompt_brblue="$fg_bold[blue]"  # brblue base0
       prompt_brcyan="$fg_bold[cyan]"  # brcyan base1
-      prompt_white="$fg[white]" # white base2
+      prompt_white="$fg_no_bold[white]" # white base2
       prompt_brwhite="$fg_bold[white]" # brwhite base3
-      prompt_yellow="$fg[yellow]" # yellow yellow
+      prompt_yellow="$fg_no_bold[yellow]" # yellow yellow
       prompt_orange="$fg_bold[red]" # brred orange
-      prompt_red="$fg[red]" # red red
-      prompt_magenta="$fg[magenta]" # magenta magenta
+      prompt_red="$fg_no_bold[red]" # red red
+      prompt_magenta="$fg_no_bold[magenta]" # magenta magenta
       prompt_violet="$fg_bold[magenta]" # brmagenta violet
-      prompt_blue="%fg[blue]" # blue blue
-      prompt_cyan="$fg[cyan]" # cyan cyan
-      prompt_green="$fg[green]" # green green
+      prompt_blue="%fg_no_bold[blue]" # blue blue
+      prompt_cyan="$fg_no_bold[cyan]" # cyan cyan
+      prompt_green="$fg_no_bold[green]" # green green
 
       RPROMPT=''
 
