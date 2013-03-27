@@ -9,7 +9,7 @@ Settings
 
 ### PYTHONSTARTUP
 
-To export the PYTHONSTARTUP environment variable, add the following 
+To export the PYTHONSTARTUP environment variable, add the following
 to *zshrc*:
 
     zstyle ':dotzsh:module:python' rcfile '~/.pythonrc'

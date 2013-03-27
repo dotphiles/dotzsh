@@ -19,7 +19,7 @@ Aliases
   - `rs` starts the Rails server.
   - `rsd` starts the Rails server with the debugger.
   - `rx` destroys newly generated code.
-  
+
 Authors
 -------
 
