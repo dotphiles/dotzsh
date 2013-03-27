@@ -156,7 +156,7 @@ to date or pushed
  - `gwd`, Show changes between commits, commit and working tree, etc.
  - `gwD`, Show changes between commits, commit and working tree, etc. (without white spaces)
  - `gwr`, Reset current HEAD to specified state, do not touch the index file nor
-the working tree 
+the working tree
  - `gwR`, Reset current HEAD to specified state,match the working tree and index
 to the given tree
  - `gwc`, Remove untracked files from working tree (dry-run)
@@ -243,7 +243,7 @@ Here is an exhaustive list of the elements and the format code that can be used:
 </table>
 
 #### Prompt and rPrompt
-Once every element has been pre-formated, 
+Once every element has been pre-formated,
 - prompt, Left prompt.
 - rprompt, Right prompt.
 

@@ -72,7 +72,7 @@ accompanying README files to learn of what is available.
   1. Add your own modules to *~/.zsh.local/modules/* to override existing modules.
   2. Load the modules you need in *~/.zshrc* then open a new Zsh terminal window
      or tab.
- 
+
 ### Themes
 
   1. For a list of themes, type `prompt -l`.

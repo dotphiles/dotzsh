@@ -54,7 +54,7 @@ if [[ "$editor" == (less|) ]]; then
     export LESS='-F -g -i -M -R -S -w -X -z-4'
   fi
   # Set the Less input preprocessor.
-  
+
   if (( $+commands[src-hilite-lesspipe.sh] )); then
     export LESSOPEN='| /usr/bin/env src-hilite-lesspipe.sh %s 2>&-'
   elif (( $+commands[lesspipe.sh] )); then

@@ -58,7 +58,7 @@ notify_precmd() {
         ${notify_exec} -group dotzshnotify -message ${message} -title ${notify_cmd:-Some command} > /dev/null
       else
         ${notify_exec} -n "dotzshnotify" -m ${message} ${notify_cmd:-Some command}
-      fi 
+      fi
     fi
   fi
   notify_cmd=

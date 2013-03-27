@@ -16,7 +16,7 @@ a random theme.
 
 ### Custom Themes
 
-To set a custom theme on a per host or per domain basis, add the following 
+To set a custom theme on a per host or per domain basis, add the following
 to *zshrc* and replace **name** with the name of the theme you wish to load.
 
     zstyle ':dotzsh:module:theme:hostname:host1.example.com' theme 'name'
