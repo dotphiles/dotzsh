@@ -183,7 +183,7 @@ function prompt_dotphiles_setup {
       add-zsh-hook chpwd prompt_dotphiles_chpwd
       __PROMPT_dotphiles_VCS_UPDATE=1
 
-      if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
+      if [[ $TERM = *256color || $TERM = *rxvt* ]]; then
         prompt_brblack="%F{234}"  # brblack base03
         prompt_black="%F{235}"  # black base02
         prompt_brgreen="%F{240}"  # brgreen base01
