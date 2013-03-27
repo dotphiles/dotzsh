@@ -43,11 +43,11 @@ notify_precmd() {
   let elapsedsecs=$(($elapsed / 1000000000 % 1000000000))
 
   max=${notify_max:-30}
-  alias_notify_cmd=`alias $notify_cmd | awk -F"'" '{print $2}'`
+  alias_notify_cmd=`alias $notify_cmd | awk -F"'" '{print $2}'|awk '{print $1}'`
   if [[ "$alias_notify_cmd" == "" ]]; then
     alias_notify_cmd=$notify_cmd
   fi
-  if [[ ! "$alias_notify_cmd" == (vi*|vim*|top|ssh*|cmatrix|telnet*|tmux*|mux*|) ]]; then
+  if [[ ! "$alias_notify_cmd" == (vi|vim|top|ssh|cmatrix|telnet|tmux|mux|) ]]; then
     if [[ $elapsedsecs -gt $max ]]; then
       if [[ $exitstatus == 0 ]]; then
         message="Completed after $(format-elapsed $elapsed)"
