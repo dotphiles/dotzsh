@@ -1,4 +1,4 @@
-# 
+#
 # dotzsh : https://github.com/dotphiles/dotzsh
 #
 # Defines dpkg aliases.

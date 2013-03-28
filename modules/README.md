@@ -3,7 +3,7 @@ dotzsh modules
 
 Modules can be enabled for loading in *zshrc*.
 
-dotzsh will try to load modules from 
+dotzsh will try to load modules from
 
     $DOTZSHLOCAL/modules
     $DOTZSH/modules

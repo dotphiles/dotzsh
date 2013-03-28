@@ -198,7 +198,7 @@ function dzinfo {
   else
     print " module                            global local   aliases colour">&1
     print " ======                            ====== =====   ======= ======">&1
-  fi 
+  fi
   for dzmodule in "$dzmodules[@]"; do
     zstyle -a ":dotzsh:module:$dzmodule" loaded 'dzmodload_module_loaded'
     zstyle -a ":dotzsh:module:local:$dzmodule" loaded 'dzmodload_local_module_loaded'
