@@ -45,7 +45,7 @@ notify_precmd() {
   max=${notify_max:-30}
   alias_notify_cmd=`alias $notify_cmd | awk -F"'" '{print $2}'|awk '{print $1}'`
   if [[ "$alias_notify_cmd" == "" ]]; then
-    alias_notify_cmd=$notify_cmd
+    alias_notify_cmd=`echo $notify_cmd | awk '{print $1}'`
   fi
   if [[ ! "$alias_notify_cmd" == (vi|vim|top|ssh|cmatrix|telnet|tmux|mux|) ]]; then
     if [[ $elapsedsecs -gt $max ]]; then
