@@ -18,7 +18,11 @@ else
   zstyle ':dotzsh:module:theme:lscolors:dotphiles' theme 'gxfxbEaEBxxEhEhBaDaCaD'
 fi
 
-zstyle ':dotzsh:module:theme:grepcolors:dotphiles' theme '37;45'
+if [[ $TERM = *256color || $TERM = *rxvt* ]]; then
+  zstyle ':dotzsh:module:theme:grepcolors:dotphiles' theme '37;45'
+else
+  zstyle ':dotzsh:module:theme:grepcolors:dotphiles' theme '00;38;5;254;48;5;160'
+fi
 
 # Patterns
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf' 'fg=white,bold,bg=red')
