@@ -25,7 +25,7 @@ else
 fi
 
 # Load virtualenvwrapper into the shell session.
-if [[ -n "$WORKON_HOME" ]] && (( $+commands[virtualenvwrapper.sh] )); then
+if [[ -z "$WORKON_HOME" ]] && (( $+commands[virtualenvwrapper.sh] )); then
   source "$commands[virtualenvwrapper.sh]"
 fi
 
