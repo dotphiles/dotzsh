@@ -62,7 +62,14 @@ function prompt_dotphiles_precmd {
     SEPLENGTH=${#${(S%%)end//$~zero/}}
     DETAILLENGTH=${#${(S%%)prompt_detail//$~zero/}}
     MAINLENGTH=${#${(S%%)MAINPROMPT//$~zero/}}
-    (( j=$COLUMNS-($SEPLENGTH+$MAINLENGTH+$DETAILLENGTH) ))
+    if [ ! -z $VIRTUAL_ENV ]; then
+        VENV=`basename $VIRTUAL_ENV`
+        VENVLENGTH=${#${(S%%)VENV//$~zero/}}
+        VENVLENGTH=$VENVLENGTH+2
+        (( j=$COLUMNS-($SEPLENGTH+$MAINLENGTH+$DETAILLENGTH+$VENVLENGTH) ))
+    else
+        (( j=$COLUMNS-($SEPLENGTH+$MAINLENGTH+$DETAILLENGTH) ))
+    fi
     repeat $j; do fill="$fill$dash"; done
     prompt_seperator="%{${prompt_dull}%}$fill$end"
     unset fill
