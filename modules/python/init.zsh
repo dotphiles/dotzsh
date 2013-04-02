@@ -16,7 +16,7 @@ fi
 # Prepend PEP 370 per user site packages directory, which defaults to
 # ~/Library/Python on Mac OS X and ~/.local elsewhere, to PATH/MANPATH.
 if [[ "$OSTYPE" == darwin* ]]; then
-  path=(/usr/local/ishare/python $HOME/Library/Python/*/bin(N) $path)
+  path=(/usr/local/share/python $HOME/Library/Python/*/bin(N) $path)
   manpath=($HOME/Library/Python/*/{,share/}man(N) $manpath)
 else
   # This is subject to change.
@@ -25,8 +25,8 @@ else
 fi
 
 # Load virtualenvwrapper into the shell session.
-if [[ -z "$WORKON_HOME" ]] && (( $+commands[virtualenvwrapper.sh] )); then
-  source "$commands[virtualenvwrapper.sh]"
+if [[ -z "$WORKON_HOME" ]] && (( $+commands[virtualenvwrapper_lazy.sh] )); then
+  source "$commands[virtualenvwrapper_lazy.sh]"
 fi
 
 zstyle -a ':dotzsh:module:python' rcfile 'rcfile_argv'
