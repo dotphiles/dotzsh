@@ -19,9 +19,9 @@ else
 fi
 
 if [[ $TERM = *256color || $TERM = *rxvt* ]]; then
-  zstyle ':dotzsh:module:theme:grepcolors:dotphiles' theme '37;45'
-else
   zstyle ':dotzsh:module:theme:grepcolors:dotphiles' theme '00;38;5;254;48;5;160'
+else
+  zstyle ':dotzsh:module:theme:grepcolors:dotphiles' theme '37;45'
 fi
 
 # Patterns
