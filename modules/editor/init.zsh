@@ -70,6 +70,11 @@ for key in "$key_info[@]"; do
   fi
 done
 
+# alias sudoedit if it doesnt exist
+if (( ! $+commands[sudoedit] )); then
+  alias sudoedit='sudo -e '
+fi
+
 # Displays editor information.
 function editor-info {
   # Clean up previous $editor_info.
