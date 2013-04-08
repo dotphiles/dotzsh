@@ -318,11 +318,11 @@ function prompt_dotphiles_setup {
   local fmt_unstaged="%{$prompt_red%}${unstaged}%{$prompt_reset%} "
   local fmt_staged="%{$prompt_green%}${staged}%{$prompt_reset%} "
 
-  zstyle ':vcs_info:(hg*|git*):*' unstagedstr   "${fmt_unstaged}"
-  zstyle ':vcs_info:(hg*|git*):*' stagedstr     "${fmt_staged}"
-  zstyle ':vcs_info:(hg*|git*):*' actionformats "${fmt_branch}${fmt_action}"
-  zstyle ':vcs_info:(hg*|git*):*' formats       "${fmt_branch}"
-  zstyle ':vcs_info:(hg*|git*):*' nvcsformats   ""
+  zstyle ':vcs_info:(hg*|git*|svn*):*' unstagedstr   "${fmt_unstaged}"
+  zstyle ':vcs_info:(hg*|git*|svn*):*' stagedstr     "${fmt_staged}"
+  zstyle ':vcs_info:(hg*|git*|svn*):*' actionformats "${fmt_branch}${fmt_action}"
+  zstyle ':vcs_info:(hg*|git*|svn*):*' formats       "${fmt_branch}"
+  zstyle ':vcs_info:(hg*|git*|svn*):*' nvcsformats   ""
 
   # rev+changes branch misc
   zstyle ':vcs_info:hg*:*' get-bookmarks true
