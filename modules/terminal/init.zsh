@@ -120,3 +120,6 @@ function set-title-preexec {
 }
 add-zsh-hook preexec set-title-preexec
 
+if [[ ! -z $ITERM_PROFILE ]]; then
+  LC_IDENTIFICATION=$ITERM_PROFILE
+fi
