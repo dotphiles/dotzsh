@@ -179,102 +179,100 @@ function prompt_dotphiles_setup {
   prompt_theme=${1:-'soldark'}
   _prompt_host=${2:-'green'}
 
-  if [[ "$prompt_theme" = sol* ]]; then
-    # Check for the minimum supported version.
-    min_zsh_version='4.3.10'
-    if autoload -Uz is-at-least && is-at-least "$min_zsh_version"; then
-      autoload -Uz add-zsh-hook
-      autoload -Uz vcs_info
-      add-zsh-hook precmd prompt_dotphiles_precmd
-      add-zsh-hook preexec prompt_dotphiles_preexec
-      add-zsh-hook chpwd prompt_dotphiles_chpwd
-      __PROMPT_dotphiles_VCS_UPDATE=1
-
-      if [[ $TERM = *256color || $TERM = *rxvt* ]]; then
-        prompt_brblack="%F{234}"  # brblack base03
-        prompt_black="%F{235}"  # black base02
-        prompt_brgreen="%F{240}"  # brgreen base01
-        prompt_bryellow="%F{241}"  # bryellow base00
-        prompt_brblue="%F{244}"  # brblue base0
-        prompt_brcyan="%F{245}"  # brcyan base1
-        prompt_white="%F{254}" # white base2
-        prompt_brwhite="%F{230}" # brwhite base3
-        prompt_yellow="%F{136}" # yellow yellow
-        prompt_orange="%F{166}" # brred orange
-        prompt_red="%F{160}" # red red
-        prompt_magenta="%F{125}" # magenta magenta
-        prompt_violet="%F{61}" # brmagenta violet
-        prompt_blue="%F{33}" # blue blue
-        prompt_cyan="%F{37}" # cyan cyan
-        prompt_green="%F{64}" # green green
-      else
-        prompt_brblack="%B%F{black}"  # brblack base03
-        prompt_black="%b%F{black}"  # black base02
-        prompt_brgreen="%B%F{green}"  # brgreen base01
-        prompt_bryellow="%B%F{yellow}"  # bryellow base00
-        prompt_brblue="%B%F{blue}"  # brblue base0
-        prompt_brcyan="%B%F{cyan}"  # brcyan base1
-        prompt_white="%b%F{white}" # white base2
-        prompt_brwhite="%B%F{white}" # brwhite base3
-        prompt_yellow="%b%F{yellow}" # yellow yellow
-        prompt_orange="%B%F{red}" # brred orange
-        prompt_red="%b%F{red}" # red red
-        prompt_magenta="%b%F{magenta}" # magenta magenta
-        prompt_violet="%B%F{magenta}" # brmagenta violet
-        prompt_blue="%b%F{blue}" # blue blue
-        prompt_cyan="%b%F{cyan}" # cyan cyan
-        prompt_green="%b%F{green}" # green green
-      fi
-
-      userprompt="❯❯"
-      bropen="❮"
-      brclose="❯"
-      unstaged="✱"
-      staged="✚"
-      dirty="✭"
-      promptahead="⬆ "
-      promptbehind="⬇ "
-      remotetrack="▸"
-      over="♺"
-      dash="⋅"
-      RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}${VIM:+" %B%{$prompt_green%}V%b%{$prompt_reset%}"}'
-    else
-      prompt_brblack="$fg_bold[black]"  # brblack base03
-      prompt_black="$fg_no_bold[black]"  # black base02
-      prompt_brgreen="$fg_bold[green]"  # brgreen base01
-      prompt_bryellow="$fg_bold[yellow]"  # bryellow base00
-      prompt_brblue="$fg_bold[blue]"  # brblue base0
-      prompt_brcyan="$fg_bold[cyan]"  # brcyan base1
-      prompt_white="$fg_no_bold[white]" # white base2
-      prompt_brwhite="$fg_bold[white]" # brwhite base3
-      prompt_yellow="$fg_no_bold[yellow]" # yellow yellow
-      prompt_orange="$fg_bold[red]" # brred orange
-      prompt_red="$fg_no_bold[red]" # red red
-      prompt_magenta="$fg_no_bold[magenta]" # magenta magenta
-      prompt_violet="$fg_bold[magenta]" # brmagenta violet
-      prompt_blue="%fg_no_bold[blue]" # blue blue
-      prompt_cyan="$fg_no_bold[cyan]" # cyan cyan
-      prompt_green="$fg_no_bold[green]" # green green
-
-      RPROMPT=''
-
-      userprompt=">>"
-      bropen="("
-      brclose=")"
-      unstaged="x"
-      staged="+"
-      dirty="*"
-      promptahead="+"
-      promptbehind="-"
-      remotetrack=">"
-      over="O"
-      dash="-"
-    fi
-    unset min_zsh_version
-
-  elif [[ "$prompt_theme" = 'zenburn' ]]; then
-    #TODO
+  if [[ "$ITERM_PROFILE" != "" ]]; then
+    prompt_theme="$ITERM_PROFILE"
   fi
+    # Check for the minimum supported version.
+  min_zsh_version='4.3.10'
+  if autoload -Uz is-at-least && is-at-least "$min_zsh_version"; then
+    autoload -Uz add-zsh-hook
+    autoload -Uz vcs_info
+    add-zsh-hook precmd prompt_dotphiles_precmd
+    add-zsh-hook preexec prompt_dotphiles_preexec
+    add-zsh-hook chpwd prompt_dotphiles_chpwd
+    __PROMPT_dotphiles_VCS_UPDATE=1
+
+    if [[ "$prompt_theme" = sol* ]] && [[ $TERM = *256color || $TERM = *rxvt* ]] then
+      prompt_brblack="%F{234}"  # brblack base03
+      prompt_black="%F{235}"  # black base02
+      prompt_brgreen="%F{240}"  # brgreen base01
+      prompt_bryellow="%F{241}"  # bryellow base00
+      prompt_brblue="%F{244}"  # brblue base0
+      prompt_brcyan="%F{245}"  # brcyan base1
+      prompt_white="%F{254}" # white base2
+      prompt_brwhite="%F{230}" # brwhite base3
+      prompt_yellow="%F{136}" # yellow yellow
+      prompt_orange="%F{166}" # brred orange
+      prompt_red="%F{160}" # red red
+      prompt_magenta="%F{125}" # magenta magenta
+      prompt_violet="%F{61}" # brmagenta violet
+      prompt_blue="%F{33}" # blue blue
+      prompt_cyan="%F{37}" # cyan cyan
+      prompt_green="%F{64}" # green green
+    else
+      prompt_brblack="%B%F{black}"  # brblack base03
+      prompt_black="%b%F{black}"  # black base02
+      prompt_brgreen="%B%F{green}"  # brgreen base01
+      prompt_bryellow="%B%F{yellow}"  # bryellow base00
+      prompt_brblue="%B%F{blue}"  # brblue base0
+      prompt_brcyan="%B%F{cyan}"  # brcyan base1
+      prompt_white="%b%F{white}" # white base2
+      prompt_brwhite="%B%F{white}" # brwhite base3
+      prompt_yellow="%b%F{yellow}" # yellow yellow
+      prompt_orange="%B%F{red}" # brred orange
+      prompt_red="%b%F{red}" # red red
+      prompt_magenta="%b%F{magenta}" # magenta magenta
+      prompt_violet="%B%F{magenta}" # brmagenta violet
+      prompt_blue="%b%F{blue}" # blue blue
+      prompt_cyan="%b%F{cyan}" # cyan cyan
+      prompt_green="%b%F{green}" # green green
+    fi
+    userprompt="❯❯"
+    bropen="❮"
+    brclose="❯"
+    unstaged="✱"
+    staged="✚"
+    dirty="✭"
+    promptahead="⬆ "
+    promptbehind="⬇ "
+    remotetrack="▸"
+    over="♺"
+    dash="⋅"
+    RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}${VIM:+" %B%{$prompt_green%}V%b%{$prompt_reset%}"}'
+  else
+    prompt_brblack="$fg_bold[black]"  # brblack base03
+    prompt_black="$fg_no_bold[black]"  # black base02
+    prompt_brgreen="$fg_bold[green]"  # brgreen base01
+    prompt_bryellow="$fg_bold[yellow]"  # bryellow base00
+    prompt_brblue="$fg_bold[blue]"  # brblue base0
+    prompt_brcyan="$fg_bold[cyan]"  # brcyan base1
+    prompt_white="$fg_no_bold[white]" # white base2
+    prompt_brwhite="$fg_bold[white]" # brwhite base3
+    prompt_yellow="$fg_no_bold[yellow]" # yellow yellow
+    prompt_orange="$fg_bold[red]" # brred orange
+    prompt_red="$fg_no_bold[red]" # red red
+    prompt_magenta="$fg_no_bold[magenta]" # magenta magenta
+    prompt_violet="$fg_bold[magenta]" # brmagenta violet
+    prompt_blue="%fg_no_bold[blue]" # blue blue
+    prompt_cyan="$fg_no_bold[cyan]" # cyan cyan
+    prompt_green="$fg_no_bold[green]" # green green
+
+    RPROMPT=''
+
+    userprompt=">>"
+    bropen="("
+    brclose=")"
+     unstaged="x"
+    staged="+"
+    dirty="*"
+    promptahead="+"
+    promptbehind="-"
+    remotetrack=">"
+    over="O"
+    dash="-"
+  fi
+  unset min_zsh_version
+
   eval prompt_host="$"prompt_$_prompt_host""
 
   if [[ ! -z $SSH_CONNECTION ]]; then
@@ -292,6 +290,11 @@ function prompt_dotphiles_setup {
     prompt_reset="$prompt_brblue"
     prompt_hi="$prompt_brcyan"
     prompt_dull="$prompt_brgreen"
+    zstyle ':dotzsh:module:editor' completing '%{$prompt_brgreen%}...%{$prompt_reset%}'
+  else
+    prompt_reset="$prompt_white"
+    prompt_hi="$prompt_white"
+    prompt_dull="$prompt_brwhite"
     zstyle ':dotzsh:module:editor' completing '%{$prompt_brgreen%}...%{$prompt_reset%}'
   fi
 
