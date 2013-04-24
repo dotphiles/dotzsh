@@ -45,7 +45,11 @@ function format-elapsed {
   elif [[ $mins > 0 ]]; then
     elapsed+="$mins mins and $secs secs"
   elif [[ $secs > 0 ]]; then
-    elapsed+="$secs.$hsecs secs"
+    if [[ $hsecs > 0 ]]; then
+      elapsed+="$secs.$hsecs secs"
+    else
+      elapsed+="$secs secs"
+    fi
   elif [[ $msecs > 0 ]]; then
     elapsed+="$msecs ms"
   else
