@@ -27,6 +27,13 @@ else
   return 1
 fi
 
+zstyle -b ':dotzsh:module:notify' different-window-only '_different_window_only'
+
+zstyle -a ':dotzsh:module:notify' elapsed '_elapsed'
+if (( $#_elapsed > 0 )); then
+  notify_max="$_elapsed[@]"
+fi
+
 function dotzsh-notify {
   if (( $+commands[growlnotify] )); then
     ${dotzsh_notify_exec} -n "dotzsh-notify" -m ${1} ${2}
@@ -38,14 +45,25 @@ function dotzsh-notify {
   fi
 }
 
-zstyle -a ':dotzsh:module:notify' elapsed '_elapsed'
-if (( $#_elapsed > 0 )); then
-  notify_max="$_elapsed[@]"
-fi
+function frontmost-window-id {
+    osascript -e 'tell application (path to frontmost application as text) to id of front window' 2&> /dev/null
+}
+
+function should-notify {
+  if is-true ${_different_window_only}; then
+    current_win_id=`frontmost-window-id`
+    [[ ! "$current_win_id" == "$notify_win_id" ]]
+  else
+    [[ ! "$1" == (vi|vim|top|ssh|cmatrix|telnet|tmux*|mux|man|workon) ]]
+  fi
+}
 
 notify_preexec() {
   notify_cmd=$1
   notify_time=`date +%s`
+  if is-true ${_different_window_only}; then
+    notify_win_id=`frontmost-window-id`
+  fi
 }
 
 notify_precmd() {
@@ -59,8 +77,8 @@ notify_precmd() {
   if [[ "$alias_notify_cmd" == "" ]]; then
     alias_notify_cmd=`echo $notify_cmd | awk '{print $1}'`
   fi
-  if [[ ! "$alias_notify_cmd" == (vi|vim|top|ssh|cmatrix|telnet|tmux*|mux|man|workon) ]]; then
-    if [[ $elapsed -gt $max ]]; then
+  if [[ $elapsed -gt $max ]]; then
+    if should-notify $alias_notify_cmd; then
       let elapsed_ns=$(($elapsed * 1000000000))
       if [[ $exitstatus == 0 ]]; then
         message="Completed after $(format-elapsed $elapsed_ns)"
@@ -73,6 +91,7 @@ notify_precmd() {
   fi
   notify_cmd=
   notify_time=
+  notify_win_id=
 }
 
 add-zsh-hook preexec notify_preexec
