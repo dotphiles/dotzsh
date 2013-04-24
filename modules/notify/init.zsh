@@ -59,7 +59,7 @@ notify_precmd() {
   if [[ "$alias_notify_cmd" == "" ]]; then
     alias_notify_cmd=`echo $notify_cmd | awk '{print $1}'`
   fi
-  if [[ ! "$alias_notify_cmd" == (vi|vim|top|ssh|cmatrix|telnet|tmux|mux|man|workon) ]]; then
+  if [[ ! "$alias_notify_cmd" == (vi|vim|top|ssh|cmatrix|telnet|tmux*|mux|man|workon) ]]; then
     if [[ $elapsed -gt $max ]]; then
       let elapsed_ns=$(($elapsed * 1000000000))
       if [[ $exitstatus == 0 ]]; then
