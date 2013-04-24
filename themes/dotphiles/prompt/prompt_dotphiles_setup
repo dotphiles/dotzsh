@@ -179,10 +179,7 @@ function prompt_dotphiles_setup {
   prompt_theme=${1:-'soldark'}
   _prompt_host=${2:-'green'}
 
-  if [[ "$ITERM_PROFILE" != "" ]]; then
-    prompt_theme="$ITERM_PROFILE"
-  fi
-    # Check for the minimum supported version.
+  # Check for the minimum supported version.
   min_zsh_version='4.3.10'
   if autoload -Uz is-at-least && is-at-least "$min_zsh_version"; then
     autoload -Uz add-zsh-hook
