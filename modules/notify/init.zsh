@@ -47,7 +47,7 @@ notify_precmd() {
   if [[ "$alias_notify_cmd" == "" ]]; then
     alias_notify_cmd=`echo $notify_cmd | awk '{print $1}'`
   fi
-  if [[ ! "$alias_notify_cmd" == (vi|vim|top|ssh|cmatrix|telnet|tmux|mux|) ]]; then
+  if [[ ! "$alias_notify_cmd" == (vi|vim|top|ssh|cmatrix|telnet|tmux|mux|workon|) ]]; then
     if [[ $elapsedsecs -gt $max ]]; then
       if [[ $exitstatus == 0 ]]; then
         message="Completed after $(format-elapsed $elapsed)"
