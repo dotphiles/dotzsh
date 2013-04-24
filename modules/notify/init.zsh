@@ -68,7 +68,7 @@ notify_precmd() {
         message="Failed with status $exitstatus after $(format-elapsed $elapsed_ns)"
       fi
 
-      dotzsh-notify ${message} ${notify_cmd:-Some command}
+      dotzsh-notify ${message} ${alias_notify_cmd:-Some command}
     fi
   fi
   notify_cmd=
