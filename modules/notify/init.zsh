@@ -77,8 +77,6 @@ notify_precmd() {
   if [[ "$alias_notify_cmd" == "" ]]; then
     alias_notify_cmd=`echo $notify_cmd | awk '{print $1}'`
   fi
-  echo $notify_cmd
-  echo $alias_notify_cmd
   if [[ $elapsed -gt $max ]]; then
     if should-notify $alias_notify_cmd; then
       let elapsed_ns=$(($elapsed * 1000000000))
