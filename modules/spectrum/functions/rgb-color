@@ -1,0 +1,7 @@
+function rgb-color {
+    red=$1
+    green=$2
+    blue=$3
+    color=$(( 16 + $red * 36 + $green * 6 + $blue ))
+    print "${color}: \033[48;05;${color}m  \033[0m"
+}

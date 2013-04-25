@@ -24,12 +24,21 @@ color-grid() {
 
   # now the color cube
   print "Color cube, 6x6x6:\n"
-  for green ({0..5}); do
-  print -n "  "
+  for green ({0..6}); do
+    if [[ ${green} < 6 ]]; then
+      print -n "G ${green}"
+    else
+      print -n "B  "
+    fi
+
     for red ({0..5}); do
       for blue ({0..5}); do
-        (( color =  16 + $red * 36 + $green * 6 + $blue ))
-        print -n "\033[48;5;${color}m  "
+        if [[ ${green} < 6 ]]; then
+          (( color =  16 + $red * 36 + $green * 6 + $blue ))
+          print -n "\033[48;5;${color}m  "
+        else
+          print -n " ${blue}"
+        fi
       done
       print -n "\033[0m "
     done
