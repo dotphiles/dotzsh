@@ -73,10 +73,12 @@ notify_precmd() {
   let elapsed=$stop-$start
 
   max=${notify_max:-30}
-  alias_notify_cmd=`alias $notify_cmd | awk -F"'" '{print $2}'|awk '{print $1}'`
+  alias_notify_cmd=`alias $(echo $notify_cmd | awk '{print $1}') | awk -F"'" '{print $2}'|awk '{print $1}'`
   if [[ "$alias_notify_cmd" == "" ]]; then
     alias_notify_cmd=`echo $notify_cmd | awk '{print $1}'`
   fi
+  echo $notify_cmd
+  echo $alias_notify_cmd
   if [[ $elapsed -gt $max ]]; then
     if should-notify $alias_notify_cmd; then
       let elapsed_ns=$(($elapsed * 1000000000))
