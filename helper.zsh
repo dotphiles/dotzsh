@@ -34,19 +34,24 @@ function autoloadable {
 }
 
 function format-elapsed {
+  hours=$(($1 / 10000000000000 % 24))
   mins=$(($1 / 100000000000 % 60))
   secs=$(($1 / 1000000000 % 60))
   hsecs=$(($1 / 10000000 % 100))
   msecs=$(($1 / 1000000 % 1000))
   local elapsed
-  if [[ $mins > 0 ]]; then
-    elapsed+="$mins mins $secs secs"
+  if [[ $hours > 0 ]]; then
+    elapsed+="$hours hours, $mins mins and $secs secs"
+  elif [[ $mins > 0 ]]; then
+    elapsed+="$mins mins and $secs secs"
   elif [[ $secs > 0 ]]; then
-    elapsed+="$secs.$hsecs secs"
+    if [[ $hsecs > 0 ]]; then
+      elapsed+="$secs.$hsecs secs"
+    else
+      elapsed+="$secs secs"
+    fi
   elif [[ $msecs > 0 ]]; then
     elapsed+="$msecs ms"
-  elif [[ $nsecs >0 ]]; then
-    elapsed+="$1 ns"
   else
     elapsed+="0"
   fi

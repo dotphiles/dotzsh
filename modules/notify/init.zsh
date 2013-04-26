@@ -17,54 +17,82 @@ if [[ ! -z $SSH_CONNECTION ]]; then
   return 1
 fi
 
-if (( $+commands[growlnotify] )); then
-  notify_exec="growlnotify"
+if (( $+commands[terminal-notifier] )); then
+  dotzsh_notify_exec="terminal-notifier"
 elif [[ -d /Applications/terminal-notifier.app ]]; then
-  notify_exec="/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier"
+  dotzsh_notify_exec="/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier"
+elif (( $+commands[growlnotify] )); then
+  dotzsh_notify_exec="growlnotify"
 else
   return 1
 fi
+
+zstyle -b ':dotzsh:module:notify' different-window-only '_different_window_only'
 
 zstyle -a ':dotzsh:module:notify' elapsed '_elapsed'
 if (( $#_elapsed > 0 )); then
   notify_max="$_elapsed[@]"
 fi
 
+function dotzsh-notify {
+  if (( $+commands[growlnotify] )); then
+    ${dotzsh_notify_exec} -n "dotzsh-notify" -m ${1} ${2}
+  elif [[ ! "$dotzsh_notify_exec" == "" ]]; then
+    ${dotzsh_notify_exec} -group "dotzsh-notify" -message ${1} -title ${2} > /dev/null
+  else
+    echo "Install growlnotify or terminal-notifier to use the dotzsh notify module"
+    echo "$2: $1"
+  fi
+}
+
+function frontmost-window-id {
+    osascript -e 'tell application (path to frontmost application as text) to id of front window' 2&> /dev/null
+}
+
+function should-notify {
+  if is-true ${_different_window_only}; then
+    current_win_id=`frontmost-window-id`
+    [[ ! "$current_win_id" == "$notify_win_id" ]]
+  else
+    [[ ! "$1" == (vi|vim|top|ssh|cmatrix|telnet|tmux*|mux|man|workon) ]]
+  fi
+}
+
 notify_preexec() {
   notify_cmd=$1
-  notify_time=`date +%s%N`
+  notify_time=`date +%s`
+  if is-true ${_different_window_only}; then
+    notify_win_id=`frontmost-window-id`
+  fi
 }
 
 notify_precmd() {
   exitstatus=$?
-  stop=$(date +'%s%N')
+  stop=$(date +'%s')
   start=${notify_time:-$stop}
   let elapsed=$stop-$start
-  let elapsedsecs=$(($elapsed / 1000000000 % 1000000000))
 
   max=${notify_max:-30}
-  alias_notify_cmd=`alias $notify_cmd | awk -F"'" '{print $2}'|awk '{print $1}'`
+  alias_notify_cmd=`alias $(echo $notify_cmd | awk '{print $1}') | awk -F"'" '{print $2}'|awk '{print $1}'`
   if [[ "$alias_notify_cmd" == "" ]]; then
     alias_notify_cmd=`echo $notify_cmd | awk '{print $1}'`
   fi
-  if [[ ! "$alias_notify_cmd" == (vi|vim|top|ssh|cmatrix|telnet|tmux|mux|) ]]; then
-    if [[ $elapsedsecs -gt $max ]]; then
+  if [[ $elapsed -gt $max ]]; then
+    if should-notify $alias_notify_cmd; then
+      let elapsed_ns=$(($elapsed * 1000000000))
       if [[ $exitstatus == 0 ]]; then
-        message="Completed after $(format-elapsed $elapsed)"
+        message="Completed after $(format-elapsed $elapsed_ns)"
       else
-        message="Failed with status $exitstatus after $(format-elapsed $elapsed)"
+        message="Failed with status $exitstatus after $(format-elapsed $elapsed_ns)"
       fi
-      if [[ -d /Applications/terminal-notifier.app/ ]]; then
-        ${notify_exec} -group dotzshnotify -message ${message} -title ${notify_cmd:-Some command} > /dev/null
-      else
-        ${notify_exec} -n "dotzshnotify" -m ${message} ${notify_cmd:-Some command}
-      fi
+
+      dotzsh-notify ${message} ${alias_notify_cmd:-Some command}
     fi
   fi
   notify_cmd=
   notify_time=
+  notify_win_id=
 }
 
 add-zsh-hook preexec notify_preexec
 add-zsh-hook precmd notify_precmd
-
