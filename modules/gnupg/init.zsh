@@ -38,6 +38,9 @@ if [[ -s "${_gpg_env}" ]]; then
   else
      _agent_pid=$SSH_AGENT
   fi
+  if [[ ! -f ${_gpg_env} ]]; then
+    pkill gpg-agent
+  fi
   ps -ef | grep "${_agent_pid}" | grep -q 'gpg-agent' || {
     _gpg-agent-start
   }
