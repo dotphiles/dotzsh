@@ -26,3 +26,6 @@
 [submodule "modules/autoenv/external"]
 	path = modules/autoenv/external
 	url = https://github.com/kennethreitz/autoenv
+[submodule "modules/aliaster"]
+	path = modules/aliaster
+	url = https://github.com/wesalvaro/Aliaster.git
