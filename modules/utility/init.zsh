@@ -15,6 +15,7 @@ dzmodload 'spectrum'
 
 # Correct commands.
 setopt CORRECT
+CORRECT_IGNORE='_*'
 
 # Aliases
 

@@ -176,7 +176,7 @@ function prompt_dotphiles_setup {
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
 
-  prompt_theme=${1:-'soldark'}
+  prompt_theme=${1}
   _prompt_host=${2:-'green'}
 
   # Check for the minimum supported version.
