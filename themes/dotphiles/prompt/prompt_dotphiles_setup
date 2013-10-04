@@ -176,7 +176,7 @@ function prompt_dotphiles_setup {
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
 
-  prompt_theme=${1:-'soldark'}
+  prompt_theme=${1}
   _prompt_host=${2:-'green'}
 
   # Check for the minimum supported version.
@@ -272,6 +272,12 @@ function prompt_dotphiles_setup {
 
   eval prompt_host="$"prompt_$_prompt_host""
 
+  if [[ $COLUMNS -gt 80 ]]; then
+    path_parts=5
+  else
+    path_parts=3
+  fi
+
   if [[ ! -z $SSH_CONNECTION ]]; then
     prompt_at="on"
   else
@@ -337,7 +343,7 @@ function prompt_dotphiles_setup {
   zstyle ':dotzsh:module:editor:keymap:primary' overwrite " %{$prompt_red%}${over}%{$prompt_reset%}"
   zstyle ':dotzsh:module:editor:keymap' alternate " %{$prompt_yellow%}${bropen}%{$prompt_orange%}${bropen}%{$prompt_red%}${bropen}%{$prompt_reset%}"
   SPROMPT='zsh: correct %{$prompt_red%}%R%{$prompt_reset%} to %{$prompt_green%}%r%{$prompt_reset%} [nyae]? '
-  MAINPROMPT="%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_dull%} ${prompt_at} %{$prompt_host%}%m%u%{$prompt_dull%} in %{$prompt_hi%}%~ "
+  MAINPROMPT="%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_dull%} ${prompt_at} %{$prompt_host%}%m%u%{$prompt_dull%} in %{$prompt_hi%}%$path_parts~ "
   SUBPROMPT="%{${prompt_hi}%} ${userprompt} %{$prompt_reset%}"
   PROMPT='%{$MAINPROMPT%}%{$prompt_detail%}%{$prompt_seperator%}
 $SUBPROMPT'
