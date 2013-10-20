@@ -11,10 +11,11 @@ if (( ! $+commands[vagrant] )); then
   return 1
 fi
 
-alias v='vagrant'
+alias va='vagrant'
 alias vs='vagrant suspend'
 alias vp='vagrant provision'
 alias vu='vagrant up'
 alias vh='vagrant halt'
+alias vd='vagrant destroy'
 alias vss='vagrant ssh'
 
