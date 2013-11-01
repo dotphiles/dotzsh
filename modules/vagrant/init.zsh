@@ -12,10 +12,10 @@ if (( ! $+commands[vagrant] )); then
 fi
 
 alias va='vagrant'
-alias vs='vagrant suspend'
+alias vS='vagrant suspend'
 alias vp='vagrant provision'
 alias vu='vagrant up'
-alias vh='vagrant halt'
-alias vd='vagrant destroy'
-alias vss='vagrant ssh'
+alias vH='vagrant halt'
+alias vD='vagrant destroy'
+alias vs='vagrant ssh'
 

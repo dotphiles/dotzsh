@@ -43,15 +43,15 @@ alias rake='noglob rake'
 alias _='sudo'
 alias __='sudo -s'
 alias b='${(z)BROWSER}'
-alias cp="${aliases[cp]:-cp} -i"
+alias cp='${aliases[cp]:-cp} -i'
 alias e='${(z)EDITOR}'
-alias ln="${aliases[ln]:-ln} -i"
-alias mkdir="${aliases[mkdir]:-mkdir} -p"
-alias mv="${aliases[mv]:-mv} -i"
+alias ln='${aliases[ln]:-ln} -i'
+alias mkdir='${aliases[mkdir]:-mkdir} -p'
+alias mv='${aliases[mv]:-mv} -i'
 alias p='${(z)PAGER}'
 alias po='popd'
 alias pu='pushd'
-alias rm="${aliases[rm]:-rm} -i"
+alias rm='${aliases[rm]:-rm} -i'
 alias type='type -a'
 
 alias l='ls -1A'         # Lists in one column, hidden files.
@@ -186,4 +186,6 @@ function scratch {
   fi
   unset _scratch
 }
+
+alias myip='curl ifconfig.me'
 
