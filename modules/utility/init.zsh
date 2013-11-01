@@ -15,6 +15,7 @@ dzmodload 'spectrum'
 
 # Correct commands.
 setopt CORRECT
+CORRECT_IGNORE='_*'
 
 # Aliases
 
@@ -46,7 +47,7 @@ alias b='${(z)BROWSER}'
 alias cp="${aliases[cp]:-cp} -i"
 alias e='${(z)EDITOR}'
 alias ln="${aliases[ln]:-ln} -i"
-alias mkdir='${aliases[mkdir]:-mkdir} -p'
+alias mkdir="${aliases[mkdir]:-mkdir} -p"
 alias mv="${aliases[mv]:-mv} -i"
 alias p='${(z)PAGER}'
 alias po='popd'
