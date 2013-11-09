@@ -81,9 +81,6 @@ function prompt_dotphiles_precmd {
 
 function prompt_dotphiles_preexec {
   case "$(history $HISTCMD)" in
-    (*vi*)
-      __PROMPT_dotphiles_VCS_UPDATE=1
-    ;;
     (*git*)
       __PROMPT_dotphiles_VCS_UPDATE=1
     ;;

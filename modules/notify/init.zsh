@@ -54,7 +54,7 @@ function should-notify {
     current_win_id=`frontmost-window-id`
     [[ ! "$current_win_id" == "$notify_win_id" ]]
   else
-    [[ ! "$1" == (vi|vim|top|ssh|cmatrix|telnet|tmux*|mux|man|workon) ]]
+    [[ ! "$1" == (vi|vim|top|ssh|cmatrix|telnet|tmux*|mux|man|workon|vagrant) ]]
   fi
 }
 
