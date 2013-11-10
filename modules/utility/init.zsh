@@ -15,6 +15,7 @@ dzmodload 'spectrum'
 
 # Correct commands.
 setopt CORRECT
+CORRECT_IGNORE='_*'
 
 # Aliases
 
@@ -186,4 +187,6 @@ function scratch {
   fi
   unset _scratch
 }
+
+alias myip='curl ifconfig.me'
 

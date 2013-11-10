@@ -41,8 +41,12 @@ if [[ -z "$TMUX" ]] && ( zstyle -t ':dotzsh:module:tmux' auto-start \
 fi
 
 # Aliases
-alias ta="tmux attach-session"
+alias ta="tmux attach-session -t "
 alias tl="tmux list-sessions"
+
+if (( $+commands[tmuxp] )); then
+  source ${0:h}/tmuxp.zsh
+fi
 
 if (( $+commands[tmuxinator] )); then
   source ${0:h}/tmuxinator.zsh
