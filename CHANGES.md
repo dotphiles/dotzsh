@@ -1,4 +1,4 @@
-dotzsh Changelog
+dotzsh changelog
 ----------------
 
   - 1.0.0  : Intitial stable release
