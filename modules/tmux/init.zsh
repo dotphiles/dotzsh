@@ -41,11 +41,18 @@ if [[ -z "$TMUX" ]] && ( zstyle -t ':dotzsh:module:tmux' auto-start \
 fi
 
 # Aliases
-alias ta="tmux attach-session -t "
-alias tl="tmux list-sessions"
+alias ta='tmux attach-session -t '
+alias tl='tmux list-sessions'
 
 if (( $+commands[tmuxp] )); then
   source ${0:h}/tmuxp.zsh
+fi
+
+if [[ -e ~/.tmuxifier/bin ]]; then
+  PATH=$PATH:~/.tmuxifier/bin
+fi
+if (( $+commands[tmuxifier] )); then
+  eval "$(tmuxifier init -)"
 fi
 
 if (( $+commands[tmuxinator] )); then
