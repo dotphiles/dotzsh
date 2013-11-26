@@ -20,3 +20,6 @@
 [submodule "modules/fasd/external"]
 	path = modules/fasd/external
 	url = https://github.com/clvv/fasd.git
+[submodule "modules/zaw/external"]
+	path = modules/zaw/external
+	url = https://github.com/zsh-users/zaw
