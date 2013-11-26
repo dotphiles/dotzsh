@@ -188,5 +188,20 @@ function scratch {
   unset _scratch
 }
 
+function cdup()
+{
+    if [[ -z "$1" ]]; then
+        cd ..
+    else
+        local -a cdpathtemp
+        local integer depth=${#PWD//[^\/]/}
+        for (( i = 1; i <= depth; i++ )); do
+            cdpathtemp+=(${(l:(($i * 3 - 1))::../::..:)})
+        done
+        cdpath=($cdpathtemp) cd $1
+    fi
+    return $?
+}
+
 alias myip='curl ifconfig.me'
 
