@@ -70,9 +70,13 @@ function prompt_dotphiles_precmd {
     else
         (( j=$COLUMNS-($SEPLENGTH+$MAINLENGTH+$DETAILLENGTH) ))
     fi
-    repeat $j; do fill="$fill$dash"; done
-    prompt_seperator="%{${prompt_dull}%}$fill$end"
-    unset fill
+    if [[ $COLUMNS -gt 120 ]]; then
+      repeat $j; do fill="$fill$dash"; done
+      prompt_seperator="%{${prompt_dull}%}$fill$end"
+      unset fill
+    else
+      prompt_seperator=""
+    fi
   else
     prompt_detail=""
     prompt_seperator=""
