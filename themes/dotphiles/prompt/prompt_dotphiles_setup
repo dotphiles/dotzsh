@@ -70,9 +70,13 @@ function prompt_dotphiles_precmd {
     else
         (( j=$COLUMNS-($SEPLENGTH+$MAINLENGTH+$DETAILLENGTH) ))
     fi
-    repeat $j; do fill="$fill$dash"; done
-    prompt_seperator="%{${prompt_dull}%}$fill$end"
-    unset fill
+    if [[ $COLUMNS -gt 120 ]]; then
+      repeat $j; do fill="$fill$dash"; done
+      prompt_seperator="%{${prompt_dull}%}$fill$end"
+      unset fill
+    else
+      prompt_seperator=""
+    fi
   else
     prompt_detail=""
     prompt_seperator=""
@@ -272,6 +276,12 @@ function prompt_dotphiles_setup {
 
   eval prompt_host="$"prompt_$_prompt_host""
 
+  if [[ $COLUMNS -gt 80 ]]; then
+    path_parts=5
+  else
+    path_parts=3
+  fi
+
   if [[ ! -z $SSH_CONNECTION ]]; then
     prompt_at="on"
   else
@@ -337,7 +347,7 @@ function prompt_dotphiles_setup {
   zstyle ':dotzsh:module:editor:keymap:primary' overwrite " %{$prompt_red%}${over}%{$prompt_reset%}"
   zstyle ':dotzsh:module:editor:keymap' alternate " %{$prompt_yellow%}${bropen}%{$prompt_orange%}${bropen}%{$prompt_red%}${bropen}%{$prompt_reset%}"
   SPROMPT='zsh: correct %{$prompt_red%}%R%{$prompt_reset%} to %{$prompt_green%}%r%{$prompt_reset%} [nyae]? '
-  MAINPROMPT="%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_dull%} ${prompt_at} %{$prompt_host%}%m%u%{$prompt_dull%} in %{$prompt_hi%}%~ "
+  MAINPROMPT="%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_dull%} ${prompt_at} %{$prompt_host%}%m%u%{$prompt_dull%} in %{$prompt_hi%}%$path_parts~ "
   SUBPROMPT="%{${prompt_hi}%} ${userprompt} %{$prompt_reset%}"
   PROMPT='%{$MAINPROMPT%}%{$prompt_detail%}%{$prompt_seperator%}
 $SUBPROMPT'

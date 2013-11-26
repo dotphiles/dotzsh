@@ -188,3 +188,5 @@ function scratch {
   unset _scratch
 }
 
+alias myip='curl ifconfig.me'
+

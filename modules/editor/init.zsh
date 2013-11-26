@@ -300,7 +300,7 @@ elif [[ "$editor" == emacs ]]; then
 elif [[ "$editor" == vi ]]; then
   export EDITOR='vim'
   export VISUAL='vim'
-  if (( ! $+commands[vim] )); then
+  if (( $+commands[vim] )); then
     alias vi=vim
   fi
 else
