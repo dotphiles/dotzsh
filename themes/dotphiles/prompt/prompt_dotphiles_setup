@@ -265,8 +265,8 @@ function prompt_dotphiles_setup {
     zstyle ':dotzsh:module:editor' completing '%{$prompt_brgreen%}...%{$prompt_reset%}'
   else
     prompt_reset="$prompt_white"
-    prompt_hi="$prompt_white"
-    prompt_dull="$prompt_brwhite"
+    prompt_hi="$prompt_brwhite"
+    prompt_dull="$prompt_brblack"
     zstyle ':dotzsh:module:editor' completing '%{$prompt_brgreen%}...%{$prompt_reset%}'
   fi
 
