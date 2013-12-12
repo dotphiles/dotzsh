@@ -175,13 +175,24 @@ function +vi-hg-branchhead() {
     fi
 }
 
+function hostname_color() {
+    local chash=0
+    hostcolors=( red green yellow blue magenta cyan )
+    foreach letter ( ${(ws::)HOST[(ws:.:)1]} )
+        (( chash += #letter ))
+    end
+    local crand=$(( $chash % 5 ))
+    local crandname=$hostcolors[$crand]
+    echo "$crandname"
+}
+
 function prompt_dotphiles_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
 
   prompt_theme=${1}
-  _prompt_host=${2:-'green'}
+  _prompt_host=${2:-$(hostname_color)}
 
   prompt_brblack="$fg_bold[black]"  # brblack base03
   prompt_black="$fg_no_bold[black]"  # black base02
