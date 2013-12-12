@@ -199,6 +199,9 @@ function prompt_dotphiles_setup {
   prompt_blue="%fg_no_bold[blue]" # blue blue
   prompt_cyan="$fg_no_bold[cyan]" # cyan cyan
   prompt_green="$fg_no_bold[green]" # green green
+  prompt_reset="$fg_no_bold[white]" # white base2
+  prompt_hi="$fg_bold[white]" # brwhite base3
+  prompt_dull="$fg_bold[black]"  # brblack base03
 
   # Check for the minimum supported version.
   min_zsh_version='4.3.10'
@@ -253,22 +256,7 @@ function prompt_dotphiles_setup {
     prompt_at="at"
   fi
 
-  if [ "$prompt_theme" = 'sollight' ]; then
-    prompt_reset="$prompt_bryellow"
-    prompt_hi="$prompt_brgreen"
-    prompt_dull="$prompt_brcyan"
-    zstyle ':dotzsh:module:editor' completing '%{$prompt_brcyan%}...%{$prompt_reset%}'
-  elif [ "$prompt_theme" = 'soldark' ]; then
-    prompt_reset="$prompt_brblue"
-    prompt_hi="$prompt_brcyan"
-    prompt_dull="$prompt_brgreen"
-    zstyle ':dotzsh:module:editor' completing '%{$prompt_brgreen%}...%{$prompt_reset%}'
-  else
-    prompt_reset="$prompt_white"
-    prompt_hi="$prompt_brwhite"
-    prompt_dull="$prompt_brblack"
-    zstyle ':dotzsh:module:editor' completing '%{$prompt_brgreen%}...%{$prompt_reset%}'
-  fi
+  zstyle ':dotzsh:module:editor' completing '%{$prompt_brgreen%}...%{$prompt_reset%}'
 
   # Enable VCS systems you use.
   zstyle ':vcs_info:*' enable git hg svn cvs
