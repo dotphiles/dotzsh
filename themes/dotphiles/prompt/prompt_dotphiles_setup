@@ -192,7 +192,8 @@ function prompt_dotphiles_setup {
   prompt_opts=(cr percent subst)
 
   prompt_theme=${1}
-  eval _prompt_host=${2:-$(hostname_color)}
+  hashed_host=$(hostname_color)
+  _prompt_host=${2:-$hashed_host}
 
   prompt_brblack="$fg_bold[black]"  # brblack base03
   prompt_black="$fg_no_bold[black]"  # black base02
