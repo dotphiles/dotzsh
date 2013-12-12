@@ -80,8 +80,9 @@ function set-title-by-command {
     if (( $#cmd > 15 )); then
       cmd="${cmd[1,15]}..."
     fi
-
-    for kind in window tab screen; do
+ 
+    set-window-title "$SSHHOST$cmd"
+    for kind in tab screen; do
       set-${kind}-title "$cmd"
     done
   fi
@@ -101,7 +102,7 @@ function set-title-precmd {
     if [[ ! -z $SSH_CONNECTION ]]; then
       SSHHOST="$HOST:"
     fi
-    set-window-title "${(%):-%~}"
+    set-window-title "$SSHHOST${(%):-%~}"
     for kind in tab screen; do
       # Left-truncate the current working directory to 15 characters.
       set-${kind}-title "${(%):-%15<...<%~%<<}"
