@@ -19,7 +19,7 @@ fi
 
 zstyle ':dotzsh:module:theme:lscolors:dotphiles' theme 'gxfxbEaEBxxEhEhBaDaCaD'
 
-zstyle ':dotzsh:module:theme:grepcolors:dotphiles' theme '37;45'
+#zstyle ':dotzsh:module:theme:grepcolors:dotphiles' theme '37;45'
 
 # Patterns
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf' 'fg=white,bold,bg=red')
