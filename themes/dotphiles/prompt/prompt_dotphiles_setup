@@ -208,7 +208,7 @@ function prompt_dotphiles_setup {
   prompt_red="$fg_no_bold[red]" # red red
   prompt_magenta="$fg_no_bold[magenta]" # magenta magenta
   prompt_violet="$fg_bold[magenta]" # brmagenta violet
-  prompt_blue="%fg_no_bold[blue]" # blue blue
+  prompt_blue="$fg_no_bold[blue]" # blue blue
   prompt_cyan="$fg_no_bold[cyan]" # cyan cyan
   prompt_green="$fg_no_bold[green]" # green green
   prompt_reset="$fg_no_bold[white]" # white base2
