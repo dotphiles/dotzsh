@@ -23,9 +23,3 @@
 [submodule "modules/zaw/external"]
 	path = modules/zaw/external
 	url = https://github.com/zsh-users/zaw
-[submodule "modules/zsh-autosuggestions"]
-	path = modules/zsh-autosuggestions
-	url = git://github.com/tarruda/zsh-autosuggestions
-[submodule "modules/autosuggestions/external"]
-	path = modules/autosuggestions/external
-	url = git://github.com/tarruda/zsh-autosuggestions
