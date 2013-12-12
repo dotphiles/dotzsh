@@ -16,7 +16,7 @@ elif [[ "$_theme[2]" = "sollight" ]]; then
 elif [[ "$_theme[2]" = "soldark" ]]; then
   zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.ansi-dark'
 else
-  zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.ansi-universal'
+  zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.base16'
 fi
 
 zstyle ':dotzsh:module:theme:lscolors:dotphiles' theme 'gxfxbEaEBxxEhEhBaDaCaD'
