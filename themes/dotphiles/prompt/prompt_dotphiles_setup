@@ -175,10 +175,10 @@ function +vi-hg-branchhead() {
     fi
 }
 
-function hostname_color() {
+function get_hostname_color() {
     local chash=0
     hostcolors=( red green yellow blue magenta cyan )
-    foreach letter ( ${(ws::)HOST[(ws:.:)1]} )
+    foreach letter ( ${(ws::)HOSTNAME[(ws:.:)1]} )
         (( chash += #letter ))
     end
     local crand=$(( $chash % 5 ))
@@ -192,8 +192,8 @@ function prompt_dotphiles_setup {
   prompt_opts=(cr percent subst)
 
   prompt_theme=${1}
-  hashed_host=$(hostname_color)
-  _prompt_host=${2:-$hashed_host}
+  host_hash_color=$(get_hostname_color)
+  _prompt_host=${2:-$host_hash_color}
 
   prompt_brblack="$fg_bold[black]"  # brblack base03
   prompt_black="$fg_no_bold[black]"  # black base02
