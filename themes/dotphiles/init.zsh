@@ -13,13 +13,13 @@ elif [[ "$_theme[2]" = "molokai" ]]; then
   zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.molokai'
 elif [[ "$_theme[2]" = "sollight" ]]; then
   zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.ansi-light'
-else
+elif [[ "$_theme[2]" = "soldark" ]]; then
   zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.ansi-dark'
+else
+  zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.ansi-universal'
 fi
 
 zstyle ':dotzsh:module:theme:lscolors:dotphiles' theme 'gxfxbEaEBxxEhEhBaDaCaD'
-
-#zstyle ':dotzsh:module:theme:grepcolors:dotphiles' theme '37;45'
 
 # Patterns
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf' 'fg=white,bold,bg=red')
