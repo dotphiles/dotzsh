@@ -13,8 +13,10 @@ elif [[ "$_theme[2]" = "molokai" ]]; then
   zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.molokai'
 elif [[ "$_theme[2]" = "sollight" ]]; then
   zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.ansi-light'
-else
+elif [[ "$_theme[2]" = "soldark" ]]; then
   zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.256dark'
+else
+  zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.ansi-dark'
 fi
 
 zstyle ':dotzsh:module:theme:lscolors:dotphiles' theme 'gxfxbEaEBxxEhEhBaDaCaD'

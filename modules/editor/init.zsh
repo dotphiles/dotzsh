@@ -307,5 +307,10 @@ else
   print "dotzsh: invalid editor: $editor" >&2
 fi
 
+# ctrl+x e to edit command line in $EDITOR
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
+
 unset key{map}
 

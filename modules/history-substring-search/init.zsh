@@ -45,7 +45,9 @@ if [[ -n "$key_info" ]]; then
   # Emacs and Vi
   for keymap in 'emacs' 'viins'; do
     bindkey -M "$keymap" "$key_info[Up]" history-substring-search-up
+    bindkey -M "$keymap" "\e[A" history-substring-search-up
     bindkey -M "$keymap" "$key_info[Down]" history-substring-search-down
+    bindkey -M "$keymap" "\e[B" history-substring-search-down
   done
 fi
 
