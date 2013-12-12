@@ -177,11 +177,11 @@ function +vi-hg-branchhead() {
 
 function get_hostname_color() {
     local chash=0
-    hostcolors=( red yellow green blue magenta cyan )
+    hostcolors=( red brightred yellow blue green magenta cyan brightcyan )
     foreach letter ( ${(ws::)HOSTNAME[(ws:.:)1]} )
         (( chash += #letter ))
     end
-    local crand=$(( $chash % 5 ))
+    local crand=$(( $chash % 8 ))
     local crandname=$hostcolors[$crand]
     echo "$crandname"
 }
