@@ -21,11 +21,7 @@ fi
 
 zstyle ':dotzsh:module:theme:lscolors:dotphiles' theme 'gxfxbEaEBxxEhEhBaDaCaD'
 
-if [[ $TERM = *256color || $TERM = *rxvt* ]]; then
-  zstyle ':dotzsh:module:theme:grepcolors:dotphiles' theme '00;38;5;254;48;5;160'
-else
-  zstyle ':dotzsh:module:theme:grepcolors:dotphiles' theme '37;45'
-fi
+zstyle ':dotzsh:module:theme:grepcolors:dotphiles' theme '37;45'
 
 # Patterns
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf' 'fg=white,bold,bg=red')
