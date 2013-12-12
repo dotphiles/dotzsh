@@ -25,6 +25,11 @@ bindkey -M filterselect '^S' up-line-or-history
 bindkey -M filterselect '^E' accept-search
 
 zstyle ':filter-select:highlight' matched fg=green
-zstyle ':filter-select' max-lines 3
-zstyle ':filter-select' case-insensitive yes # enable case-insensitive 
+zstyle ':filter-select:highlight' title fg=yellow
+zstyle ':filter-select:highlight' error fg=red
+zstyle ':filter-select' max-lines 10 # use 10 lines for filter-select
+zstyle ':filter-select' max-lines -10 # use $LINES - 10 for filter-select
+zstyle ':filter-select' rotate-list yes # enable rotation for filter-select
+zstyle ':filter-select' case-insensitive yes # enable case-insensitive search
 zstyle ':filter-select' extended-search yes # see below
+
