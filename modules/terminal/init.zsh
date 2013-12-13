@@ -53,6 +53,8 @@ function set-tab-title {
   fi
   if [[ ! -z $SSH_CONNECTION ]] && [[ "$LC_TERM_PROGRAM" == 'iTerm.app' ]]; then
     tab_$_prompt_host
+  else
+    tab_reset
   fi
 }
 
@@ -138,6 +140,8 @@ function tab_color() {
   echo -n -e "\033]6;1;bg;green;brightness;$2\a"
   echo -n -e "\033]6;1;bg;blue;brightness;$3\a"
 }
+
+tab_reset() { echo -ne "\033]6;1;bg;*;default\a" }
 
 [[ "$TERM_PROGRAM" != "" ]] && export LC_TERM_PROGRAM="$TERM_PROGRAM"
 [[ "$ITERM_PROFILE" != "" ]] && export LC_ITERM_PROFILE="$ITERM_PROFILE"
