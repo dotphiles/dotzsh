@@ -51,6 +51,9 @@ function set-tab-title {
   if [[ "$TERM" == ((x|a|ml|dt|E)term*|(u|)rxvt*) ]]; then
     printf "\e]1;%s\a" ${(V)argv}
   fi
+  if [[ "$TERM_PROGRAM" == 'iTerm.app' ]]; then
+    tab_$_prompt_host
+  fi
 }
 
 # Sets the tab and window titles with the command name.
@@ -121,3 +124,17 @@ function set-title-preexec {
 }
 add-zsh-hook preexec set-title-preexec
 
+function tab_red()     { tab_color 172  65  66; }
+function tab_brred()   { tab_color 210 132  69; }
+function tab_yellow()  { tab_color 244 191 117; }
+function tab_green()   { tab_color 144 169  89; }
+function tab_cyan()    { tab_color 117 181 170; }
+function tab_blue()    { tab_color 106 159 181; }
+function tab_magenta() { tab_color 170 117 159; }
+function tab_brcyan()  { tab_color 143  85  54; }
+
+function tab_color() {
+  echo -n -e "\033]6;1;bg;red;brightness;$1\a"
+  echo -n -e "\033]6;1;bg;green;brightness;$2\a"
+  echo -n -e "\033]6;1;bg;blue;brightness;$3\a"
+}
