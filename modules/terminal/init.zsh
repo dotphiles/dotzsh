@@ -51,11 +51,6 @@ function set-tab-title {
   if [[ "$TERM" == ((x|a|ml|dt|E)term*|(u|)rxvt*) ]]; then
     printf "\e]1;%s\a" ${(V)argv}
   fi
-  if [[ ! -z $SSH_CONNECTION ]] && [[ "$LC_TERM_PROGRAM" == 'iTerm.app' ]]; then
-    tab_$_prompt_host
-  else
-    tab_reset
-  fi
 }
 
 # Sets the tab and window titles with the command name.
@@ -106,6 +101,11 @@ function set-title-precmd {
 
     if [[ ! -z $SSH_CONNECTION ]]; then
       SSHHOST="$HOST:"
+      if [[ "$LC_TERM_PROGRAM" == 'iTerm.app' ]]; then
+        tab_$_prompt_host
+      else
+        tab_reset
+      fi
     fi
     set-window-title "$SSHHOST${(%):-%~}"
     for kind in tab screen; do
