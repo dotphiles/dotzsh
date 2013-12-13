@@ -51,7 +51,7 @@ function set-tab-title {
   if [[ "$TERM" == ((x|a|ml|dt|E)term*|(u|)rxvt*) ]]; then
     printf "\e]1;%s\a" ${(V)argv}
   fi
-  if [[ "$TERM_PROGRAM" == 'iTerm.app' || "$LC_TERM_PROGRAM" == 'iTerm.app' ]]; then
+  if [[ -x $SSH_CONNECTION ]] && [[ "$LC_TERM_PROGRAM" == 'iTerm.app' ]]; then
     tab_$_prompt_host
   fi
 }
