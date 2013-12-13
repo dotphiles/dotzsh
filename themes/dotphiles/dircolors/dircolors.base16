@@ -243,6 +243,7 @@ EXEC                    00;32 # This is for files with execute permission:
 .rb             00;33
 .sh             00;33
 .zsh            00;33
+.env            00;33
 .bash           00;33
 .php            00;33
 .java           00;33
