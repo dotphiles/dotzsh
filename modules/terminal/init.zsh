@@ -54,6 +54,7 @@ function set-tab-title {
   if [[ "$TERM_PROGRAM" == 'iTerm.app' ]]; then
     tab_$_prompt_host
   fi
+  tab_$_prompt_host
 }
 
 # Sets the tab and window titles with the command name.
