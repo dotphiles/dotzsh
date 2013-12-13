@@ -51,10 +51,9 @@ function set-tab-title {
   if [[ "$TERM" == ((x|a|ml|dt|E)term*|(u|)rxvt*) ]]; then
     printf "\e]1;%s\a" ${(V)argv}
   fi
-  if [[ "$TERM_PROGRAM" == 'iTerm.app' ]]; then
+  if [[ "$TERM_PROGRAM" == 'iTerm.app' || "$LC_TERM_PROGRAM" == 'iTerm.app' ]]; then
     tab_$_prompt_host
   fi
-  tab_$_prompt_host
 }
 
 # Sets the tab and window titles with the command name.
@@ -84,7 +83,7 @@ function set-title-by-command {
     if (( $#cmd > 15 )); then
       cmd="${cmd[1,15]}..."
     fi
- 
+
     set-window-title "$SSHHOST$cmd"
     for kind in tab screen; do
       set-${kind}-title "$cmd"
@@ -139,3 +138,6 @@ function tab_color() {
   echo -n -e "\033]6;1;bg;green;brightness;$2\a"
   echo -n -e "\033]6;1;bg;blue;brightness;$3\a"
 }
+
+[[ "$TERM_PROGRAM" != "" ]] && export LC_TERM_PROGRAM="$TERM_PROGRAM"
+[[ "$ITERM_PROFILE" != "" ]] && export LC_ITERM_PROFILE="$ITERM_PROFILE"
