@@ -103,10 +103,11 @@ function set-title-precmd {
       SSHHOST="$HOST:"
       if [[ "$LC_TERM_PROGRAM" == 'iTerm.app' ]]; then
         tab_$_prompt_host
-      else
-        tab_reset
       fi
+    else
+      tab_reset
     fi
+
     set-window-title "$SSHHOST${(%):-%~}"
     for kind in tab screen; do
       # Left-truncate the current working directory to 15 characters.
