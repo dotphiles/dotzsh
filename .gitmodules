@@ -23,3 +23,6 @@
 [submodule "modules/zaw/external"]
 	path = modules/zaw/external
 	url = https://github.com/zsh-users/zaw
+[submodule "modules/autoenv/external"]
+	path = modules/autoenv/external
+	url = https://github.com/kennethreitz/autoenv
