@@ -51,6 +51,9 @@ function set-tab-title {
   if [[ "$TERM" == ((x|a|ml|dt|E)term*|(u|)rxvt*) ]]; then
     printf "\e]1;%s\a" ${(V)argv}
   fi
+  if [[ "$TERM_PROGRAM" == 'iTerm.app' || "$LC_TERM_PROGRAM" == 'iTerm.app' ]]; then
+    tab_$_prompt_host
+  fi
 }
 
 # Sets the tab and window titles with the command name.
@@ -103,14 +106,9 @@ function set-title-precmd {
       SSHHOST="$HOST:"
     fi
     set-window-title "$SSHHOST${(%):-%~}"
-
-    if [[ "$TERM_PROGRAM" == 'iTerm.app' || "$LC_TERM_PROGRAM" == 'iTerm.app' ]]; then
-      tab_$_prompt_host
-    fi
-
     for kind in tab screen; do
       # Left-truncate the current working directory to 15 characters.
-      set-${kind}-title "${(%):-%15<...<%~%<<}"
+      set-${kind}-title "$SSHHOST${(%):-%15<...<%~%<<}"
     done
   fi
 }
@@ -120,7 +118,7 @@ add-zsh-hook precmd set-title-precmd
 function set-title-preexec {
   if zstyle -t ':dotzsh:module:terminal' auto-title; then
     if [[ "$TERM_PROGRAM" != 'Apple_Terminal' ]]; then
-      set-title-by-command "$2"
+      set-title-by-command "$SSHHOST$2"
     fi
   fi
 }
