@@ -76,7 +76,7 @@ SETUID                  37;41    # file that is setuid (u+s)
 SETGID                  30;43    # file that is setgid (g+s)
 CAPABILITY              30;41 # file with capability
 STICKY_OTHER_WRITABLE   30;42 # dir that is sticky and other-writable (+t,o+w)
-OTHER_WRITABLE          34;42 # dir that is other-writable (o+w) and not sticky
+OTHER_WRITABLE          04;34 # dir that is other-writable (o+w) and not sticky
 STICKY                  37;44    # dir with the sticky bit set (+t) and not other-writable
 EXEC                    00;32 # This is for files with execute permission:
 
@@ -227,6 +227,7 @@ EXEC                    00;32 # This is for files with execute permission:
 
 ## Config files (cyan)
 .conf       00;36
+.cnf        00;36
 .cfg        00;36
 .ini        00;36
 .properties 00;36
