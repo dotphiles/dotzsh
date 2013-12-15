@@ -205,3 +205,18 @@ function cdup()
 
 alias myip='curl ifconfig.me'
 
+grepp() {
+[ $# -eq 1 ] && perl -00ne "print if /$1/i" || perl -00ne "print if /$1/i" < "$2"
+}
+
+pingrouter() {
+GATEWAY=`netstat -rn | grep "default" | awk '{print $2}'`; if [ $? != 0 ]; then echo "No internet gateways found"; exit 1; else ping $GATEWAY; fi
+}
+
+# repeat last command with sudo
+function fuck {
+     LAST_CMD=`fc -nl -1`
+     echo sudo $LAST_CMD
+     sudo zsh -c $LAST_CMD
+}
+
