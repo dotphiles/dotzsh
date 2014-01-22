@@ -82,13 +82,11 @@ STICKY                  37;44   # dir with the sticky bit set (+t) and not other
 EXEC                    00;32   # This is for files with execute permission:
 
 # If you use DOS-style suffixes, you may want to uncomment the following:
-#.cmd 00;32 # executables (bright green)
-#.exe 00;32
-#.com 00;32
-#.btm 00;32
-#.bat 00;32
-#.sh  00;32
-#.csh 00;32
+.cmd 00;33 # executables (bright green)
+.exe 00;33
+.com 00;33
+.btm 00;33
+.bat 00;33
 
 ## Archives or compressed (red)
 .tar    01;31
