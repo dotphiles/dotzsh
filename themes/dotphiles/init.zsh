@@ -7,16 +7,13 @@
 #   Ben O'Hara <bohara@gmail.com>
 #
 
-if [[ "$_theme[2]" = "zenburn" ]]; then
-  zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.zenburn'
-elif [[ "$_theme[2]" = "molokai" ]]; then
-  zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.molokai'
-elif [[ "$_theme[2]" = "sollight" ]]; then
+if [[ "$_theme[2]" =~ ".*\.light" ]] || [[ "$LC_TERM_PROFILE" =~ ".*\.light" ]]; then
+  zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.base16.light'
   zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.ansi-light'
-elif [[ "$_theme[2]" = "soldark" ]]; then
-  zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.ansi-dark'
 else
-  zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.base16'
+  zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.base16.dark'
+  zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.ansi-dark'
+  _theme[2]="base16-default.dark"
 fi
 
 zstyle ':dotzsh:module:theme:lscolors:dotphiles' theme 'gxfxbEaEBxxEhEhBaDaCaD'
@@ -24,4 +21,6 @@ zstyle ':dotzsh:module:theme:lscolors:dotphiles' theme 'gxfxbEaEBxxEhEhBaDaCaD'
 # Patterns
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf' 'fg=white,bold,bg=red')
 ZSH_HIGHLIGHT_PATTERNS+=('sudo' 'fg=white,bold,bg=red')
+
+export DOTZSH_THEME="$_theme[2]"
 

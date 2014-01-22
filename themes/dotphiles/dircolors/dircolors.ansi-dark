@@ -33,7 +33,7 @@
 # - See table below to see the assignments.
 
 
-# Insatllation instructions:
+# Installation instructions:
 # This file goes in the /etc directory, and must be world readable.
 # You can copy this file to .dir_colors in your $HOME directory to override
 # the system defaults.
@@ -63,10 +63,12 @@ TERM cygwin
 TERM dtterm
 TERM Eterm
 TERM eterm-color
+TERM fbterm
 TERM gnome
 TERM gnome-256color
 TERM jfbterm
 TERM konsole
+TERM konsole-256color
 TERM kterm
 TERM linux
 TERM linux-c
@@ -74,6 +76,7 @@ TERM mach-color
 TERM mlterm
 TERM nxterm
 TERM putty
+TERM putty-256color
 TERM rxvt
 TERM rxvt-256color
 TERM rxvt-cygwin
@@ -84,16 +87,22 @@ TERM rxvt-unicode-256color
 TERM screen
 TERM screen-256color
 TERM screen-256color-bce
+TERM screen-256color-s
 TERM screen-bce
-TERM screen.linux
 TERM screen-w
+TERM screen.linux
+TERM screen.xterm-new
+TERM st
+TERM st-256color
 TERM vt100
 TERM xterm
+TERM xterm-new
 TERM xterm-16color
 TERM xterm-256color
 TERM xterm-88color
 TERM xterm-color
 TERM xterm-debian
+TERM xterm-termite
 
 # EIGHTBIT, followed by '1' for on, '0' for off. (8-bit output)
 EIGHTBIT 1
@@ -141,7 +150,9 @@ NORMAL 00
 # normal file
 FILE 00
 # directory
-DIR 36
+DIR 34
+# 777 directory
+OTHER_WRITABLE 34;40
 # symbolic link
 LINK 35
 
@@ -191,6 +202,7 @@ EXEC 01;31  # Unix
 .c 32
 .C 32
 .cc 32
+.cpp 32
 .cxx 32
 .objc 32
 .sh 32
@@ -208,10 +220,16 @@ EXEC 01;31  # Unix
 .htm 32
 .html 32
 .shtml 32
+.erb 32
+.haml 32
 .xml 32
 .rdf 32
 .css 32
+.sass 32
+.scss 32
+.less 32
 .js 32
+.coffee 32
 .man 32
 .0 32
 .1 32

@@ -58,30 +58,6 @@ function should-notify {
   fi
 }
 
-function dotzsh-notify {
-  if (( $+commands[growlnotify] )); then
-    ${dotzsh_notify_exec} -n "dotzsh-notify" -m ${1} ${2}
-  elif [[ ! "$dotzsh_notify_exec" == "" ]]; then
-    ${dotzsh_notify_exec} -group "dotzsh-notify" -message ${1} -title ${2} > /dev/null
-  else
-    echo "Install growlnotify or terminal-notifier to use the dotzsh notify module"
-    echo "$2: $1"
-  fi
-}
-
-function frontmost-window-id {
-    osascript -e 'tell application (path to frontmost application as text) to id of front window' 2&> /dev/null
-}
-
-function should-notify {
-  if is-true ${_different_window_only}; then
-    current_win_id=`frontmost-window-id`
-    [[ ! "$current_win_id" == "$notify_win_id" ]]
-  else
-    [[ ! "$1" == (vi|vim|top|ssh|cmatrix|telnet|tmux*|mux|man|workon|vagrant) ]]
-  fi
-}
-
 notify_preexec() {
   notify_cmd=$1
   notify_time=`date +%s`
