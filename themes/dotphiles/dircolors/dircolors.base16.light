@@ -56,16 +56,16 @@ TERM xterm-debian
 # Attribute codes:
 # 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
 # Text color codes:
-# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 30=white
+# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
 # Background color codes:
 # 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
-NORMAL                  00;30   # global default, although everything should be something.
-FILE                    01;33   # normal file
-RESET                   00;30   # reset to "normal" color
+NORMAL                  01;30   # global default, although everything should be something.
+FILE                    01;30   # normal file
+RESET                   00;01;30   # reset to "normal" color
 DIR                     00;34   # directory
 LINK                    00;36   # symbolic link.  (If you set this to 'target' instead of a
                                 # numerical value, the color is as for the file pointed to.)
-MULTIHARDLINK           00;30   # regular file with more than one link
+MULTIHARDLINK           01;30   # regular file with more than one link
 FIFO                    40;33   # pipe
 SOCK                    00;35   # socket
 DOOR                    00;35   # door
@@ -258,55 +258,55 @@ EXEC                    00;32   # This is for files with execute permission:
 .fs     00;32 # ZODB Data.fs
 
 ## Files of special interest (base1 + bold)
-.tex                01;30
-.rdf                01;30
-.owl                01;30
-.n3                 01;30
-.ttl                01;30
-.nt                 01;30
-.torrent            01;30
-.xml                01;30
-*Makefile           01;30
-*Rakefile           01;30
-*build.xml          01;30
-*rc                 01;30
-.nfo                01;30
-*README             01;30
-*README.txt         01;30
-*readme.txt         01;30
-.md                 01;30
-*README.markdown    01;30
-.ini                01;30
-.yml                01;30
-.cfg                01;30
-.conf               01;30
-.c                  01;30
-.cpp                01;30
-.cc                 01;30
+.tex                00;30
+.rdf                00;30
+.owl                00;30
+.n3                 00;30
+.ttl                00;30
+.nt                 00;30
+.torrent            00;30
+.xml                00;30
+*Makefile           00;30
+*Rakefile           00;30
+*build.xml          00;30
+*rc                 00;30
+.nfo                00;30
+*README             00;30
+*README.txt         00;30
+*readme.txt         00;30
+.md                 00;30
+*README.markdown    00;30
+.ini                00;30
+.yml                00;30
+.cfg                00;30
+.conf               00;30
+.c                  00;30
+.cpp                00;30
+.cc                 00;30
 
 ## Machine generated files / non-important (bright black)
-.log        01;30
-.bak        01;30
-.aux        01;30
-.lof        01;30
-.lol        01;30
-.lot        01;30
-.out        01;30
-.toc        01;30
-.bbl        01;30
-.blg        01;30
-*~          01;30
-*#          01;30
-.part       01;30
-.incomplete 01;30
-.swp        01;30
-.tmp        01;30
-.temp       01;30
-.o          01;30
-.obj        01;30
-.pyc        01;30
-.pyo        01;30
-.class      01;30
-.cache      01;30
-.egg-info   01;30
+.log        37
+.bak        37
+.aux        37
+.lof        37
+.lol        37
+.lot        37
+.out        37
+.toc        37
+.bbl        37
+.blg        37
+*~          37
+*#          37
+.part       37
+.incomplete 37
+.swp        37
+.tmp        37
+.temp       37
+.o          37
+.obj        37
+.pyc        37
+.pyo        37
+.class      37
+.cache      37
+.egg-info   37
 

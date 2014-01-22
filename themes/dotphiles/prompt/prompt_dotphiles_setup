@@ -213,12 +213,12 @@ function prompt_dotphiles_setup {
   prompt_green="$fg_no_bold[green]" # green green
   prompt_reset="$fg_no_bold[white]" # white base2
   prompt_hi="$fg_bold[white]" # brwhite base3
-  prompt_dull="$fg_bold[black]"  # brblack base03
+  prompt_dull="$fg_bold[yellow]"  # brblack base03
 
   if [[ "$LC_TERM_PROFILE" =~ '.*\.light' ]]; then
     prompt_reset="$fg_bold[black]" # white base2
     prompt_hi="$fg_no_bold[black]" # brwhite base3
-    prompt_dull="$fg_bold[black]"  # brblack base03
+    prompt_dull="$fg_bold[blue]"  # brblack base03
   fi
 
   # Check for the minimum supported version.

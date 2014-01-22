@@ -9,10 +9,8 @@
 
 if [[ "$_theme[2]" =~ ".*\.light" ]] || [[ "$LC_TERM_PROFILE" =~ ".*\.light" ]]; then
   zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.base16.light'
-  zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.ansi-light'
 else
   zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.base16.dark'
-  zstyle ':dotzsh:module:theme:dircolors:dotphiles' theme 'dircolors/dircolors.ansi-dark'
   _theme[2]="base16-default.dark"
 fi
 
