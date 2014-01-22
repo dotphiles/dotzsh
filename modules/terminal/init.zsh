@@ -146,3 +146,5 @@ tab_reset() { echo -ne "\033]6;1;bg;*;default\a" }
 
 [[ "$TERM_PROGRAM" != "" ]] && export LC_TERM_PROGRAM="$TERM_PROGRAM"
 [[ "$ITERM_PROFILE" != "" ]] && export LC_TERM_PROFILE="$ITERM_PROFILE"
+[[ "$ITERM_PROFILE" = "Hotkey Window" ]] && export LC_TERM_PROFILE="base16-default.dark"
+
