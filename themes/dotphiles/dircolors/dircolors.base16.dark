@@ -272,8 +272,8 @@ EXEC                    00;32   # This is for files with execute permission:
 *README             01;37
 *README.txt         01;37
 *readme.txt         01;37
-.md                 01;37
 *README.markdown    01;37
+*README.md          01;37
 .ini                01;37
 .yml                01;37
 .cfg                01;37

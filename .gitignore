@@ -8,4 +8,4 @@
 *.zwc
 *.zwc.old
 modules/*/cache.zsh
-themes/*/dircolors/test-directory
+

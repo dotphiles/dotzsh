@@ -29,3 +29,6 @@
 [submodule "modules/aliaster"]
 	path = modules/aliaster
 	url = https://github.com/wesalvaro/Aliaster.git
+[submodule "modules/autosuggestions/external"]
+	path = modules/autosuggestions/external
+	url = https://github.com/tarruda/zsh-autosuggestions.git
