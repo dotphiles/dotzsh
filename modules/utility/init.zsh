@@ -115,6 +115,14 @@ alias -g C='| wc -l'
 alias x="exit"
 alias q="exit"
 
+# My IP
+alias myip='curl ifconfig.me'
+# IP addresses
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# Enhanced WHOIS lookups
+alias whois="whois -h whois-servers.net"
+
 ### Functions
 
 # Serves a directory via HTTP.
@@ -159,8 +167,13 @@ function psu {
   ps -{U,u}" ${1:-$USER}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
 }
 
-encode64(){ echo -n $1 | base64 }
-decode64(){ echo -n $1 | base64 -d }
+function encode64 {
+  echo -n $1 | base64
+}
+
+function decode64 {
+  echo -n $1 | base64 -d
+}
 
 function up {
   for parent in {1..${1:-1}}; do
@@ -203,20 +216,18 @@ function cdup()
     return $?
 }
 
-alias myip='curl ifconfig.me'
-
-grepp() {
-[ $# -eq 1 ] && perl -00ne "print if /$1/i" || perl -00ne "print if /$1/i" < "$2"
+function grepp() {
+  [ $# -eq 1 ] && perl -00ne "print if /$1/i" || perl -00ne "print if /$1/i" < "$2"
 }
 
-pingrouter() {
-GATEWAY=`netstat -rn | grep "default" | awk '{print $2}'`; if [ $? != 0 ]; then echo "No internet gateways found"; exit 1; else ping $GATEWAY; fi
+function pingrouter() {
+  GATEWAY=`netstat -rn | grep "default" | awk '{print $2}'`; if [ $? != 0 ]; then echo "No internet gateways found"; exit 1; else ping $GATEWAY; fi
 }
 
 # repeat last command with sudo
 function fuck {
-     LAST_CMD=`fc -nl -1`
-     echo sudo $LAST_CMD
-     sudo zsh -c $LAST_CMD
+  LAST_CMD=`fc -nl -1`
+  echo sudo $LAST_CMD
+  sudo zsh -c $LAST_CMD
 }
 
