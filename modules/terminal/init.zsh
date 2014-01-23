@@ -16,7 +16,7 @@ if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
 fi
 
 # Dumb terminals lack support.
-if [[ "$TERM" == 'dumb' ]]; then
+if [[ "$TERM" == (dumb|linux|*bsd*) ]]; then
   return 1
 fi
 
