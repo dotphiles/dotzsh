@@ -181,7 +181,7 @@ function get_hostname_color() {
     foreach letter ( ${(ws::)HOSTNAME[(ws:.:)1]} )
         (( chash += #letter ))
     end
-    local crand=$(( $chash % 8 ))
+    local crand=$(( $chash % 7 ))
     local crandname=$hostcolors[$crand]
     echo "$crandname"
 }
