@@ -225,9 +225,14 @@ function pingrouter() {
 }
 
 # repeat last command with sudo
-function fuck {
+function fuck() {
   LAST_CMD=`fc -nl -1`
   echo sudo $LAST_CMD
   sudo zsh -c $LAST_CMD
+}
+
+# clean up photos of a whiteboard
+function whiteboard_clean() {
+  convert "$1" -resize %50 -morphology Convolve DoG:15,100,0 -negate -normalize -blur 0x1 -channel RBG -level 60%,91%,0.1 "$2"
 }
 
