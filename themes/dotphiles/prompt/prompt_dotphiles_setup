@@ -182,7 +182,7 @@ function get_hostname_color() {
         (( chash += #letter ))
     end
     local crand=$(( $chash % 7 ))
-    local crandname=$hostcolors[$crand]
+    local crandname=$hostcolors[$crand+1]
     echo "$crandname"
 }
 
