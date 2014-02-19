@@ -17,7 +17,8 @@ if zstyle -t ':dotzsh:module:grc' color; then
   if (( ${#_grc_cmds[@]} == 0 )); then
     _grc_cmds=(
       'cat' 'tail' 'configure' 'diff' 'make' 'gcc' 'g++' 'as' 'gas' 'ps'
-      'ld' 'netstat' 'ping' 'ping6' 'traceroute' 'traceroute6' 'nmap'
+      'ld' 'netstat' 'ping' 'ping6' 'traceroute' 'traceroute6' 'nmap' 'df'
+      'mount'
      )
   fi
 
