@@ -177,11 +177,11 @@ function +vi-hg-branchhead() {
 
 function get_hostname_color() {
     local chash=0
-    hostcolors=( red orange yellow green cyan blue magenta brcyan )
+    hostcolors=( red orange yellow cyan blue magenta brcyan )
     foreach letter ( ${(ws::)HOSTNAME} )
         (( chash += #letter ))
     end
-    local crand=$(( $chash % 8 ))
+    local crand=$(( $chash % 7 ))
     local crandname=$hostcolors[$crand+1]
     echo "$crandname"
 }
@@ -318,7 +318,7 @@ function prompt_dotphiles_setup {
   zstyle ':dotzsh:module:editor:keymap:primary' overwrite " %{$prompt_red%}${over}%{$prompt_reset%}"
   zstyle ':dotzsh:module:editor:keymap' alternate " %{$prompt_yellow%}${bropen}%{$prompt_orange%}${bropen}%{$prompt_red%}${bropen}%{$prompt_reset%}"
   SPROMPT='zsh: correct %{$prompt_red%}%R%{$prompt_reset%} to %{$prompt_green%}%r%{$prompt_reset%} [nyae]? '
-  MAINPROMPT="%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_dull%} ${prompt_at} %{$prompt_host%}%m%u%{$prompt_dull%} in %{$prompt_hi%}%$path_parts~ "
+  MAINPROMPT="%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_dull%} ${prompt_at} %{$prompt_host%}$HOSTNAME%u%{$prompt_dull%} in %{$prompt_hi%}%$path_parts~ "
   SUBPROMPT="%{${prompt_hi}%} ${userprompt} %{$prompt_reset%}"
   PROMPT='%{$MAINPROMPT%}%{$prompt_detail%}%{$prompt_seperator%}
 $SUBPROMPT'

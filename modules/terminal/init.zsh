@@ -100,7 +100,7 @@ function set-title-precmd {
     fi
 
     if [[ ! -z $SSH_CONNECTION ]]; then
-      SSHHOST="$HOST:"
+      SSHHOST="$HOSTNAME:"
       if [[ "$LC_TERM_PROGRAM" == 'iTerm.app' ]]; then
         tab_$_prompt_host
       fi
