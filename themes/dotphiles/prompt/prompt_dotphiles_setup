@@ -143,7 +143,7 @@ function +vi-git-stash() {
 
   if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
     stashes=$(git stash list 2>/dev/null | wc -l)
-    hook_com[misc]+=" ${bropen}%{$prompt_dull%}${stashes} stashed%{$prompt_reset%}${brclose}"
+    hook_com[misc]+="${bropen}%{$prompt_dull%}${stashes} stashed%{$prompt_reset%}${brclose}"
   fi
 }
 
