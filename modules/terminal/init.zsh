@@ -101,9 +101,9 @@ function set-title-precmd {
 
     if [[ ! -z $SSH_CONNECTION ]]; then
       SSHHOST="$HOSTNAME:"
-      if [[ "$LC_TERM_PROGRAM" == 'iTerm.app' ]]; then
-        tab_$_prompt_host
-      fi
+      #if [[ "$LC_TERM_PROGRAM" == 'iTerm.app' ]]; then
+      tab_$_prompt_host
+      #fi
     else
       tab_reset
     fi
@@ -128,7 +128,7 @@ function set-title-preexec {
 add-zsh-hook preexec set-title-preexec
 
 function tab_red()     { tab_color 172  65  66; }
-function tab_brred()   { tab_color 210 132  69; }
+function tab_orange()  { tab_color 210 132  69; }
 function tab_yellow()  { tab_color 244 191 117; }
 function tab_green()   { tab_color 144 169  89; }
 function tab_cyan()    { tab_color 117 181 170; }
