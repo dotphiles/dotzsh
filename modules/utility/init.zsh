@@ -42,6 +42,7 @@ alias rake='noglob rake'
 
 # Define general aliases.
 alias _='sudo'
+alias en='sudo -s'
 alias __='sudo -s'
 alias b='${(z)BROWSER}'
 alias cp="${aliases[cp]:-cp} -i"
@@ -63,6 +64,7 @@ alias lm='la | "$PAGER"' # Lists human readable sizes, hidden files through page
 alias lx='ll -XB'        # Lists sorted by extension (GNU only).
 alias lk='ll -Sr'        # Lists sorted by size, largest last.
 alias lt='ll -tr'        # Lists sorted by date, most recent last.
+alias lat='ll -atr'      # Lists sorted by date, hidden files, most recent last.
 alias lc='lt -c'         # Lists sorted by date, most recent last, shows change time.
 alias lu='lt -u'         # Lists sorted by date, most recent last, shows access time.
 alias sl='ls'            # I often screw this up.
