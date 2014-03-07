@@ -13,9 +13,6 @@ if (( ! $+commands[tmux] )); then
   return 1
 fi
 
-# for tmux: export 256color
-[  -n "$TMUX" ] && export TERM=screen-256color
-
 # Auto Start
 if [[ -z "$TMUX" ]] && ( zstyle -t ':dotzsh:module:tmux' auto-start \
     || ( [[ -n "$SSH_TTY" ]] && zstyle -m ':dotzsh:module:tmux' auto-start 'remote' ) \
