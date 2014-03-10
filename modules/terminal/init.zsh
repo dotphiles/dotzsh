@@ -16,7 +16,7 @@ if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
 fi
 
 # Dumb terminals lack support.
-if [[ "$TERM" == 'dumb' ]]; then
+if [[ "$TERM" == (dumb|linux|*bsd*) ]]; then
   return 1
 fi
 
@@ -81,7 +81,8 @@ function set-title-by-command {
       cmd="${cmd[1,15]}..."
     fi
 
-    for kind in window tab screen; do
+    set-window-title "$SSHHOST$cmd"
+    for kind in tab screen; do
       set-${kind}-title "$cmd"
     done
   fi
@@ -99,12 +100,18 @@ function set-title-precmd {
     fi
 
     if [[ ! -z $SSH_CONNECTION ]]; then
-      SSHHOST="$HOST:"
+      SSHHOST="$HOSTNAME:"
+      if [[ "$TERM" == ((x|a|ml|dt|E)term*|(u|)rxvt*) ]]; then
+        tab_$_prompt_host
+      fi
+    else
+      tab_reset
     fi
-    set-window-title "${(%):-%~}"
+
+    set-window-title "$SSHHOST${(%):-%~}"
     for kind in tab screen; do
       # Left-truncate the current working directory to 15 characters.
-      set-${kind}-title "${(%):-%15<...<%~%<<}"
+      set-${kind}-title "$SSHHOST${(%):-%15<...<%~%<<}"
     done
   fi
 }
@@ -114,9 +121,30 @@ add-zsh-hook precmd set-title-precmd
 function set-title-preexec {
   if zstyle -t ':dotzsh:module:terminal' auto-title; then
     if [[ "$TERM_PROGRAM" != 'Apple_Terminal' ]]; then
-      set-title-by-command "$2"
+      set-title-by-command "$SSHHOST$2"
     fi
   fi
 }
 add-zsh-hook preexec set-title-preexec
+
+function tab_red()     { tab_color 172  65  66; }
+function tab_orange()  { tab_color 210 132  69; }
+function tab_yellow()  { tab_color 244 191 117; }
+function tab_green()   { tab_color 144 169  89; }
+function tab_cyan()    { tab_color 117 181 170; }
+function tab_blue()    { tab_color 106 159 181; }
+function tab_magenta() { tab_color 170 117 159; }
+function tab_brcyan()  { tab_color 143  85  54; }
+
+function tab_color() {
+  echo -n -e "\033]6;1;bg;red;brightness;$1\a"
+  echo -n -e "\033]6;1;bg;green;brightness;$2\a"
+  echo -n -e "\033]6;1;bg;blue;brightness;$3\a"
+}
+
+tab_reset() { echo -ne "\033]6;1;bg;*;default\a" }
+
+[[ "$TERM_PROGRAM" != "" ]] && export LC_TERM_PROGRAM="$TERM_PROGRAM"
+[[ "$ITERM_PROFILE" != "" ]] && export LC_TERM_PROFILE="$ITERM_PROFILE"
+[[ "$ITERM_PROFILE" = "Hotkey Window" ]] && export LC_TERM_PROFILE="base16-default.dark"
 

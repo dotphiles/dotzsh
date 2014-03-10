@@ -13,9 +13,6 @@ if (( ! $+commands[tmux] )); then
   return 1
 fi
 
-# for tmux: export 256color
-[  -n "$TMUX" ] && export TERM=screen-256color
-
 # Auto Start
 if [[ -z "$TMUX" ]] && ( zstyle -t ':dotzsh:module:tmux' auto-start \
     || ( [[ -n "$SSH_TTY" ]] && zstyle -m ':dotzsh:module:tmux' auto-start 'remote' ) \
@@ -44,18 +41,11 @@ fi
 alias ta='tmux attach-session -t '
 alias tl='tmux list-sessions'
 
-if (( $+commands[tmuxp] )); then
-  source ${0:h}/tmuxp.zsh
-fi
-
-if [[ -e ~/.tmuxifier/bin ]]; then
-  PATH=$PATH:~/.tmuxifier/bin
-fi
-if (( $+commands[tmuxifier] )); then
-  eval "$(tmuxifier init -)"
-fi
-
 if (( $+commands[tmuxinator] )); then
   source ${0:h}/tmuxinator.zsh
+fi
+
+if (( $+commands[tmuxp] )); then
+  source ${0:h}/tmuxp.zsh
 fi
 

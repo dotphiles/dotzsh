@@ -1,11 +1,12 @@
 #
 # dotzsh : https://github.com/dotphiles/dotzsh
 #
-# Defines tmuxp aliases
+# Setup tmuxp
 #
 # Authors:
 #   Ben O'Hara <bohara@gmail.com>
 #
 
+# Setup completion
 source tmuxp.zsh
 

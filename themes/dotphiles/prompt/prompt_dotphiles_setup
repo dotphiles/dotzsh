@@ -143,7 +143,7 @@ function +vi-git-stash() {
 
   if [[ -s ${hook_com[base]}/.git/refs/stash ]] ; then
     stashes=$(git stash list 2>/dev/null | wc -l)
-    hook_com[misc]+=" ${bropen}%{$prompt_dull%}${stashes} stashed%{$prompt_reset%}${brclose}"
+    hook_com[misc]+="${bropen}%{$prompt_dull%}${stashes} stashed%{$prompt_reset%}${brclose}"
   fi
 }
 
@@ -175,13 +175,51 @@ function +vi-hg-branchhead() {
     fi
 }
 
+function get_hostname_color() {
+    local chash=0
+    hostcolors=( red orange yellow cyan blue magenta brcyan )
+    foreach letter ( ${(ws::)HOSTNAME} )
+        (( chash += #letter ))
+    end
+    local crand=$(( $chash % 7 ))
+    local crandname=$hostcolors[$crand+1]
+    echo "$crandname"
+}
+
 function prompt_dotphiles_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
 
   prompt_theme=${1}
-  _prompt_host=${2:-'green'}
+  host_hash_color=$(get_hostname_color)
+  _prompt_host=${2:-$host_hash_color}
+
+  prompt_brblack="$fg_bold[black]"  # brblack base03
+  prompt_black="$fg_no_bold[black]"  # black base02
+  prompt_brgreen="$fg_bold[green]"  # brgreen base01
+  prompt_bryellow="$fg_bold[yellow]"  # bryellow base00
+  prompt_brblue="$fg_bold[blue]"  # brblue base0
+  prompt_brcyan="$fg_bold[cyan]"  # brcyan base1
+  prompt_white="$fg_no_bold[white]" # white base2
+  prompt_brwhite="$fg_bold[white]" # brwhite base3
+  prompt_yellow="$fg_no_bold[yellow]" # yellow yellow
+  prompt_orange="$fg_bold[red]" # brred orange
+  prompt_red="$fg_no_bold[red]" # red red
+  prompt_magenta="$fg_no_bold[magenta]" # magenta magenta
+  prompt_violet="$fg_bold[magenta]" # brmagenta violet
+  prompt_blue="$fg_no_bold[blue]" # blue blue
+  prompt_cyan="$fg_no_bold[cyan]" # cyan cyan
+  prompt_green="$fg_no_bold[green]" # green green
+  prompt_reset="$fg_no_bold[white]" # white base2
+  prompt_hi="$fg_bold[white]" # brwhite base3
+  prompt_dull="$fg_bold[blue]"  # brblack base03
+
+  if [[ "$LC_TERM_PROFILE" == '.*\.light' ]]; then
+    prompt_reset="$fg_bold[black]" # white base2
+    prompt_hi="$fg_no_bold[black]" # brwhite base3
+    prompt_dull="$fg_bold[yellow]"  # brblack base03
+  fi
 
   # Check for the minimum supported version.
   min_zsh_version='4.3.10'
@@ -193,41 +231,6 @@ function prompt_dotphiles_setup {
     add-zsh-hook chpwd prompt_dotphiles_chpwd
     __PROMPT_dotphiles_VCS_UPDATE=1
 
-    if [[ "$prompt_theme" = sol* ]] && [[ $TERM = *256color || $TERM = *rxvt* ]] then
-      prompt_brblack="%F{234}"  # brblack base03
-      prompt_black="%F{235}"  # black base02
-      prompt_brgreen="%F{240}"  # brgreen base01
-      prompt_bryellow="%F{241}"  # bryellow base00
-      prompt_brblue="%F{244}"  # brblue base0
-      prompt_brcyan="%F{245}"  # brcyan base1
-      prompt_white="%F{254}" # white base2
-      prompt_brwhite="%F{230}" # brwhite base3
-      prompt_yellow="%F{136}" # yellow yellow
-      prompt_orange="%F{166}" # brred orange
-      prompt_red="%F{160}" # red red
-      prompt_magenta="%F{125}" # magenta magenta
-      prompt_violet="%F{61}" # brmagenta violet
-      prompt_blue="%F{33}" # blue blue
-      prompt_cyan="%F{37}" # cyan cyan
-      prompt_green="%F{64}" # green green
-    else
-      prompt_brblack="%B%F{black}"  # brblack base03
-      prompt_black="%b%F{black}"  # black base02
-      prompt_brgreen="%B%F{green}"  # brgreen base01
-      prompt_bryellow="%B%F{yellow}"  # bryellow base00
-      prompt_brblue="%B%F{blue}"  # brblue base0
-      prompt_brcyan="%B%F{cyan}"  # brcyan base1
-      prompt_white="%b%F{white}" # white base2
-      prompt_brwhite="%B%F{white}" # brwhite base3
-      prompt_yellow="%b%F{yellow}" # yellow yellow
-      prompt_orange="%B%F{red}" # brred orange
-      prompt_red="%b%F{red}" # red red
-      prompt_magenta="%b%F{magenta}" # magenta magenta
-      prompt_violet="%B%F{magenta}" # brmagenta violet
-      prompt_blue="%b%F{blue}" # blue blue
-      prompt_cyan="%b%F{cyan}" # cyan cyan
-      prompt_green="%b%F{green}" # green green
-    fi
     userprompt="❯❯"
     bropen="❮"
     brclose="❯"
@@ -241,23 +244,6 @@ function prompt_dotphiles_setup {
     dash="⋅"
     RPROMPT='${editor_info[keymap]}${editor_info[overwrite]}${VIM:+" %B%{$prompt_green%}V%b%{$prompt_reset%}"}'
   else
-    prompt_brblack="$fg_bold[black]"  # brblack base03
-    prompt_black="$fg_no_bold[black]"  # black base02
-    prompt_brgreen="$fg_bold[green]"  # brgreen base01
-    prompt_bryellow="$fg_bold[yellow]"  # bryellow base00
-    prompt_brblue="$fg_bold[blue]"  # brblue base0
-    prompt_brcyan="$fg_bold[cyan]"  # brcyan base1
-    prompt_white="$fg_no_bold[white]" # white base2
-    prompt_brwhite="$fg_bold[white]" # brwhite base3
-    prompt_yellow="$fg_no_bold[yellow]" # yellow yellow
-    prompt_orange="$fg_bold[red]" # brred orange
-    prompt_red="$fg_no_bold[red]" # red red
-    prompt_magenta="$fg_no_bold[magenta]" # magenta magenta
-    prompt_violet="$fg_bold[magenta]" # brmagenta violet
-    prompt_blue="%fg_no_bold[blue]" # blue blue
-    prompt_cyan="$fg_no_bold[cyan]" # cyan cyan
-    prompt_green="$fg_no_bold[green]" # green green
-
     RPROMPT=''
 
     userprompt=">>"
@@ -288,22 +274,7 @@ function prompt_dotphiles_setup {
     prompt_at="at"
   fi
 
-  if [ "$prompt_theme" = 'sollight' ]; then
-    prompt_reset="$prompt_bryellow"
-    prompt_hi="$prompt_brgreen"
-    prompt_dull="$prompt_brcyan"
-    zstyle ':dotzsh:module:editor' completing '%{$prompt_brcyan%}...%{$prompt_reset%}'
-  elif [ "$prompt_theme" = 'soldark' ]; then
-    prompt_reset="$prompt_brblue"
-    prompt_hi="$prompt_brcyan"
-    prompt_dull="$prompt_brgreen"
-    zstyle ':dotzsh:module:editor' completing '%{$prompt_brgreen%}...%{$prompt_reset%}'
-  else
-    prompt_reset="$prompt_white"
-    prompt_hi="$prompt_white"
-    prompt_dull="$prompt_brwhite"
-    zstyle ':dotzsh:module:editor' completing '%{$prompt_brgreen%}...%{$prompt_reset%}'
-  fi
+  zstyle ':dotzsh:module:editor' completing '%{$prompt_brgreen%}...%{$prompt_reset%}'
 
   # Enable VCS systems you use.
   zstyle ':vcs_info:*' enable git hg svn cvs
@@ -347,7 +318,7 @@ function prompt_dotphiles_setup {
   zstyle ':dotzsh:module:editor:keymap:primary' overwrite " %{$prompt_red%}${over}%{$prompt_reset%}"
   zstyle ':dotzsh:module:editor:keymap' alternate " %{$prompt_yellow%}${bropen}%{$prompt_orange%}${bropen}%{$prompt_red%}${bropen}%{$prompt_reset%}"
   SPROMPT='zsh: correct %{$prompt_red%}%R%{$prompt_reset%} to %{$prompt_green%}%r%{$prompt_reset%} [nyae]? '
-  MAINPROMPT="%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_dull%} ${prompt_at} %{$prompt_host%}%m%u%{$prompt_dull%} in %{$prompt_hi%}%$path_parts~ "
+  MAINPROMPT="%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_dull%} ${prompt_at} %{$prompt_host%}$HOSTNAME%u%{$prompt_dull%} in %{$prompt_hi%}%$path_parts~ "
   SUBPROMPT="%{${prompt_hi}%} ${userprompt} %{$prompt_reset%}"
   PROMPT='%{$MAINPROMPT%}%{$prompt_detail%}%{$prompt_seperator%}
 $SUBPROMPT'
