@@ -122,9 +122,6 @@ alias myip='curl ifconfig.me'
 # IP addresses
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
-# Enhanced WHOIS lookups
-alias whois="whois -h whois-servers.net"
-
 ### Functions
 
 # Serves a directory via HTTP.

@@ -32,3 +32,6 @@
 [submodule "modules/autosuggestions/external"]
 	path = modules/autosuggestions/external
 	url = https://github.com/tarruda/zsh-autosuggestions.git
+[submodule "modules/docker/external"]
+	path = modules/docker/external
+	url = https://github.com/felixr/docker-zsh-completion.git
