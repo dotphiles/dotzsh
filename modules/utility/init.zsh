@@ -42,6 +42,7 @@ alias rake='noglob rake'
 
 # Define general aliases.
 alias _='sudo'
+alias en='sudo -s'
 alias __='sudo -s'
 alias b='${(z)BROWSER}'
 alias cp="${aliases[cp]:-cp} -i"
@@ -63,6 +64,7 @@ alias lm='la | "$PAGER"' # Lists human readable sizes, hidden files through page
 alias lx='ll -XB'        # Lists sorted by extension (GNU only).
 alias lk='ll -Sr'        # Lists sorted by size, largest last.
 alias lt='ll -tr'        # Lists sorted by date, most recent last.
+alias lat='ll -atr'      # Lists sorted by date, hidden files, most recent last.
 alias lc='lt -c'         # Lists sorted by date, most recent last, shows change time.
 alias lu='lt -u'         # Lists sorted by date, most recent last, shows access time.
 alias sl='ls'            # I often screw this up.
@@ -115,6 +117,11 @@ alias -g C='| wc -l'
 alias x="exit"
 alias q="exit"
 
+# My IP
+alias myip='curl ifconfig.me'
+# IP addresses
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
 ### Functions
 
 # Serves a directory via HTTP.
@@ -159,8 +166,13 @@ function psu {
   ps -{U,u}" ${1:-$USER}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
 }
 
-encode64(){ echo -n $1 | base64 }
-decode64(){ echo -n $1 | base64 -d }
+function encode64 {
+  echo -n $1 | base64
+}
+
+function decode64 {
+  echo -n $1 | base64 -d
+}
 
 function up {
   for parent in {1..${1:-1}}; do
@@ -188,5 +200,51 @@ function scratch {
   unset _scratch
 }
 
-alias myip='curl ifconfig.me'
+function cdup()
+{
+    if [[ -z "$1" ]]; then
+        cd ..
+    else
+        local -a cdpathtemp
+        local integer depth=${#PWD//[^\/]/}
+        for (( i = 1; i <= depth; i++ )); do
+            cdpathtemp+=(${(l:(($i * 3 - 1))::../::..:)})
+        done
+        cdpath=($cdpathtemp) cd $1
+    fi
+    return $?
+}
+
+function grepp() {
+  [ $# -eq 1 ] && perl -00ne "print if /$1/i" || perl -00ne "print if /$1/i" < "$2"
+}
+
+function pingrouter() {
+  GATEWAY=`netstat -rn | grep "default" | awk '{print $2}'`; if [ $? != 0 ]; then echo "No internet gateways found"; exit 1; else ping $GATEWAY; fi
+}
+
+# repeat last command with sudo
+function fuck() {
+  LAST_CMD=`fc -nl -1`
+  echo sudo $LAST_CMD
+  sudo zsh -c $LAST_CMD
+}
+
+# clean up photos of a whiteboard
+function whiteboard_clean() {
+  convert "$1" -resize %50 -morphology Convolve DoG:15,100,0 -negate -normalize -blur 0x1 -channel RBG -level 60%,91%,0.1 "$2"
+}
+
+# ctrl+z to fg
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    fg
+    zle redisplay
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
 

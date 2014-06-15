@@ -84,8 +84,6 @@ if zstyle -t ':dotzsh:module:environment:grep' color; then
     export GREP_COLOR='$_grepcolors'
   elif (( ${#_theme_grepcolors} > 0  )); then
     export GREP_COLOR="$_theme_grepcolors"
-  else
-    export GREP_COLOR='37;45'
   fi
   export GREP_OPTIONS='--color=auto'
 fi

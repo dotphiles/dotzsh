@@ -20,3 +20,18 @@
 [submodule "modules/fasd/external"]
 	path = modules/fasd/external
 	url = https://github.com/clvv/fasd.git
+[submodule "modules/zaw/external"]
+	path = modules/zaw/external
+	url = https://github.com/zsh-users/zaw
+[submodule "modules/autoenv/external"]
+	path = modules/autoenv/external
+	url = https://github.com/kennethreitz/autoenv
+[submodule "modules/aliaster"]
+	path = modules/aliaster
+	url = https://github.com/wesalvaro/Aliaster.git
+[submodule "modules/autosuggestions/external"]
+	path = modules/autosuggestions/external
+	url = https://github.com/tarruda/zsh-autosuggestions.git
+[submodule "modules/docker/external"]
+	path = modules/docker/external
+	url = https://github.com/felixr/docker-zsh-completion.git

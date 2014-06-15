@@ -27,6 +27,24 @@ if [[ "$HOSTNAME" = *\.*  ]]; then
   export DOMAIN=`echo $HOSTNAME | cut -f2- -d.`
 fi
 
+ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
+
+if [ -f /etc/lsb-release ]; then
+    . /etc/lsb-release
+    OS=$DISTRIB_ID
+    OSVER=$DISTRIB_RELEASE
+elif [ -f /etc/debian_version ]; then
+    OS=Debian  # XXX or Ubuntu??
+    OSVER=$(cat /etc/debian_version)
+elif [ -f /etc/redhat-release ]; then
+    OS=RedHat
+    OSVER=$(cat /etc/redhat-release | awk '{print $3}')
+else
+    OS=$(uname -s)
+    OSVER=$(uname -r)
+fi
+OSMAJORVER=$(echo $OSVER | awk -F"." '{print $1}')
+
 # Jobs
 setopt LONG_LIST_JOBS     # List jobs in the long format by default.
 setopt AUTO_RESUME        # Attempt to resume existing job before creating a new process.
@@ -37,7 +55,6 @@ unsetopt CHECK_JOBS       # Don't report on jobs when shell exit.
 
 # Grep
 if zstyle -t ':dotzsh:module:environment:grep' color; then
-  export GREP_COLOR='37;45'
   export GREP_OPTIONS='--color=auto'
 fi
 

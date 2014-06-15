@@ -54,7 +54,7 @@ function should-notify {
     current_win_id=`frontmost-window-id`
     [[ ! "$current_win_id" == "$notify_win_id" ]]
   else
-    [[ ! "$1" == (vi|vim|top|ssh|cmatrix|telnet|tmux*|mux|man|workon|vagrant) ]]
+    [[ ! "$1" == (vi|vim|git|top|ssh|cmatrix|telnet|tmux*|mux|man|workon|vagrant) ]]
   fi
 }
 
@@ -94,5 +94,6 @@ notify_precmd() {
   notify_win_id=
 }
 
+autoload -Uz add-zsh-hook
 add-zsh-hook preexec notify_preexec
 add-zsh-hook precmd notify_precmd
