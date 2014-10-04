@@ -73,20 +73,22 @@ notify_precmd() {
   let elapsed=$stop-$start
 
   max=${notify_max:-30}
-  alias_notify_cmd=`alias $(echo $notify_cmd | awk '{print $1}') | awk -F"'" '{print $2}'|awk '{print $1}'`
-  if [[ "$alias_notify_cmd" == "" ]]; then
-    alias_notify_cmd=`echo $notify_cmd | awk '{print $1}'`
-  fi
-  if [[ $elapsed -gt $max ]]; then
-    if should-notify $alias_notify_cmd; then
-      let elapsed_ns=$(($elapsed * 1000000000))
-      if [[ $exitstatus == 0 ]]; then
-        message="Completed after $(format-elapsed $elapsed_ns)"
-      else
-        message="Failed with status $exitstatus after $(format-elapsed $elapsed_ns)"
-      fi
+  if [[ $notify_cmd != "" ]]; then
+    alias_notify_cmd=`alias $(echo $notify_cmd | awk '{print $1}') | awk -F"'" '{print $2}'|awk '{print $1}'`
+    if [[ "$alias_notify_cmd" == "" ]]; then
+      alias_notify_cmd=$notify_cmd[(w)1]
+    fi
+    if [[ $elapsed -gt $max ]]; then
+      if should-notify $alias_notify_cmd; then
+        let elapsed_ns=$(($elapsed * 1000000000))
+        if [[ $exitstatus == 0 ]]; then
+          message="Completed after $(format-elapsed $elapsed_ns)"
+        else
+          message="Failed with status $exitstatus after $(format-elapsed $elapsed_ns)"
+        fi
 
-      dotzsh-notify ${message} ${alias_notify_cmd:-Some command}
+        dotzsh-notify ${message} ${alias_notify_cmd:-Some command}
+      fi
     fi
   fi
   notify_cmd=
