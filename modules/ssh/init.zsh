@@ -25,27 +25,20 @@ if [[ -f "${HOME}/.ssh/known_hosts" ]]; then
   # add an alias to ssh for known hosts
   zstyle -b ':dotzsh:module:ssh:aliases' hosts '_ssh_host_aliases'
   if is-true "${_ssh_host_aliases}"; then
-    zstyle -a ":completion:*:ssh:hosts" hosts hosts
-    if (( $#hosts > 0 )); then
-      for host in $hosts; do
-      if [[ ! "$host" == (*.*|*:*|$HOST|loopback|ip6-loopback|localhost|\
+    zstyle -a ":completion:*:ssh:hosts" hosts _hosts
+    if (( $#_hosts > 0 )); then
+      for _host in $_hosts; do
+      if [[ ! "$_host" == (*.*|*:*|$HOST|loopback|ip6-loopback|localhost|\
         ip6-localhost|ip6-allhosts|ip6-allnodes|ip6-allrouters|ip6-localnet|\
         ip6-mcastprefix|localhost4|localhost6|broadcasthost) ]]; then
-        if (( !$+commands[$host] )); then
-          alias $host="${aliases[ssh]:-ssh} $host"
+        if (( !$+commands[$_host] )); then
+          alias $_host="${aliases[ssh]:-ssh} $_host"
         fi
       fi
       done
     fi
   fi
 fi
-
-for _ssh_alias in \1 \2 \4 \6 \A \C \D \F \I \L \M \N \O \P \R \S \T \V \X \
-                  \Y \a \b \c \e \f \g \i \k \l \m \n \o \p \q \s \t \v \x
-do
-  alias "ssh${_ssh_alias}"="ssh -${_ssh_alias}"
-done
-unset _ssh_alias
 
 # Functions
 
@@ -91,4 +84,4 @@ fi
 # Tidy up after ourselves.
 unfunction _ssh-agent-start
 unset _ssh_agent_{env,forwarding}
-
+unset _host{s}
