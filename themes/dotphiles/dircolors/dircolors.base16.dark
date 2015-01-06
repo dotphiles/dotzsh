@@ -34,6 +34,7 @@ TERM linux-c
 TERM mach-color
 TERM mlterm
 TERM putty
+TERM putty-256color
 TERM rxvt
 TERM rxvt-cygwin
 TERM rxvt-cygwin-native
@@ -156,13 +157,12 @@ EXEC                    00;32   # This is for files with execute permission:
 .ps     00;32
 .txt    00;32
 .html   00;32
+.css    00;32
 .rst    00;32
 .md     00;32
 .patch  00;32
 .diff   00;32
 .tex    00;32
-.doc    00;32
-.xml    00;32
 .xls    00;32
 .xlsx   00;32
 .doc    00;32
@@ -170,11 +170,15 @@ EXEC                    00;32   # This is for files with execute permission:
 .ppt    00;32
 .pptx   00;32
 .key    00;32 # Keynote presentation
+.ods    00;32 # OpenDocument spreadsheet
+.odt    00;32 # OpenDocument text document
 
 ## Template files (bright green)
 .pt     01;32 # Zope page template
 .tmpl   01;32
 .in     01;32
+.ots    01;32 # OpenDocument spreadsheet template
+.ott    01;32 # OpenDocument text document template
 
 ## Audio formats (bright red)
 .aac    01;36
@@ -226,6 +230,7 @@ EXEC                    00;32   # This is for files with execute permission:
 
 ## Config files (cyan)
 .conf       00;36
+.config     00;36
 .cnf        00;36
 .cfg        00;36
 .ini        00;36
@@ -247,13 +252,20 @@ EXEC                    00;32   # This is for files with execute permission:
 .php            00;33
 .java           00;33
 .zcml           00;33 # Zope configuration language
+.pl             00;33
+.lua            00;33
+.clj            00;33
+.cs             00;33 # csharp
+.fs             00;33 # fsharp
+.fsx            00;33 # fsharp script
+.go             00;33
 
 ## Data / database (green)
 .db     00;32
 .sql    00;32
 .json   00;32
 .plist  00;32 # OSX properties
-.fs     00;32 # ZODB Data.fs
+.xml    00;32
 
 ## Files of special interest (base1 + bold)
 .tex                01;37
@@ -265,6 +277,7 @@ EXEC                    00;32   # This is for files with execute permission:
 .torrent            01;37
 .xml                01;37
 *Makefile           01;37
+*makefile           01;37
 *Rakefile           01;37
 *build.xml          01;37
 *rc                 01;37
@@ -274,12 +287,6 @@ EXEC                    00;32   # This is for files with execute permission:
 *readme.txt         01;37
 *README.markdown    01;37
 *README.md          01;37
-.ini                01;37
-.yml                01;37
-.cfg                01;37
-.conf               01;37
-.c                  01;37
-.cpp                01;37
 .cc                 01;37
 
 ## Machine generated files / non-important (bright black)
