@@ -16,6 +16,10 @@ fi
 if [[ ! -z $SSH_CONNECTION ]]; then
   return 1
 fi
+if [[ ! -z $TMUX ]]; then
+  return 1
+fi
+
 
 if (( $+commands[terminal-notifier] )); then
   dotzsh_notify_exec="terminal-notifier"
