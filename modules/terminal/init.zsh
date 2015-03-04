@@ -97,15 +97,15 @@ function set-title-precmd {
     if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
       # Set the current working directory in Apple Terminal.
       printf '\e]7;%s\a' "file://$HOST${PWD// /%20}"
-    fi
-
-    if [[ ! -z $SSH_CONNECTION ]]; then
-      SSHHOST="$HOSTNAME:"
-      if [[ "$TERM" == ((x|a|ml|dt|E)term*|(u|)rxvt*) ]]; then
-        tab_$_prompt_host
+    elif [[ "$TERM_PROGRAM" == 'iTerm.app' ]]; then
+      if [[ ! -z $SSH_CONNECTION ]]; then
+        SSHHOST="$HOSTNAME:"
+        if [[ "$TERM" == ((x|a|ml|dt|E)term*|(u|)rxvt*) ]]; then
+          tab_$_prompt_host
+        fi
+      else
+        tab_reset
       fi
-    else
-      tab_reset
     fi
 
     set-window-title "$SSHHOST${(%):-%~}"
