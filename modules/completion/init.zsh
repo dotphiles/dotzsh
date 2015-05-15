@@ -34,10 +34,10 @@ colors
 # Treat these characters as part of a word.
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
-# Use caching to make completion for cammands such as dpkg and apt usable.
+# Use caching to make completion for commands such as dpkg and apt usable.
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "~/.zcache"
+zstyle ':completion:*' cache-path "$HOME/.zcache"
 
 # Case-insensitive (all), partial-word, and then substring completion.
 if zstyle -t ':dotzsh:module:completion:*' case-sensitive; then
