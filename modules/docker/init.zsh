@@ -9,7 +9,7 @@
 
 alias dl='docker ps -l -q'
 
-if (( $+commands[docker] && $+commands[boot2docker] )); then
+if (( $+commands[docker] && $+commands[boot2docker] )) && [[ -d "~/.vagrant/machines/boot2docker-vm" ]]; then
   $(boot2docker shellinit 2>/dev/null |grep -v Writing )
   export DOCKER_TLS_VERIFY=1
   export FORWARD_DOCKER_PORTS=1

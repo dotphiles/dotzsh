@@ -69,7 +69,7 @@ zstyle -b ':dotzsh:module:ssh:agent' forwarding '_ssh_agent_forwarding'
 if is-true "${_ssh_agent_forwarding}" && [[ -n "$SSH_AUTH_SOCK" ]]; then
   # Add a nifty symlink for screen/tmux if agent forwarding.
   if [[ ! -L "$SSH_AUTH_SOCK" ]]; then
-    ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent-$USER && export SSH_AUTH_SOCK=/tmp/ssh-agent-$USER
+    ln -sf "$SSH_AUTH_SOCK" ~/.ssh-agent && export SSH_AUTH_SOCK=~/.ssh-agent
   fi
 elif [[ -s "${_ssh_agent_env}" ]]; then
   # Source SSH settings, if applicable.

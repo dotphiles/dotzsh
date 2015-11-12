@@ -107,6 +107,7 @@ fi
 alias -g NE='2>|/dev/null'
 alias -g NO='&>|/dev/null'
 
+alias -g Grep='grep'
 alias -g G='| grep -'
 alias -g P='2>&1 | $PAGER'
 alias -g L='| less'
@@ -249,3 +250,9 @@ zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
 alias mmv="noglob zmv -W"
+
+if [[ "$OSTYPE" == darwin* ]]; then
+  alias fzf='fzf.Darwin'
+else
+  alias fzf='fzf.Linux'
+fi

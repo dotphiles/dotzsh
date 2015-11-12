@@ -186,6 +186,13 @@ function get_hostname_color() {
     echo "$crandname"
 }
 
+trap updateprompt WINCH
+
+function updateprompt {
+  PROMPT='%{$MAINPROMPT%}%{$prompt_detail%}%{$prompt_seperator%}
+$SUBPROMPT'
+}
+
 function prompt_dotphiles_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
@@ -320,8 +327,7 @@ function prompt_dotphiles_setup {
   SPROMPT='zsh: correct %{$prompt_red%}%R%{$prompt_reset%} to %{$prompt_green%}%r%{$prompt_reset%} [nyae]? '
   MAINPROMPT="%(!.%U%{$prompt_red%}.%{$prompt_host%})%n%u%{$prompt_dull%} ${prompt_at} %{$prompt_host%}$HOSTNAME%u%{$prompt_dull%} in %{$prompt_hi%}%$path_parts~ "
   SUBPROMPT="%{${prompt_hi}%} ${userprompt} %{$prompt_reset%}"
-  PROMPT='%{$MAINPROMPT%}%{$prompt_detail%}%{$prompt_seperator%}
-$SUBPROMPT'
+  updateprompt
 }
 
 prompt_dotphiles_setup "$@"

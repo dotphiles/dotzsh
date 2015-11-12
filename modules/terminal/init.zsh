@@ -9,6 +9,14 @@
 #   Ben O'Hara <bohara@gmail.com>
 #
 
+if [[ -f /etc/redhat-release ]]; then
+  release=$(cat /etc/redhat-release)
+  # RHEL5 lacks screen-256color, downgrade
+  if [[ "$release" == *5* && "$TERM" == 'screen-256color' ]]; then
+    export TERM=screen
+  fi
+fi
+
 # Check for the minimum supported version.
 local min_zsh_version='4.3.10'
 if ! autoload -Uz is-at-least || ! is-at-least "$min_zsh_version"; then
@@ -53,6 +61,11 @@ function set-tab-title {
   fi
 }
 
+# Sets the tmux pane title.
+function set-tmux-pane-title {
+  printf '\033]2;%s\033\\' ${(V)argv}
+}
+
 # Sets the tab and window titles with the command name.
 function set-title-by-command {
   emulate -L zsh
@@ -77,12 +90,15 @@ function set-title-by-command {
     local cmd=${1[(wr)^(*=*|sudo|ssh|-*)]}
 
     # Right-truncate the command name to 15 characters.
-    if (( $#cmd > 15 )); then
-      cmd="${cmd[1,15]}..."
-    fi
+    #if (( $#cmd > 15 )); then
+    #  cmd="${cmd[1,15]}..."
+    #fi
 
+    if [[ ! -z $SSH_CONNECTION ]]; then
+      SSHHOST="$HOSTNAME:"
+    fi
     set-window-title "$SSHHOST$cmd"
-    for kind in tab screen; do
+    for kind in tab screen tmux-pane; do
       set-${kind}-title "$cmd"
     done
   fi
@@ -98,18 +114,16 @@ function set-title-precmd {
       # Set the current working directory in Apple Terminal.
       printf '\e]7;%s\a' "file://$HOST${PWD// /%20}"
     elif [[ "$TERM_PROGRAM" == 'iTerm.app' ]]; then
-      if [[ ! -z $SSH_CONNECTION ]]; then
-        SSHHOST="$HOSTNAME:"
-        if [[ "$TERM" == ((x|a|ml|dt|E)term*|(u|)rxvt*) ]]; then
-          tab_$_prompt_host
-        fi
-      else
         tab_reset
+    elif [[ ! -z $SSH_CONNECTION ]]; then
+      SSHHOST="$HOSTNAME:"
+      if [[ "$TERM" == ((x|a|ml|dt|E)term*|(u|)rxvt*) ]]; then
+        tab_$_prompt_host
       fi
     fi
 
     set-window-title "$SSHHOST${(%):-%~}"
-    for kind in tab screen; do
+    for kind in tab screen tmux-pane; do
       # Left-truncate the current working directory to 15 characters.
       set-${kind}-title "$SSHHOST${(%):-%15<...<%~%<<}"
     done

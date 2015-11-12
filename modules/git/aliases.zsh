@@ -78,7 +78,7 @@ git_log_format_brief='--pretty=format:%C(green)%h%C(reset) %s%n%C(blue)(%ar by %
 
 alias gl='git log --topo-order ${git_log_format_medium}'
 alias gls='git log --topo-order --stat ${git_log_format_medium}'
-alias gld='git log --topo-order --stat --patch --full-diff ${git_log_format_medium}'
+alias gld='git log --topo-order --stat -p --full-diff ${git_log_format_full}'
 alias glo='git log --topo-order ${git_log_format_oneline}'
 alias glg='git log --topo-order --all --graph ${git_log_format_oneline}'
 alias glb='git log --topo-order ${git_log_format_brief}'
@@ -154,4 +154,6 @@ alias gwx='git rm -r'
 alias gwX='git rm -rf'
 alias gwg='git grep'
 alias gms='git-multi-status'
+
+alias fix='$EDITOR `git diff --name-only | uniq`'
 

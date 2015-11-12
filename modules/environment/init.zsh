@@ -29,16 +29,16 @@ fi
 
 ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
 
-if [ -f /etc/lsb-release ]; then
-    . /etc/lsb-release
-    OS=$DISTRIB_ID
-    OSVER=$DISTRIB_RELEASE
-elif [ -f /etc/debian_version ]; then
+if [ -f /etc/debian_version ]; then
     OS=Debian  # XXX or Ubuntu??
     OSVER=$(cat /etc/debian_version)
 elif [ -f /etc/redhat-release ]; then
     OS=RedHat
     OSVER=$(cat /etc/redhat-release | awk '{print $3}')
+elif [ -f /etc/lsb-release ]; then
+    . /etc/lsb-release
+    OS=$DISTRIB_ID
+    OSVER=$DISTRIB_RELEASE
 else
     OS=$(uname -s)
     OSVER=$(uname -r)
